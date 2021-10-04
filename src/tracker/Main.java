@@ -9,7 +9,7 @@ public class Main {
         System.out.println("Введите резюме дефекта:");
         String resume = scanner.nextLine();
 
-        System.out.println("Введите критичность дефекта (Высокий, Средний, Низкий):");
+        System.out.println("Введите критичность дефекта (Высокий, Средний, Низкий ):");
         String priority = scanner.nextLine();
 
         System.out.println("Введите ожидаемое количество дней на исправление дефекта:");
