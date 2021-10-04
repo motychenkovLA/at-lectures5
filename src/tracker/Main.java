@@ -18,11 +18,11 @@ public class Main {
 
         scanner.close();
 
-        boolean howMuchTime = countDays > 7;
+        boolean howMuchTime = countDays > 5;
 
         System.out.format("%32s%13s%32s%31s", "Резюме|", "Серьёзность|",
                 "Количество дней на исправление|", "Займет больше рабочей недели?" + '\n');
-        System.out.format("%32s%13s%32s%31s", resume + "|", critical + "|", countDays + "|", howMuchTime);
+        System.out.format("%32s%13s%32s%30s", resume + "|", critical + "|", countDays + "|", howMuchTime);
 
     }
 }
