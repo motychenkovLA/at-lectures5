@@ -13,5 +13,7 @@ public class Main {
         // Предложение ввести критичность и выдать список, принять строку
         System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
         String prioritet = scan.nextLine();
+
+        //
     }
 }
