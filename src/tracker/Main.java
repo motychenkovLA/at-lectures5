@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         // todo 1 константы CAPS_WITH_UNDERSCORES
-        final int workDays = 5;
+        final int WORK_DAYS = 5;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -20,7 +20,7 @@ public class Main {
         int daysToFixed = scanner.nextInt();
         scanner.nextLine();
 
-        boolean moreThanWeek = workDays < daysToFixed;
+        boolean moreThanWeek = WORK_DAYS < daysToFixed;
 
         System.out.println("Информация о дефекте:");
         System.out.println( "Резюме:" +  resume + "|Серьезность:" + priority + "|Количество дней на исправление:"
