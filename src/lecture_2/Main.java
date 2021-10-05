@@ -8,7 +8,7 @@ public class Main {
         String summary;
         String priority;
         int numOfDays;
-        boolean duringWeek;
+        boolean duringWorkWeek;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -22,12 +22,12 @@ public class Main {
         numOfDays = scanner.nextInt();
         scanner.nextLine();
 
-        duringWeek = 5 < numOfDays;
+        duringWorkWeek = numOfDays > 5;
 
         System.out.println("\nИнформация о дефекте");
         System.out.println("Резюме: " + summary);
         System.out.println("Критичность: " + priority);
         System.out.println("Количество дней на исправление: " + numOfDays);
-        System.out.println("Займет больше рабочей недели: " + duringWeek);
+        System.out.println("Займет больше рабочей недели: " + duringWorkWeek);
     }
 }
