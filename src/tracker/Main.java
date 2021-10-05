@@ -5,15 +5,24 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Предложение пользователю ввести резюме дефекта, принять строку
         Scanner scan = new Scanner(System.in);
+        // Предложение пользователю ввести резюме дефекта, принять строку
         System.out.println("Введите резюме дефекта:");
         String resumeDef = scan.nextLine();
 
-        // Предложение ввести критичность и выдать список, принять строку
+        // Предложение ввести критичность, выдать список и принять строку
         System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
-        String prioritet = scan.nextLine();
+        String prioritetDef = scan.nextLine();
 
-        //
+        // Предложение ввести ожидаемое количество дней на исправление и принять число
+        System.out.println("Введите ожидаемое количество дней на исправление:");
+        int daysToFix = scan.nextInt();
+        scan.nextLine();
+
+        // Вывести инфо о заведенном дефекте
+        boolean moreWorkWeek = daysToFix > 5;
+        System.out.println("Инфо о заведенном дефекте:");
+        System.out.println("РЕЗЮМЕ:" + resumeDef + "\n" + "СЕРЬЕЗНОСТЬ:" + prioritetDef + "\n" + "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFix + "\n" + "ЗАЙМЕТ БОЛЬШЕ РАБОЧЕЙ НЕДЕЛИ:" + moreWorkWeek);
+
     }
 }
