@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        // todo 1 константы CAPS_WITH_UNDERSCORES
         final int workDays = 5;
 
         Scanner scanner = new Scanner(System.in);
@@ -16,17 +17,12 @@ public class Main {
         String priority = scanner.nextLine();
 
         System.out.println("Введите ожидаемое количество дней на исправление дефекта:");
-        // todo 0 лучше daysToFix
         int daysToFixed = scanner.nextInt();
         scanner.nextLine();
 
-        // todo 3 рабочая неделя 5 дней
-        // todo 3 лучше вынести число в константу в самое начало метода
         boolean moreThanWeek = workDays < daysToFixed;
 
         System.out.println("Информация о дефекте:");
-        // todo 1 строка вылезает за экран, можно перенести, разделив по плюсам
-        // todo 1 складываются литералы (вроде "a" + "b"), лучше сразу написать результат ("ab")
         System.out.println( "Резюме:" +  resume + "|Серьезность:" + priority + "|Количество дней на исправление:"
                 + daysToFixed + "|Займет больше рабочей недели? " + moreThanWeek + "|" );
     }
