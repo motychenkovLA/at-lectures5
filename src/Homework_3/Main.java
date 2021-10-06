@@ -6,9 +6,9 @@ package Homework_3;
 import java.util.Scanner;
 
 public class Main {
-    private static final byte MAX_DEFECTS = 2;
 
     public static void main(String[] args) {
+        final byte MAX_DEFECTS = 2;
         String menu = null;
         Scanner scan = new Scanner(System.in);
         // Матрица дефектов
