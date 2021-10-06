@@ -13,19 +13,14 @@ public class Main {
         do {
             System.out.println('\n' + "Выберите, что хотите сделать:\n" +
                     "- Добавить новый дефект (введите add)\n" +
-                    "- Вывести список дефектов (введите list)\n"  +
+                    "- Вывести список дефектов (введите list)\n" +
                     "- Выйти из программы (введите quit)");
             String result = scanner.nextLine();
 
             switch (result) {
                 case "add":
-                    if (numberOfBug == COUNT_OF_BUGS) {
-                        System.out.println('\n' + "Невозможно добавить больше дефектов");
-                    } else {
-                        String s = add();
-                        addToList(s);
-
-                    }
+                    String s = add();
+                    addToList(s);
                     break;
                 case "list":
                     list(listOfBug);
@@ -41,8 +36,12 @@ public class Main {
     }
 
     public static void addToList(String str) {
-        listOfBug[numberOfBug] = str;
-        numberOfBug++;
+        if (numberOfBug == COUNT_OF_BUGS) {
+            System.out.println('\n' + "Невозможно добавить больше дефектов");
+        } else {
+            listOfBug[numberOfBug] = str;
+            numberOfBug++;
+        }
     }
 
     public static String add() {
@@ -57,13 +56,7 @@ public class Main {
         System.out.println("Введите ожидаемо количество дней на исправление:");
         int countDays = scanner.nextInt();
 
-        return (resume + " |" + critical + " |" + countDays + " |");
-
-//        boolean howMuchTime = countDays > 5;
-//
-//        System.out.format("%32s%13s%32s%31s", "Резюме|", "Серьёзность|",
-//                "Количество дней на исправление|", "Займет больше рабочей недели?" + '\n');
-//        System.out.format("%32s%13s%32s%30s", resume + "|", critical + "|", countDays + "|", howMuchTime);
+        return (resume + " | " + critical + " | " + countDays + " |");
     }
 
     public static void list(String[] listOfBug) {
