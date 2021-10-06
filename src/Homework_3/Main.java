@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        final byte MAX_DEFECTS = 2; // Максимальное значение хранящихся дефектов
+        final byte MAX_DEFECTS = 3; // Максимальное значение хранящихся дефектов
         String menu = null; // Выбранный пункт меню
         String[][] listOfBugs = new String[MAX_DEFECTS][3]; // Матрица дефектов
         byte defects = 0; // Кол-во заведенных дефектов
@@ -29,23 +29,19 @@ public class Main {
                     if (defects < MAX_DEFECTS) {
 
                         // Ввод резюме
-                        System.out.println("_____________________________________________");
                         System.out.print("Резюме дефекта: ");
                         String resume = scan.nextLine();
                         listOfBugs[row][0] = resume;
 
                         // Ввод критичности
-                        System.out.println("_____________________________________________");
                         System.out.println("Введите кричисность дефекта:" + '\n' + '\t' + "- Blocker" + '\n' + '\t' + "- Critical" + '\n' + '\t' + "- Major" + '\n' + '\t' + "- Minor" + '\n' + '\t' + "- Trivial" + '\n');
                         System.out.print("Критичность: ");
                         String severity = scan.nextLine();
                         listOfBugs[row][1] = severity;
 
                         // Ввод количества дней на исправление
-                        System.out.println("_____________________________________________");
                         System.out.print("Ожидаемое кол-во дней на исправление: ");
                         int daysToFix = scan.nextInt();
-                        System.out.println("_____________________________________________" + '\n');
                         String str = Integer.toString(daysToFix);
                         listOfBugs[row][2] = str;
 
@@ -60,7 +56,7 @@ public class Main {
                     System.out.println("_____________________________________________");
                     System.out.println("Список дефектов:");
                     for (row = 0; row < defects; row++) {
-                        System.out.println(listOfBugs[row][0] + " | " + listOfBugs[row][1] + " | " + listOfBugs[row][2]);
+                        System.out.println(row + " | " + listOfBugs[row][0] + " | " + listOfBugs[row][1] + " | " + listOfBugs[row][2]);
                     }
                     System.out.println();
                     break;
