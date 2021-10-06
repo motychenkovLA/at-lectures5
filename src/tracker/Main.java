@@ -46,7 +46,10 @@ public class Main {
         boolean weekOrNot = daysToFix > 5;
         System.out.println("Резюме дефекта: " + ANSI_CYAN + resume + ANSI_RESET);
         System.out.println('\t' + "Критичность: " + ANSI_CYAN + severity + ANSI_RESET);
-        System.out.println('\t' + "Дней на исправление: " + ANSI_CYAN + daysToFix + ANSI_RESET + '\n' + '\t' + '\t' + "Больше недели: " + ANSI_CYAN + weekOrNot + ANSI_RESET);
-
+        if (weekOrNot == true){
+            System.out.println('\t' + "Дней на исправление: " + ANSI_CYAN + daysToFix + ANSI_RESET + '\n' + '\t' + '\t' + "Больше недели: " + ANSI_GREEN + weekOrNot + ANSI_RESET);
+        }else {
+            System.out.println('\t' + "Дней на исправление: " + ANSI_CYAN + daysToFix + ANSI_RESET + '\n' + '\t' + '\t' + "Больше недели: " + ANSI_RED + weekOrNot + ANSI_RESET);
+        }
     }
 }
