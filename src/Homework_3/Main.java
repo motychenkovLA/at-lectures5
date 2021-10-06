@@ -28,11 +28,11 @@ public class Main {
 
             switch (menu) {
                 case "add": // Добавление дефекта
+                    System.out.println("*******************************************");
+                    System.out.println();
                     if (defects < MAX_DEFECTS) {
 
                         // Ввод резюме
-                        System.out.println("*******************************************");
-                        System.out.println();
                         System.out.print("Резюме дефекта: ");
                         String resume = scan.nextLine();
                         listOfBugs[row][0] = resume;
@@ -56,8 +56,6 @@ public class Main {
                         defects++;
                         menu = null;
                     } else {
-                        System.out.println("*******************************************");
-                        System.out.println();
                         System.out.println("ВНИМАНИЕ!!! Достигнуто максимальное количество дефектов. Возврат в главное меню...");
                         System.out.println();
                     }
