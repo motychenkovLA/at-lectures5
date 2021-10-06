@@ -1,11 +1,11 @@
 // Osin Ilya
 // 10/07/2021
 // Lesson3
-package Homework_2;
+package Homework_3;
 
 import java.util.Scanner;
 
-public class DZ3 {
+public class Main {
 
     // Цвета для вывода текста
     public static final String ANSI_RESET = "\u001B[0m";
