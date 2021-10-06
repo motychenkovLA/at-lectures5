@@ -8,29 +8,24 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        final byte MAX_DEFECTS = 2;
-        String menu = null;
         Scanner scan = new Scanner(System.in);
-        // Матрица дефектов
-        String[][] listOfBugs = new String[MAX_DEFECTS][3];
-        // Кол-во заведенных дефектов
-        byte defects = 0;
-        // row - индекс ряда массива
-        byte row = 0;
+        final byte MAX_DEFECTS = 2; // Максимальное значение хранящихся дефектов
+        String menu = null; // Выбранный пункт меню
+        String[][] listOfBugs = new String[MAX_DEFECTS][3]; // Матрица дефектов
+        byte defects = 0; // Кол-во заведенных дефектов
+        byte row = 0; // row - индекс ряда массива
 
         while (!"quit".equals(menu)) {
-
             // Ввод команды
             System.out.println("_____________________________________________");
             System.out.println("Введите команду, чтобы:" + '\n' + '\t' + "Добавить новый дефект: add" + '\n' + '\t' + "Вывести список дефектов: list" + '\n' + '\t' + "Выйти из программы: quit");
             System.out.print('\n' + "Введите команду: ");
             menu = scan.nextLine();
 
-            // Костыльная очистка консоли через сдвиг за счет переносов строк
-            //for (int i = 0; i < 50; ++i) System.out.println();
+            for (int i = 0; i < 50; ++i) System.out.println(); // Костыльная очистка консоли через сдвиг за счет переносов строк
 
             switch (menu) {
-                case "add":
+                case "add": // Добавление дефекта
                     if (defects < MAX_DEFECTS) {
 
                         // Ввод резюме
@@ -57,22 +52,20 @@ public class Main {
                         row++;
                         defects++;
                         menu = null;
-
-                        // Вывод результата обработки
-                        //System.out.println("| " + resume + " | " + severity + " | " + daysToFix + " |");
                     } else {
                         System.out.println("Достигнуто максимальное количество дефектов. Возврат в главное меню...");
                     }
                     break;
-                case "list":
-                    // Вывод на экран списка созданных дефектов.
+                case "list": // Вывод на экран списка созданных дефектов.
+                    System.out.println("_____________________________________________");
+                    System.out.println("Список дефектов:");
                     for (row = 0; row < defects; row++) {
                         System.out.println(listOfBugs[row][0] + " | " + listOfBugs[row][1] + " | " + listOfBugs[row][2]);
                     }
+                    System.out.println();
                     break;
             }
         }
-        // Закрыть сканнер
-        scan.close();
+        scan.close(); // Закрыть сканнер
     }
 }
