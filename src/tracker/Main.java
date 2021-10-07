@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Main {
     static final int COUNT_OF_BUGS = 10;
-    static String[] listOfBug = new String[COUNT_OF_BUGS];
-    static int numberOfBug = 0;
+    static String[] bugList = new String[COUNT_OF_BUGS];
+    static int bugNumber = 0;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class Main {
                     addToList(s);
                     break;
                 case "list":
-                    list(listOfBug);
+                    list(bugList);
                     break;
                 case "quit":
                     scanner.close();
@@ -36,11 +36,11 @@ public class Main {
     }
 
     public static void addToList(String str) {
-        if (numberOfBug == COUNT_OF_BUGS) {
+        if (bugNumber == COUNT_OF_BUGS) {
             System.out.println('\n' + "Невозможно добавить больше дефектов");
         } else {
-            listOfBug[numberOfBug] = str;
-            numberOfBug++;
+            bugList[bugNumber] = str;
+            bugNumber++;
         }
     }
 
