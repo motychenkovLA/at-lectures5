@@ -10,23 +10,23 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         final byte MAX_DEFECTS = 3; // Максимальное значение хранящихся дефектов
-        String menu = null; // Выбранный пункт меню
+        String command = ""; // Выбранный пункт меню
         String[][] listOfBugs = new String[MAX_DEFECTS][3]; // Матрица дефектов
-        byte defects = 0; // Кол-во заведенных дефектов
-        byte row = 0; // row - индекс ряда массива
+        int defects = 0; // Кол-во заведенных дефектов
+        int row = 0; // row - индекс ряда массива
 
-        while (!"quit".equals(menu)) {
+        while (!"quit".equals(command)) {
             // Ввод команды
             System.out.println("*******************************************");
             System.out.println();
             System.out.println("Введите команду, чтобы:" + '\n' + '\t' + "Добавить новый дефект: add" + '\n' + '\t' + "Вывести список дефектов: list" + '\n' + '\t' + "Выйти из программы: quit");
             System.out.print('\n' + "Введите команду: ");
-            menu = scan.nextLine();
+            command = scan.nextLine();
             System.out.println();
 
             //for (int i = 0; i < 50; ++i) System.out.println(); // Костыльная очистка консоли через сдвиг за счет переносов строк
 
-            switch (menu) {
+            switch (command) {
                 case "add": // Добавление дефекта
                     System.out.println("*******************************************");
                     System.out.println();
@@ -48,13 +48,13 @@ public class Main {
                         // Ввод количества дней на исправление
                         System.out.print("Ожидаемое кол-во дней на исправление: ");
                         int daysToFix = scan.nextInt();
+                        scan.nextLine();
                         String str = Integer.toString(daysToFix);
                         listOfBugs[row][2] = str;
                         System.out.println();
 
                         row++;
                         defects++;
-                        menu = null;
                     } else {
                         System.out.println("ВНИМАНИЕ!!! Достигнуто максимальное количество дефектов. Возврат в главное меню...");
                         System.out.println();
