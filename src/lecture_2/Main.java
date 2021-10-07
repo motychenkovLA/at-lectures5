@@ -1,13 +1,15 @@
 package lecture_2;
+// todo 1 пакет tracker
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+        // todo 1 - объявление переменных задолго до использования, без инициализации
         String summary;
         String priority;
-        int numOfDays;
+        int numOfDays; // todo 0 -> dayCount, daysToFix, лучше избегать of в названиях
         boolean duringWorkWeek;
 
         Scanner scanner = new Scanner(System.in);
@@ -22,6 +24,7 @@ public class Main {
         numOfDays = scanner.nextInt();
         scanner.nextLine();
 
+        // todo 3 - 5 это константа, вынести в начало main
         duringWorkWeek = numOfDays > 5;
 
         System.out.println("\nИнформация о дефекте");
