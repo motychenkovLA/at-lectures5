@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        // todo 1 константы CAPS_WITH_UNDERSCORES
+
         final int WORK_DAYS = 5;
 
         Scanner scanner = new Scanner(System.in);
