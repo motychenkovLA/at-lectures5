@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class HomeWork3 {
     public static void main(String[] args) {
 
-        final int NUM_OF_BUGS = 3;
+        final int NUM_OF_BUGS = 10;
 
         String[] summaryBugs = new String[NUM_OF_BUGS];
         String[] priorityBugs = new String[NUM_OF_BUGS];
@@ -22,7 +22,7 @@ public class HomeWork3 {
         //  не изменять больше нигде
         //  и при выводе использовать < .
         //  При этом index будет хранить именно текущее количество дефектов.
-        int index = -1;
+        int index = 0;
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
 
@@ -37,7 +37,6 @@ public class HomeWork3 {
 
             switch (action){
                 case "add":
-                    index++;
                     if (index < NUM_OF_BUGS){
 
                         System.out.println("\nДобавление дефекта");
@@ -50,37 +49,39 @@ public class HomeWork3 {
                         System.out.print("Введите количество дней на исправление дефекта: ");
                         daysToFixBugs[index] = scanner.nextInt();
                         scanner.nextLine();
+
+                        index++;
+
                     } else {
                         System.out.println("Ошибка: список полный, нельзя добавить дефект");
-                        index--; //уменьшаем, чтобы при выводе полностью заполненного массива не получить ошибку выхода за границы
                     }
                     break;
                 case "list":
-                    if (index >= 0){
+                    if (index > 0){
                         System.out.println("\nСписок дефектов");
-                        for (int i = 0; i<=index; i++){
+                        for (int i = 0; i<index; i++){
                             // todo 1 - всё ещё вылезает за экран, можно перенести в формате
                             //  а(
                             //      s,
                             //      x, y, z
                             //  );
                             //  + System.out.format объединяет сразу sout и format
-                            System.out.println(String.format("Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
-                                                                    i, summaryBugs[i], priorityBugs[i], daysToFixBugs[i]));
+                            System.out.format(
+                                    "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
+                                        i, summaryBugs[i], priorityBugs[i], daysToFixBugs[i]);
                         }
                     } else {
                         System.out.println("Ошибка: список дефектов пуст");
                     }
                     break;
                 case "quit":
-                   // System.exit(0); // todo 0 - закомменченный код лучше не оставлять в коммитах
+                     // todo 0 - закомменченный код лучше не оставлять в коммитах
                     loop = false;
                     break;
                 default:
                     System.out.println("Ошибка: такой команды нет");
                     break;
             }
-
         }
     }
 }
