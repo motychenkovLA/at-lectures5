@@ -22,10 +22,12 @@ public class Main {
         // Вывести инфо о заведенном дефекте
 //        todo "5" так называемое магическое число, что оно значит, почему тут 5 а не 20? не понятно.
 //         Необходимо вынести в константу с осмысленным именем
-        boolean moreWorkWeek = daysToFix > 5;
+        int workWeek = 5;
+        boolean moreWorkWeek = daysToFix > workWeek;
         System.out.println("Инфо о заведенном дефекте:");
 //        todo вот за эту линию стараемся не заезжать, необходимо переносить длинные строки --------------------------->
-        System.out.println("РЕЗЮМЕ:" + resumeDef + "\n" + "СЕРЬЕЗНОСТЬ:" + prioritetDef + "\n" + "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFix + "\n" + "ЗАЙМЕТ БОЛЬШЕ РАБОЧЕЙ НЕДЕЛИ:" + moreWorkWeek);
+        System.out.println("РЕЗЮМЕ:" + resumeDef + "\n" + "СЕРЬЕЗНОСТЬ:" + prioritetDef + "\n" +
+                "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFix + "\n" + "ЗАЙМЕТ БОЛЬШЕ РАБОЧЕЙ НЕДЕЛИ:" + moreWorkWeek);
 
     }
 }
