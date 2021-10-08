@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         String[] listBug = new String[10];
+
         int countReq =  0; // переменная для количества дефектов
         for (int i = 0; i < 12; i++) {
 
