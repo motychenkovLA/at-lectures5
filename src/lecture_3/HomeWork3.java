@@ -7,13 +7,21 @@ public class HomeWork3 {
 
         final int NUM_OF_BUGS = 3;
 
-        // todo 3 - в памяти хранится не дефект, а его консольное представление
-        //  лучше по массиву на каждое поле
         String[] summaryBugs = new String[NUM_OF_BUGS];
         String[] priorityBugs = new String[NUM_OF_BUGS];
         int[] daysToFixBugs = new int[NUM_OF_BUGS];
 
-
+        // todo 1 - сейчас индекс указывает на [последний добавленный элемент],
+        //  поэтому приходится при добавлении увеличить на 1 до проверки на заполненность,
+        //  уменьшать на 1 если проверка не пройдена,
+        //  и в выводе на консоль использовать <= , хотя как правило пишут < .
+        //  ;
+        //  Если заменить на [следующий добавляемый элемент], т.е. начинать с 0,
+        //  можно будет проверять заполненность не трогая счетчик,
+        //  увеличивать счетчик только после самого добавления,
+        //  не изменять больше нигде
+        //  и при выводе использовать < .
+        //  При этом index будет хранить именно текущее количество дефектов.
         int index = -1;
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -22,7 +30,7 @@ public class HomeWork3 {
             System.out.println("\n---Меню---");
             System.out.println("Добавить дефект: add");
             System.out.println("Вывести список дефектов: list");
-            System.out.println("Выйти: quit"); // todo 0 - это quit же ?
+            System.out.println("Выйти: quit");
 
             System.out.print("Введите команду: ");
             String action = scanner.nextLine();
@@ -42,12 +50,6 @@ public class HomeWork3 {
                         System.out.print("Введите количество дней на исправление дефекта: ");
                         daysToFixBugs[index] = scanner.nextInt();
                         scanner.nextLine();
-
-                        // todo 1 - длинная строчка, вылезает за экран, лучше перенести
-                      //
-
-                        // todo 0 - обычно принято обе ветки if-а писать в одном стиле, независим от размера
-                        //  если первая в скобках то вторую тоже лучше в них обернуть
                     } else {
                         System.out.println("Ошибка: список полный, нельзя добавить дефект");
                         index--; //уменьшаем, чтобы при выводе полностью заполненного массива не получить ошибку выхода за границы
@@ -56,10 +58,13 @@ public class HomeWork3 {
                 case "list":
                     if (index >= 0){
                         System.out.println("\nСписок дефектов");
-                        // todo 3 - уже есть index указывающий текущее количество дефектов
-                        //  перебирать список целиком, проверяя есть ли дефект, - лишняя работа
-
                         for (int i = 0; i<=index; i++){
+                            // todo 1 - всё ещё вылезает за экран, можно перенести в формате
+                            //  а(
+                            //      s,
+                            //      x, y, z
+                            //  );
+                            //  + System.out.format объединяет сразу sout и format
                             System.out.println(String.format("Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
                                                                     i, summaryBugs[i], priorityBugs[i], daysToFixBugs[i]));
                         }
@@ -68,9 +73,7 @@ public class HomeWork3 {
                     }
                     break;
                 case "quit":
-                    // todo ? - это верно и работает,
-                    //  но хотелось бы чтоб цикл прерывался и просто поток выполнения выходил из main
-                   // System.exit(0);
+                   // System.exit(0); // todo 0 - закомменченный код лучше не оставлять в коммитах
                     loop = false;
                     break;
                 default:
