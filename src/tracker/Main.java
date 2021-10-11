@@ -16,4 +16,5 @@ public class Main {
         border = days > 5;
         System.out.println("Результат:\n" + "Резюме дефекта - " + summary + "\n" + "Критичность дефекта - " + criticality + "\n" + "Кол-во дней на исправление - " + days + "\n" + "Займет больше рабочей недели - " + border);
     }
+
 }
