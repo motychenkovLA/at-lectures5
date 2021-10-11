@@ -11,17 +11,6 @@ public class HomeWork3 {
         String[] priorityBugs = new String[NUM_OF_BUGS];
         int[] daysToFixBugs = new int[NUM_OF_BUGS];
 
-        // todo 1 - сейчас индекс указывает на [последний добавленный элемент],
-        //  поэтому приходится при добавлении увеличить на 1 до проверки на заполненность,
-        //  уменьшать на 1 если проверка не пройдена,
-        //  и в выводе на консоль использовать <= , хотя как правило пишут < .
-        //  ;
-        //  Если заменить на [следующий добавляемый элемент], т.е. начинать с 0,
-        //  можно будет проверять заполненность не трогая счетчик,
-        //  увеличивать счетчик только после самого добавления,
-        //  не изменять больше нигде
-        //  и при выводе использовать < .
-        //  При этом index будет хранить именно текущее количество дефектов.
         int index = 0;
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -60,12 +49,6 @@ public class HomeWork3 {
                     if (index > 0){
                         System.out.println("\nСписок дефектов");
                         for (int i = 0; i<index; i++){
-                            // todo 1 - всё ещё вылезает за экран, можно перенести в формате
-                            //  а(
-                            //      s,
-                            //      x, y, z
-                            //  );
-                            //  + System.out.format объединяет сразу sout и format
                             System.out.format(
                                     "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
                                         i, summaryBugs[i], priorityBugs[i], daysToFixBugs[i]);
@@ -75,7 +58,6 @@ public class HomeWork3 {
                     }
                     break;
                 case "quit":
-                     // todo 0 - закомменченный код лучше не оставлять в коммитах
                     loop = false;
                     break;
                 default:
