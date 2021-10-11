@@ -5,9 +5,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+//        todo необходимо ввести переменную которая отражает максимальное количество дефектов
+//                использовать её тут \/ и на 27 строчке
         String[] listBug = new String[10];
 
-        int countReq =  0; // переменная для количества дефектов
+        int countReq = 0; // переменная для количества дефектов
+//        todo почему тут всего 12 попыток? зачем вообще ограничивать попыттки?
         for (int i = 0; i < 12; i++) {
 
             Scanner scanner = new Scanner(System.in);
@@ -20,8 +23,8 @@ public class Main {
             String action = scanner.nextLine();
 
             switch (action) {
-                case "Add":
-
+                case ("Add"): {
+// todo                     тут    \/
                     if (countReq > 9) {
                         System.out.println("Невозможно добавить больше 10 дефектов");
 
@@ -36,18 +39,21 @@ public class Main {
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта:");
                     int daysToFixed = scanner.nextInt();
                     scanner.nextLine();
-                    String infoBug = "|"+ countReq + "|"+ resume + "|"+ priority+ "|" + daysToFixed+ "|" ;
-                    listBug[countReq]=infoBug;
+//todo переделать хранение готовой карточки клиента на массивы
+                    String infoBug = "|" + countReq + "|" + resume + "|" + priority + "|" + daysToFixed + "|";
+                    listBug[countReq] = infoBug;
                     countReq = countReq + 1;
                     break;
-                case "List":
-                  // System.out.println(Arrays.toString(listbug));
 
-                    for (String a: listBug) {
+                }
+                case "List":
+                    // System.out.println(Arrays.toString(listbug));
+//todo переделать вывод yа вывод из массивов
+                    for (String a : listBug) {
                         System.out.println(a);
                     }
                     break;
-
+//todo выход не работает
                 case "Quit":
                     break;
                 default:
@@ -55,7 +61,7 @@ public class Main {
                     break;
             }
 
-
+//todo не захламляем класс закоменченным кодом который больше не нужен
             //final int WORK_DAYS = 5;
 
             //Scanner scanner = new Scanner(System.in);
