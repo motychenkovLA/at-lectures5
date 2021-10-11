@@ -3,6 +3,7 @@ package trackerV2;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         final int ARRAY_SIZE = 10;
         String[] list = new String[ARRAY_SIZE];
