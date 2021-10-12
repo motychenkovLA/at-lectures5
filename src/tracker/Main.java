@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        final int MAX_DEFECTS = 10; // максимальное количество дефектов
+        final int MAX_DEFECTS = 10; // максимальное количеств дефектов
         int currentDefectNum = 0; // текущий номер дефекта
         String[] summaryList = new String[MAX_DEFECTS]; // Объявили массив
         String[] severutyList = new String[MAX_DEFECTS];
