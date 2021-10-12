@@ -6,56 +6,53 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        // + предложить пользователю выбрать: добавить новый дефект ("add"), вывести список ("list")
-//    или выйти из программы ("quit") - главное меню
-// + при добавлении ввод параметров происходит как раньше
-// после добавления, вернуться в главное меню
-//программа максимально может хранить 10 дефектов, при попытке добавить больше, сообщает о невозможности
-//      и автоматически возвращает в главное меню
-//при выводе списка дефекты отображаются в виде "номер (начиная с 0) | резюме | серьезность |
-//     количество дней на исправление"
-
-        String menu = null;
-        final int MAX_DEFECTS = 10; // Максимальное количество дефектов
-        int [] defects = new int [MAX_DEFECTS]; // Объявили массив, размера 10
-
-        for (int i=0; i<2; i++) {
+        final int MAX_DEFECTS = 10; // максимальное количество дефектов
+        int currentDefectNum = 0; // текущий номер дефекта
+        String[] summaryList = new String[MAX_DEFECTS]; // Объявили массив
+        String[] severutyList = new String[MAX_DEFECTS];
+        int[] daysToFixList = new int[MAX_DEFECTS];
+        boolean isRunning = true;
+        while (isRunning) {
             Scanner scan = new Scanner(System.in);
-            System.out.println("Выберите: (Add)/ (List)/ (Quit)");
-            menu = scan.nextLine();
+            System.out.println("Выберите: (Add)/ (List)/ (Quit)"); // добавить новый дефект, вывести список,выйти (меню)
+            String menu = scan.nextLine();
+
             switch (menu) {
-                case "Add":
-                    System.out.println("Введите резюме дефекта:");
-                    String resumeDef = scan.nextLine();
-                    System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
-                    String prioritetDef = scan.nextLine();
-                    System.out.println("Введите ожидаемое количество дней на исправление:");
-                    int daysToFix = scan.nextInt();
-                    scan.nextLine();
-                    int workWeek = 5;
-                    boolean moreWorkWeek = daysToFix > workWeek;
-                    System.out.println("Инфо о заведенном дефекте:");
-                    System.out.println("РЕЗЮМЕ:" + resumeDef + "\n" + "СЕРЬЕЗНОСТЬ:" + prioritetDef + "\n" +
-                            "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFix + "\n" + "ЗАЙМЕТ БОЛЬШЕ РАБОЧЕЙ НЕДЕЛИ:" + moreWorkWeek);
+                case ("Add"): {
+                    if (MAX_DEFECTS > currentDefectNum) {
+                        System.out.println("Введите резюме дефекта:");
+                        summaryList[currentDefectNum] = scan.nextLine();
+                        System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
+                        severutyList[currentDefectNum] = scan.nextLine();
+                        System.out.println("Введите ожидаемое количество дней на исправление:");
+                        daysToFixList[currentDefectNum] = scan.nextInt();
+                        scan.nextLine();
+
+                        currentDefectNum++;
+                    } else {
+                        System.out.println("Достигнуто максимальное количество дефектов");
+                    }
                     break;
-
-                    case "List":
-
+                }
+                case ("List"): {
+                    for (int i = 0; i < currentDefectNum; i++) {
+                        System.out.println("НОМЕР:" + i + "\n" + "РЕЗЮМЕ:" + summaryList[i] + "\n" +
+                                "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFixList[i]);//вывод списка дефектов
+                    }
                     break;
-
-                    case "Quit":
-
+                }
+                case ("Quit"): {
+                    isRunning = false;
+                    System.out.println("До свидания!");
                     break;
-
-                    default:
+                }
+                default: {
                     System.out.println("Такого пункта меню нет");
                     break;
+                }
+
             }
-
-
-          }
-
-
+        }
     }
 }
 
