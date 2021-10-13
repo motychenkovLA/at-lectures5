@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
     static final int COUNT_OF_BUGS = 10;
+    // todo 3 - в данном случае хранится консольное представление, а не сам дефект
+    //   лучше по массиву на каждое поле
     static String[] bugList = new String[COUNT_OF_BUGS];
     static int bugNumber = 0;
 
@@ -19,6 +21,8 @@ public class Main {
 
             switch (result) {
                 case "add":
+                    // todo 1 - пользователь целиком вводит информацию о дефекте
+                    //  и только после этого ему говорят, что список уже заполнен
                     String s = add();
                     addToList(s);
                     break;
@@ -32,6 +36,7 @@ public class Main {
                 default:
                     System.out.println('\n' + "Введите значение из списка");
             }
+        // todo 1 - while предпочтительнее do-while
         } while (true);
     }
 
@@ -45,6 +50,7 @@ public class Main {
     }
 
     public static String add() {
+        // todo 1 - дублируется сканер
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Введите резюме дефекта:");
@@ -59,7 +65,9 @@ public class Main {
         return (resume + " | " + critical + " | " + countDays + " |");
     }
 
+    // todo 1 - принимает в аргумент местное статическое поле
     public static void list(String[] listOfBug) {
+        // todo 3 - перебирается весь массив вместо заполненной части
         for (int i = 0; i < COUNT_OF_BUGS; i++) {
             if (listOfBug[i] != null) {
                 System.out.println(i + ". " + listOfBug[i]);
