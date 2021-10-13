@@ -5,8 +5,10 @@ import java.util.Scanner;
 
 public class Main {
 
+  // todo 0 - 4 пробела отступ плз
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
+    // todo 1 - CONSTANT_FORMAT
     final int arraySize = 10;
     String[] arrayResume = new String[arraySize];
     String[] arrayPriority = new String[arraySize];
@@ -35,6 +37,8 @@ public class Main {
           }
           break;
         case "List":
+          // todo 3 - какой-то очень сложный цикл ещё и с тремя if-ами
+          //   почему просто не перебрать дефекты до последнего заведенного?
           for (int indSearch = 0; indSearch < arraySize; indSearch++) {
             if (arrayResume[indSearch] != null) {
               System.out.println(
@@ -56,6 +60,8 @@ public class Main {
           System.out.println("Введена неверная операция! Повторите попытку");
           break;
       }
+    // todo 3 - дублирование проверки, которая делается в case;
+    //   лучше ввести переменную вроде runProgram и менять ее в нужном case
     } while (!(operation.equalsIgnoreCase(goodBye)));
 
   }
