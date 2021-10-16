@@ -20,7 +20,7 @@ public class Main {
             switch (menu) {
                 case ("Add"): {
                     if (MAX_DEFECTS > currentDefectNum) {
-                        System.out.println("Введите реюме дефекта:");
+                        System.out.println("Введите резюме дефекта:");
                         summaryList[currentDefectNum] = scan.nextLine();
                         System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
                         severutyList[currentDefectNum] = scan.nextLine();
@@ -37,6 +37,7 @@ public class Main {
                 case ("List"): {
                     for (int i = 0; i < currentDefectNum; i++) {
                         System.out.println("НОМЕР:" + i + "\n" + "РЕЗЮМЕ:" + summaryList[i] + "\n" +
+                                "СЕРЬЕЗНОСТЬ:" + severutyList [i]+ "\n" +
                                 "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFixList[i]);//вывод списка дефектов
                     }
                     break;
