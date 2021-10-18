@@ -51,18 +51,29 @@ public class Main {
 
             System.out.println("Введите ожидаемо количество дней на исправление:");
             defect.setCountDays(scanner.nextInt());
+            String s = scanner.nextLine();
+
+            System.out.println("===================================");
+
+            bugList[(int) bugNumber]= defect;
 
             bugNumber++;
         }
     }
 
     public static void list() {
+        if (bugNumber==0){
+            System.out.println("Список пуст");
+        } else {
+            System.out.println("id|    Резюме|    Серьезность| Количество дней на исправление");
+        }
         for (int i = 0; i < bugNumber; i++) {
             if (bugList[i] != null) {
                 Defect def = bugList[i];
-                System.out.println(def.getId() + ". " + def.getResume()
-                        + ". " + def.getCritical() + ". " + def.getCountDays());
+                System.out.println(def.getId() + "| " + def.getResume()
+                        + "| " + def.getCritical() + "| " + def.getCountDays());
             }
         }
+        System.out.println("===================================");
     }
 }
