@@ -12,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         while (true) {
             System.out.println('\n' + "Выберите, что хотите сделать:\n" +
                     "- Добавить новый дефект (введите add)\n" +
@@ -25,7 +24,7 @@ public class Main {
                     add();
                     break;
                 case "list":
-                    list(bugList);
+                    list();
                     break;
                 case "quit":
                     scanner.close();
@@ -55,12 +54,11 @@ public class Main {
         }
     }
 
-    // todo 1 - принимает в аргумент местное статическое поле
-    public static void list(String[] listOfBug) {
+    public static void list() {
         // todo 3 - перебирается весь массив вместо заполненной части
-        for (int i = 0; i < COUNT_OF_BUGS; i++) {
-            if (listOfBug[i] != null) {
-                System.out.println(i + ". " + listOfBug[i]);
+        for (int i = 0; i < bugNumber; i++) {
+            if (bugList[i] != null) {
+                System.out.println(i + ". " + bugList[i]);
             }
         }
     }
