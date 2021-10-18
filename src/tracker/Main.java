@@ -6,9 +6,7 @@ public class Main {
     public static void main(String[] args) {
         final int NUM_OF_BUGS = 10;
 
-        String[] summaryBugs = new String[NUM_OF_BUGS];
-        String[] priorityBugs = new String[NUM_OF_BUGS];
-        int[] daysToFixBugs = new int[NUM_OF_BUGS];
+        Defect[] bugs = new Defect[NUM_OF_BUGS];
 
         int index = 0;
         Scanner scanner = new Scanner(System.in);
@@ -18,7 +16,7 @@ public class Main {
             System.out.println("\n---Меню---");
             System.out.println("Добавить дефект: add");
             System.out.println("Вывести список дефектов: list");
-            System.out.println("Выйти: quit");
+            System.out.println("Выйти: exit");
 
             System.out.print("Введите команду: ");
             String action = scanner.nextLine();
@@ -29,14 +27,18 @@ public class Main {
 
                         System.out.println("\nДобавление дефекта");
                         System.out.print("Введите резюме дефекта: ");
-                        summaryBugs[index] = scanner.nextLine();
+                        String summary = scanner.nextLine();
 
                         System.out.print("Введите критичность дефекта: блокирующий, высокий, средний, низкий: ");
-                        priorityBugs[index] = scanner.nextLine();
+                        String priority = scanner.nextLine();
 
                         System.out.print("Введите количество дней на исправление дефекта: ");
-                        daysToFixBugs[index] = scanner.nextInt();
+                        int daysToFix = scanner.nextInt();
                         scanner.nextLine();
+
+                        // todo 1 - каст в long избыточный здесь
+                        Defect bug = new Defect(index, summary, priority, daysToFix);
+                        bugs[index] = bug;
 
                         index++;
 
@@ -48,15 +50,13 @@ public class Main {
                     if (index > 0) {
                         System.out.println("\nСписок дефектов");
                         for (int i = 0; i < index; i++) {
-                            System.out.format(
-                                    "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
-                                    i, summaryBugs[i], priorityBugs[i], daysToFixBugs[i]);
+                            System.out.println(bugs[i].displayInfo());
                         }
                     } else {
                         System.out.println("Ошибка: список дефектов пуст");
                     }
                     break;
-                case "quit":
+                case "exit":
                     loop = false;
                     break;
                 default:

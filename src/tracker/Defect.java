@@ -1,4 +1,4 @@
-package lecture_4;
+package tracker;
 
 public class Defect {
     private long id;
@@ -16,33 +16,32 @@ public class Defect {
     // todo 1 - обычно всегда идут парами get-set для каждого поля по порядку
 
     // todo 3 - id не должен меняться, зачем ему сеттер?
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-
-    public void setDaysToFix(int daysToFix) {
-        this.daysToFix = daysToFix;
-    }
-
 
     public long getId() {
         return id;
+    }
+
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getSummary() {
         return summary;
     }
 
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
     public String getPriority() {
         return priority;
+    }
+
+
+    public void setDaysToFix(int daysToFix) {
+        this.daysToFix = daysToFix;
     }
 
     public int getDaysToFix() {
@@ -51,10 +50,14 @@ public class Defect {
 
     // todo 3 - лучше возвращать строку представляющую дефект,
     //  а выводить ее на консоль уже в main
-    public void displayInfo() {
-        System.out.format(
+    public String displayInfo() {
+
+        String str = String.format(
                 "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
                 id, summary, priority, daysToFix);
+
+        return str;
     }
+
 
 }
