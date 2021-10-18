@@ -40,7 +40,7 @@ public class Main {
             System.out.println('\n' + "Невозможно добавить больше дефектов");
         } else {
             Defect defect = new Defect();
-            
+
             defect.setId(bugNumber);
 
             System.out.println("Введите резюме дефекта:");
