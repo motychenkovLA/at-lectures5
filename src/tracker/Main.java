@@ -1,10 +1,9 @@
-package lecture_3;
+package tracker;
 
 import java.util.Scanner;
 
-public class HomeWork3 {
+public class Main {
     public static void main(String[] args) {
-
         final int NUM_OF_BUGS = 10;
 
         String[] summaryBugs = new String[NUM_OF_BUGS];
@@ -15,7 +14,7 @@ public class HomeWork3 {
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
 
-        while (loop){
+        while (loop) {
             System.out.println("\n---Меню---");
             System.out.println("Добавить дефект: add");
             System.out.println("Вывести список дефектов: list");
@@ -24,9 +23,9 @@ public class HomeWork3 {
             System.out.print("Введите команду: ");
             String action = scanner.nextLine();
 
-            switch (action){
+            switch (action) {
                 case "add":
-                    if (index < NUM_OF_BUGS){
+                    if (index < NUM_OF_BUGS) {
 
                         System.out.println("\nДобавление дефекта");
                         System.out.print("Введите резюме дефекта: ");
@@ -46,12 +45,12 @@ public class HomeWork3 {
                     }
                     break;
                 case "list":
-                    if (index > 0){
+                    if (index > 0) {
                         System.out.println("\nСписок дефектов");
-                        for (int i = 0; i<index; i++){
+                        for (int i = 0; i < index; i++) {
                             System.out.format(
                                     "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
-                                        i, summaryBugs[i], priorityBugs[i], daysToFixBugs[i]);
+                                    i, summaryBugs[i], priorityBugs[i], daysToFixBugs[i]);
                         }
                     } else {
                         System.out.println("Ошибка: список дефектов пуст");
