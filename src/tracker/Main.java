@@ -3,11 +3,9 @@ package tracker;
 import java.util.Scanner;
 
 public class Main {
-    static final int COUNT_OF_BUGS = 1;
-    // todo 3 - в данном случае хранится консольное представление, а не сам дефект
-    //   лучше по массиву на каждое поле
-    static String[] bugList = new String[COUNT_OF_BUGS];
-    static int bugNumber = 0;
+    static final int COUNT_OF_BUGS = 10;
+    static Defect[] bugList = new Defect[COUNT_OF_BUGS];
+    static long bugNumber = 0L;
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -41,24 +39,29 @@ public class Main {
         if (bugNumber == COUNT_OF_BUGS) {
             System.out.println('\n' + "Невозможно добавить больше дефектов");
         } else {
+            Defect defect = new Defect();
+            
+            defect.setId(bugNumber);
+
             System.out.println("Введите резюме дефекта:");
-            String resume = scanner.nextLine();
+            defect.setResume(scanner.nextLine());
 
             System.out.println("Введите критичность дефекта - низкий, средний, высокий, блокер");
-            String critical = scanner.nextLine();
+            defect.setCritical(scanner.nextLine());
 
             System.out.println("Введите ожидаемо количество дней на исправление:");
-            int countDays = scanner.nextInt();
-            bugList[bugNumber] = resume + " | " + critical + " | " + countDays + " |";
+            defect.setCountDays(scanner.nextInt());
+
             bugNumber++;
         }
     }
 
     public static void list() {
-        // todo 3 - перебирается весь массив вместо заполненной части
         for (int i = 0; i < bugNumber; i++) {
             if (bugList[i] != null) {
-                System.out.println(i + ". " + bugList[i]);
+                Defect def = bugList[i];
+                System.out.println(def.getId() + ". " + def.getResume()
+                        + ". " + def.getCritical() + ". " + def.getCountDays());
             }
         }
     }
