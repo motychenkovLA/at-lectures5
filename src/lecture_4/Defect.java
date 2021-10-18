@@ -13,6 +13,9 @@ public class Defect {
         this.daysToFix = daysToFix;
     }
 
+    // todo 1 - обычно всегда идут парами get-set для каждого поля по порядку
+
+    // todo 3 - id не должен меняться, зачем ему сеттер?
     public void setId(long id) {
         this.id = id;
     }
@@ -46,6 +49,8 @@ public class Defect {
         return daysToFix;
     }
 
+    // todo 3 - лучше возвращать строку представляющую дефект,
+    //  а выводить ее на консоль уже в main
     public void displayInfo() {
         System.out.format(
                 "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
