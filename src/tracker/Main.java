@@ -49,7 +49,7 @@ public class Main {
                     if (index > 0) {
                         System.out.println("\nСписок дефектов");
                         for (int i = 0; i < index; i++) {
-                            System.out.println(bugs[i].displayInfo());
+                            System.out.println(bugs[i].getBugInfo());
                         }
                     } else {
                         System.out.println("Ошибка: список дефектов пуст");

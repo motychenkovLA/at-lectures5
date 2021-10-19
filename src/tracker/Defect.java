@@ -46,14 +46,13 @@ public class Defect {
     }
 
     // todo 1 - getDisplayInfo тогда
-    public String displayInfo() {
+    public String getBugInfo() {
 
         // todo 1 - можно не вводить лишнюю переменную, а сразу возвращать значение
-        String str = String.format(
+        return String.format(
                 "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
                 id, summary, priority, daysToFix);
 
-        return str;
     }
 
 
