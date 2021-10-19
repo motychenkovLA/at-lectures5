@@ -13,9 +13,6 @@ public class Defect {
         this.daysToFix = daysToFix;
     }
 
-    // todo 1 - обычно всегда идут парами get-set для каждого поля по порядку
-
-    // todo 3 - id не должен меняться, зачем ему сеттер?
 
     public long getId() {
         return id;
@@ -48,10 +45,10 @@ public class Defect {
         return daysToFix;
     }
 
-    // todo 3 - лучше возвращать строку представляющую дефект,
-    //  а выводить ее на консоль уже в main
+    // todo 1 - getDisplayInfo тогда
     public String displayInfo() {
 
+        // todo 1 - можно не вводить лишнюю переменную, а сразу возвращать значение
         String str = String.format(
                 "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
                 id, summary, priority, daysToFix);

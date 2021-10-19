@@ -36,7 +36,6 @@ public class Main {
                         int daysToFix = scanner.nextInt();
                         scanner.nextLine();
 
-                        // todo 1 - каст в long избыточный здесь
                         Defect bug = new Defect(index, summary, priority, daysToFix);
                         bugs[index] = bug;
 
