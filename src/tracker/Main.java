@@ -5,9 +5,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         final int MAX_DEFECTS = 10; // максимальное количеств дефектов
-        int currentDefectNum = 0; // текущий номер дефекта
+        int id = 0; // текущий номер дефекта
         Defect [] defectss = new Defect[MAX_DEFECTS]; // один массив для 10 дефектов
         boolean isRunning = true;
         while (isRunning) {
@@ -16,7 +15,7 @@ public class Main {
             String menu = scan.nextLine();
             switch (menu) {
                 case ("Add"): {
-                    if (MAX_DEFECTS > currentDefectNum) {
+                    if (MAX_DEFECTS > id) {
                         System.out.println("Введите резюме дефекта:");
                         String summaryList = scan.nextLine();
                         System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
@@ -24,16 +23,16 @@ public class Main {
                         System.out.println("Введите ожидаемое количество дней на исправление:");
                         int daysToFixList = scan.nextInt();
                         scan.nextLine();
-                        Defect defect = new Defect(currentDefectNum, summaryList,severutyList, daysToFixList);
-                        defectss[currentDefectNum] = defect;
-                        currentDefectNum++;
+                        Defect defect = new Defect(id, summaryList,severutyList, daysToFixList);
+                        defectss[id] = defect;
+                        id++;
                     } else {
                         System.out.println("Достигнуто максимальное количество дефектов");
                     }
                     break;
                 }
                 case ("List"): {
-                    for (int i = 0; i < currentDefectNum; i++) {
+                    for (int i = 0; i < id; i++) {
                         System.out.println(defectss[i].getInfo());//вывод списка дефектов
                     }
                     break;
