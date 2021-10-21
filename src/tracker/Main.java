@@ -6,12 +6,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int NUM_BUG = 10;
-//        todo необходимо ввести переменную которая отражает максимальное количество дефектов
-//                использовать её тут \/ и на 27 строчке
-        String[] bugPriority = new String[NUM_BUG];
-        String[] bugResume = new String[NUM_BUG];
-        int[] bugDaysToFixed = new int[NUM_BUG];
-        int countReq = 0; // переменная для количества дефектов
+        Bug[] bugs = new Bug[NUM_BUG];
+
+
+       long countReq = 0; // переменная для количества дефектов
         boolean isRun = true; // переменная для бесконечного цикла
 //        todo почему тут всего 12 попыток? зачем вообще ограничивать попыттки?
         while (isRun) {
@@ -39,9 +37,8 @@ public class Main {
                     int daysToFixed = scanner.nextInt();
                     scanner.nextLine();
 //todo переделать хранение готовой карточки клиента на массивы
-                    bugResume [countReq] = resume;
-                    bugPriority[countReq] = priority;
-                    bugDaysToFixed[countReq] = daysToFixed;
+                  Bug bug = new Bug (countReq,resume,priority,daysToFixed);
+                    bugs[(int) countReq] = bug;
                     countReq = countReq + 1;
                     break;
                 }
@@ -49,7 +46,7 @@ public class Main {
                     // System.out.println(Arrays.toString(listbug));
 //todo переделать вывод yа вывод из массивов
                     for (int i = 0; i<countReq; i++){
-                    System.out.println ("|" + i + "|" + bugResume [i] + "|" + bugPriority[i] + "|" + bugDaysToFixed[i] + "|");
+                    System.out.println (bugs[i].getInfo());
                 }
                     break;
 //todo выход не работает
