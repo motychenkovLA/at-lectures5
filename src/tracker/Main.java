@@ -6,10 +6,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int NUM_BUG = 10;
-        Bug[] bugs = new Bug[NUM_BUG];
 
-
-       long countReq = 0; // переменная для количества дефектов
+        String[] bugPriority = new String[NUM_BUG];
+        String[] bugResume = new String[NUM_BUG];
+        int[] bugDaysToFixed = new int[NUM_BUG];
+        int countReq = 0; // переменная для количества дефектов
         boolean isRun = true; // переменная для бесконечного цикла
 
         while (isRun) {
@@ -37,16 +38,17 @@ public class Main {
                     int daysToFixed = scanner.nextInt();
                     scanner.nextLine();
 
-                  Bug bug = new Bug (countReq,resume,priority,daysToFixed);
-                    bugs[(int) countReq] = bug;
+                    bugResume [countReq] = resume;
+                    bugPriority[countReq] = priority;
+                    bugDaysToFixed[countReq] = daysToFixed;
                     countReq = countReq + 1;
                     break;
                 }
                 case "List":
-
+                    // System.out.println(Arrays.toString(listbug));
 
                     for (int i = 0; i<countReq; i++){
-                    System.out.println (bugs[i].getInfo());
+                    System.out.println ("|" + i + "|" + bugResume [i] + "|" + bugPriority[i] + "|" + bugDaysToFixed[i] + "|");
                 }
                     break;
 
