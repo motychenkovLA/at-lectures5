@@ -8,26 +8,24 @@ public class Main {
 
         final int MAX_DEFECTS = 10; // максимальное количеств дефектов
         int currentDefectNum = 0; // текущий номер дефекта
-        String[] summaryList = new String[MAX_DEFECTS]; // Объявили массив
-        String[] severutyList = new String[MAX_DEFECTS];
-        int[] daysToFixList = new int[MAX_DEFECTS];
+        Defect [] defectss = new Defect[MAX_DEFECTS]; // один массив для 10 дефектов
         boolean isRunning = true;
         while (isRunning) {
             Scanner scan = new Scanner(System.in);
             System.out.println("Выберите: (Add)/ (List)/ (Quit)"); // добавить новый дефект, вывести список,выйти (меню)
             String menu = scan.nextLine();
-
             switch (menu) {
                 case ("Add"): {
                     if (MAX_DEFECTS > currentDefectNum) {
                         System.out.println("Введите резюме дефекта:");
-                        summaryList[currentDefectNum] = scan.nextLine();
+                        String summaryList = scan.nextLine();
                         System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
-                        severutyList[currentDefectNum] = scan.nextLine();
+                        String severutyList = scan.nextLine();
                         System.out.println("Введите ожидаемое количество дней на исправление:");
-                        daysToFixList[currentDefectNum] = scan.nextInt();
+                        int daysToFixList = scan.nextInt();
                         scan.nextLine();
-
+                        Defect defect = new Defect(currentDefectNum, summaryList,severutyList, daysToFixList);
+                        defectss[currentDefectNum] = defect;
                         currentDefectNum++;
                     } else {
                         System.out.println("Достигнуто максимальное количество дефектов");
@@ -36,9 +34,7 @@ public class Main {
                 }
                 case ("List"): {
                     for (int i = 0; i < currentDefectNum; i++) {
-                        System.out.println("НОМЕР:" + i + "\n" + "РЕЗЮМЕ:" + summaryList[i] + "\n" +
-                                "СЕРЬЕЗНОСТЬ:" + severutyList [i]+ "\n" +
-                                "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFixList[i]);//вывод списка дефектов
+                        System.out.println(defectss[i].getInfo());//вывод списка дефектов
                     }
                     break;
                 }
