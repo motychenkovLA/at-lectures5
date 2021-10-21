@@ -1,10 +1,14 @@
 package tracker;
 
 public class Defect {
+    // todo 3 - не приватные поля
     public long id;
     public String resume;
     public String critical;
     public int countDays;
+
+    // todo 0 - обычно идут парами get-set в том же порядке что и поля
+    //   а не сначала все get, потом все set
 
     public long getId() {
         return id;
