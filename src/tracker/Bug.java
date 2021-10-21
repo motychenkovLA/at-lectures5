@@ -1,6 +1,7 @@
 package tracker;
 
 public class Bug {
+
     String resume;
     String priority;
     int daysToFixed;
