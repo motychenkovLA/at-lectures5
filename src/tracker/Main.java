@@ -50,6 +50,7 @@ public class Main {
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
         int countDays = scanner.nextInt();
+        // todo 1 - nextLine()
         Defect defect = new Defect(bugNumber, resume, critical, countDays);
 
         System.out.println("===================================");
@@ -66,6 +67,7 @@ public class Main {
             return;
         }
         for (int i = 0; i < bugNumber; i++) {
+            // todo 3 - результат get выкидывается в никуда
             bugList[i].getDisplayInf();
         }
         System.out.println("===================================");

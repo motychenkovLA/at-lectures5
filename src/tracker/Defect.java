@@ -17,6 +17,7 @@ public class Defect {
     public long getId() {
         return id;
     }
+    // todo 3 - id неизменяемый, сеттера быть не должно
     public void setId(long id) {
         this.id = id;
     }
@@ -42,8 +43,9 @@ public class Defect {
         this.countDays = countDays;
     }
 
+    // todo 3 - get ничего не возвращает
     public void getDisplayInf(){
-
+        // todo 3 - Defect занимается работой с консолью, должен заниматься представлением дефекта
         System.out.println(this.getId() + "| " + this.getResume()
                         + "| " + this.getCritical() + "| " + this.getCountDays());
     }
