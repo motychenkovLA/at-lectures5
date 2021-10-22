@@ -43,20 +43,22 @@ public class Main {
                     countReq = countReq + 1;
                     break;
                 }
-                case "List":
+                case ("List"): {
 
 //todo добавить название колонок в выводимую таблицу, сейчас вывод непонятен
-                    for (int i = 0; i<countReq; i++){
-                        System.out.println (bugs[i].getInfo());
+                    for (int i = 0; i < countReq; i++) {
+                        System.out.println(bugs[i].getInfo());
                     }
                     break;
-
-                case "Quit":
+                }
+                case ("Quit"): {
                     isRun = false;
                     break;
-                default:
+                }
+                default:{
                     System.out.println("Операция не существует");
                     break;
+                }
             }
         }
     }

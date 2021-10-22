@@ -20,7 +20,8 @@ public class Bug {
 
 //todo исправить warning
     public String getInfo(){
-        String info = "|" + id + "|" + resume  + "|" + priority + "|" + daysToFixed + "|";
+        String info = "|Id:" + id + "|Резюме:" + resume  + "|Приоритет:" + priority + "|Количество дней на исправление:"
+                + daysToFixed + "|";
                 return info;
     }
 
