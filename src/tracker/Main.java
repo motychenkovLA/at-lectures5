@@ -18,6 +18,7 @@ public class Main {
                     " List (Вывести список дефектов)" +
                     " Quit (Вернуться в главное меню)");
             String action = scanner.nextLine();
+//            todo приветси в порядок форматирование switch по аналогии c первым case, везде использовать () и {}
             switch (action) {
                 case ("Add"): {
 
@@ -44,7 +45,7 @@ public class Main {
                 }
                 case "List":
 
-
+//todo добавить название колонок в выводимую таблицу, сейчас вывод непонятен
                     for (int i = 0; i<countReq; i++){
                         System.out.println (bugs[i].getInfo());
                     }
