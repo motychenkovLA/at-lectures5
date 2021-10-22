@@ -17,14 +17,11 @@ public class Defect {
     public long getId() {
         return id;
     }
-    // todo 3 - id неизменяемый, сеттера быть не должно
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getResume() {
         return resume;
     }
+
     public void setResume(String resume) {
         this.resume = resume;
     }
@@ -32,6 +29,7 @@ public class Defect {
     public String getCritical() {
         return critical;
     }
+
     public void setCritical(String critical) {
         this.critical = critical;
     }
@@ -39,14 +37,12 @@ public class Defect {
     public int getCountDays() {
         return countDays;
     }
+
     public void setCountDays(int countDays) {
         this.countDays = countDays;
     }
 
-    // todo 3 - get ничего не возвращает
-    public void getDisplayInf(){
-        // todo 3 - Defect занимается работой с консолью, должен заниматься представлением дефекта
-        System.out.println(this.getId() + "| " + this.getResume()
-                        + "| " + this.getCritical() + "| " + this.getCountDays());
+    public String getDisplayInf() {
+        return this.getId() + "| " + this.getResume() + "| " + this.getCritical() + "| " + this.getCountDays();
     }
 }
