@@ -1,16 +1,21 @@
 package tracker;
 
 public class Defect {
+
+    private static long bugsAmount = 0;
+
     private long id;
     private String summary;
     private String priority;
     private int daysToFix;
 
-    public Defect(long id, String summary, String priority, int daysToFix) {
-        this.id = id;
+    public Defect(String summary, String priority, int daysToFix) {
         this.summary = summary;
         this.priority = priority;
         this.daysToFix = daysToFix;
+        this.id = bugsAmount;
+
+        bugsAmount++;
     }
 
 
@@ -52,5 +57,8 @@ public class Defect {
 
     }
 
+    public static long getBugsAmount() {
+        return bugsAmount;
+    }
 
 }

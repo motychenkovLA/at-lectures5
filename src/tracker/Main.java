@@ -4,11 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int NUM_OF_BUGS = 10;
 
-        Defect[] bugs = new Defect[NUM_OF_BUGS];
+        final int NUM_OF_BUGS = 3;
 
-        int index = 0;
+        Repository repository = new Repository(NUM_OF_BUGS);
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
 
@@ -23,7 +22,7 @@ public class Main {
 
             switch (action) {
                 case "add":
-                    if (index < NUM_OF_BUGS) {
+                    if (Defect.getBugsAmount() < NUM_OF_BUGS) {
 
                         System.out.println("\nДобавление дефекта");
                         System.out.print("Введите резюме дефекта: ");
@@ -36,19 +35,20 @@ public class Main {
                         int daysToFix = scanner.nextInt();
                         scanner.nextLine();
 
-                        Defect bug = new Defect(index, summary, priority, daysToFix);
-                        bugs[index] = bug;
-
-                        index++;
+                        Defect bug = new Defect(summary, priority, daysToFix);
+                        repository.addBug(bug);
 
                     } else {
                         System.out.println("Ошибка: список полный, нельзя добавить дефект");
                     }
                     break;
                 case "list":
-                    if (index > 0) {
+                    if (Defect.getBugsAmount() > 0) {
+
+                        Defect[] bugs = repository.getAll().clone();
+
                         System.out.println("\nСписок дефектов");
-                        for (int i = 0; i < index; i++) {
+                        for (int i = 0; i < Defect.getBugsAmount(); i++) {
                             System.out.println(bugs[i].getBugInfo());
                         }
                     } else {
