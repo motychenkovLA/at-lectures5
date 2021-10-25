@@ -2,7 +2,9 @@ package tracker;
 
 public class Repository {
 
+    // todo 1 - не константа
     private final int NUM_OF_BUGS;
+    // todo 1 - можно тоже final
     private Defect[] bugs;
     private int index = 0;
 

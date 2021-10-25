@@ -22,6 +22,8 @@ public class Main {
 
             switch (action) {
                 case "add":
+                    // todo 3 - какая разница сколько дефектов насчитал дефект, если нас интересует заполненность репо
+                    // todo 3 - за проверку заполненности репо должен отвечать репо, а не мейн
                     if (Defect.getBugsAmount() < NUM_OF_BUGS) {
 
                         System.out.println("\nДобавление дефекта");
@@ -43,11 +45,14 @@ public class Main {
                     }
                     break;
                 case "list":
+                    // todo 3 - аналогично add
                     if (Defect.getBugsAmount() > 0) {
 
+                        // todo 3 - clone?
                         Defect[] bugs = repository.getAll().clone();
 
                         System.out.println("\nСписок дефектов");
+                        // todo 1 - for-each
                         for (int i = 0; i < bugs.length; i++) {
                             System.out.println(bugs[i].getBugInfo());
                         }

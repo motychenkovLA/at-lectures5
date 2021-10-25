@@ -4,6 +4,7 @@ public class Defect {
 
     private static long bugsAmount = 0;
 
+    // todo 3 - final
     private long id;
     private String summary;
     private String priority;
