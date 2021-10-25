@@ -4,18 +4,18 @@ public class Defect {
     long id;
     String summary;
     String severuty;
-    int daysToFixList;
+    int daysToFix;
 
-    public Defect(long id, String summary, String severuty, int daysToFixList) {
+    public Defect(long id, String summary, String severuty, int daysToFix) {
         this.id = id;
         this.summary = summary;
         this.severuty = severuty;
-        this.daysToFixList = daysToFixList;
+        this.daysToFix = daysToFix;
     }
 
     public String getInfo () {
         return "ID:" + id + " | " + "РЕЗЮМЕ:" + summary + " | " + "СЕРЬЕЗНОСТЬ:" + severuty + " | " +
-                "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFixList;
+                "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFix;
 
     }
 }
