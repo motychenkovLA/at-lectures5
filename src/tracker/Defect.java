@@ -56,7 +56,4 @@ public class Defect {
                 id, summary, priority, daysToFix);
 
     }
-
-    // todo 1 - не используется
-
 }

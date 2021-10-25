@@ -28,13 +28,10 @@ public class Repository {
         return localBugs;
     }
 
-    // todo 1 - ну isFull же, или в данному случае isNotFull
-    // todo 3 - boolean, не Boolean
     public boolean isFull() {
         return bugsNum == index;
     }
 
-    // todo 3 - boolean, не Boolean
     public boolean isEmpty() {
         return index == 0;
     }

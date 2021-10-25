@@ -44,8 +44,6 @@ public class Main {
                     break;
                 case "list":
                     if (!repository.isEmpty()) {
-                        // todo ? - можно в принципе не делать переменную, а прямо в for-each засунуть вызов
-
                         System.out.println("\nСписок дефектов");
                         for (Defect bug : repository.getAll()) {
                             System.out.println(bug.getBugInfo());
