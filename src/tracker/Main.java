@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int NUM_BUG = 10;
-        Bug[] bugs = new Bug[NUM_BUG];
+        Defect[] defects = new Defect[NUM_BUG];
 
 
         long countReq = 0; // переменная для количества дефектов
@@ -18,7 +18,6 @@ public class Main {
                     " List (Вывести список дефектов)" +
                     " Quit (Вернуться в главное меню)");
             String action = scanner.nextLine();
-//            todo приветси в порядок форматирование switch по аналогии c первым case, везде использовать () и {}
             switch (action) {
                 case ("Add"): {
 
@@ -38,16 +37,14 @@ public class Main {
                     int daysToFixed = scanner.nextInt();
                     scanner.nextLine();
 
-                    Bug bug = new Bug (countReq,resume,priority,daysToFixed);
-                    bugs[(int) countReq] = bug;
+                    Defect bug = new Defect (countReq,resume,priority,daysToFixed);
+                    defects[(int) countReq] = bug;
                     countReq = countReq + 1;
                     break;
                 }
                 case ("List"): {
-
-//todo добавить название колонок в выводимую таблицу, сейчас вывод непонятен
                     for (int i = 0; i < countReq; i++) {
-                        System.out.println(bugs[i].getInfo());
+                        System.out.println(defects[i].getInfo());
                     }
                     break;
                 }
