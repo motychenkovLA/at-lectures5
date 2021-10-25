@@ -58,8 +58,5 @@ public class Defect {
     }
 
     // todo 1 - не используется
-    public static long getBugsAmount() {
-        return bugsAmount;
-    }
 
 }

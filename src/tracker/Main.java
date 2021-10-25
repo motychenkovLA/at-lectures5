@@ -22,7 +22,7 @@ public class Main {
 
             switch (action) {
                 case "add":
-                    if (repository.getAvailabilityAddBug()) {
+                    if (!repository.isFull()) {
 
                         System.out.println("\nДобавление дефекта");
                         System.out.print("Введите резюме дефекта: ");
@@ -45,10 +45,9 @@ public class Main {
                 case "list":
                     if (!repository.isEmpty()) {
                         // todo ? - можно в принципе не делать переменную, а прямо в for-each засунуть вызов
-                        Defect[] bugs = repository.getAll();
 
                         System.out.println("\nСписок дефектов");
-                        for (Defect bug : bugs) {
+                        for (Defect bug : repository.getAll()) {
                             System.out.println(bug.getBugInfo());
                         }
 
