@@ -2,9 +2,7 @@ package tracker;
 
 public class Repository {
 
-    // todo 1 - не константа
     private final int bugsNum;
-    // todo 1 - можно тоже final
     private final Defect[] bugs;
     private int index = 0;
 
@@ -30,10 +28,13 @@ public class Repository {
         return localBugs;
     }
 
+    // todo 1 - ну isFull же, или в данному случае isNotFull
+    // todo 3 - boolean, не Boolean
     public Boolean getAvailabilityAddBug() {
         return index < bugsNum;
     }
 
+    // todo 3 - boolean, не Boolean
     public Boolean isEmpty() {
         return index == 0;
     }

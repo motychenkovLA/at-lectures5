@@ -4,7 +4,6 @@ public class Defect {
 
     private static long bugsAmount = 0;
 
-    // todo 3 - final
     private final long id;
     private String summary;
     private String priority;
@@ -58,6 +57,7 @@ public class Defect {
 
     }
 
+    // todo 1 - не используется
     public static long getBugsAmount() {
         return bugsAmount;
     }

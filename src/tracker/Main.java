@@ -22,8 +22,6 @@ public class Main {
 
             switch (action) {
                 case "add":
-                    // todo 3 - какая разница сколько дефектов насчитал дефект, если нас интересует заполненность репо
-                    // todo 3 - за проверку заполненности репо должен отвечать репо, а не мейн
                     if (repository.getAvailabilityAddBug()) {
 
                         System.out.println("\nДобавление дефекта");
@@ -45,14 +43,11 @@ public class Main {
                     }
                     break;
                 case "list":
-                    // todo 3 - аналогично add
                     if (!repository.isEmpty()) {
-
-                        // todo 3 - clone?
+                        // todo ? - можно в принципе не делать переменную, а прямо в for-each засунуть вызов
                         Defect[] bugs = repository.getAll();
 
                         System.out.println("\nСписок дефектов");
-                        // todo 1 - for-each
                         for (Defect bug : bugs) {
                             System.out.println(bug.getBugInfo());
                         }
