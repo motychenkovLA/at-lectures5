@@ -24,7 +24,7 @@ public class Main {
                 case "add":
                     // todo 3 - какая разница сколько дефектов насчитал дефект, если нас интересует заполненность репо
                     // todo 3 - за проверку заполненности репо должен отвечать репо, а не мейн
-                    if (Defect.getBugsAmount() < NUM_OF_BUGS) {
+                    if (repository.getAvailabilityAddBug()) {
 
                         System.out.println("\nДобавление дефекта");
                         System.out.print("Введите резюме дефекта: ");
@@ -46,16 +46,17 @@ public class Main {
                     break;
                 case "list":
                     // todo 3 - аналогично add
-                    if (Defect.getBugsAmount() > 0) {
+                    if (!repository.isEmpty()) {
 
                         // todo 3 - clone?
-                        Defect[] bugs = repository.getAll().clone();
+                        Defect[] bugs = repository.getAll();
 
                         System.out.println("\nСписок дефектов");
                         // todo 1 - for-each
-                        for (int i = 0; i < bugs.length; i++) {
-                            System.out.println(bugs[i].getBugInfo());
+                        for (Defect bug : bugs) {
+                            System.out.println(bug.getBugInfo());
                         }
+
                     } else {
                         System.out.println("Ошибка: список дефектов пуст");
                     }

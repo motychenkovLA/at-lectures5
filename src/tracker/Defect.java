@@ -5,7 +5,7 @@ public class Defect {
     private static long bugsAmount = 0;
 
     // todo 3 - final
-    private long id;
+    private final long id;
     private String summary;
     private String priority;
     private int daysToFix;

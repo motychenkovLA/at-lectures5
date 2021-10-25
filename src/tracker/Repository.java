@@ -3,20 +3,21 @@ package tracker;
 public class Repository {
 
     // todo 1 - не константа
-    private final int NUM_OF_BUGS;
+    private final int bugsNum;
     // todo 1 - можно тоже final
-    private Defect[] bugs;
+    private final Defect[] bugs;
     private int index = 0;
 
 
     public Repository(int numOfBugs) {
-        NUM_OF_BUGS = numOfBugs;
-        this.bugs = new Defect[NUM_OF_BUGS];
+        this.bugsNum = numOfBugs;
+        this.bugs = new Defect[bugsNum];
     }
 
     public void addBug(Defect bug) {
         bugs[index] = bug;
         index++;
+
     }
 
     public Defect[] getAll() {
@@ -27,5 +28,13 @@ public class Repository {
         }
 
         return localBugs;
+    }
+
+    public Boolean getAvailabilityAddBug() {
+        return index < bugsNum;
+    }
+
+    public Boolean isEmpty() {
+        return index == 0;
     }
 }
