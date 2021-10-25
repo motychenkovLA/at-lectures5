@@ -35,7 +35,25 @@ public class Main {
                         int daysToFix = scanner.nextInt();
                         scanner.nextLine();
 
-                        Defect bug = new Defect(summary, priority, daysToFix);
+                        System.out.print("Введите тип вложения: comment, defect: ");
+                        String attachmentType = scanner.nextLine();
+
+                        Attachment attachment = new Attachment();
+
+                        if (attachmentType.equals("comment")) {
+                            System.out.print("Введите комментарий: ");
+                            String comment = scanner.nextLine();
+                            attachment = new CommentAttachment(comment);
+                        } else if (attachmentType.equals("defect")) {
+                            System.out.print("Введите номер дефекта: ");
+                            long bugId = scanner.nextInt();
+                            scanner.nextLine();
+                            attachment = new DefectAttachment(bugId);
+                        } else {
+                            System.out.println("Ошибка: такого типа вложения нет, вложение будет пустое");
+                        }
+
+                        Defect bug = new Defect(summary, priority, daysToFix, attachment);
                         repository.addBug(bug);
 
                     } else {
@@ -46,7 +64,7 @@ public class Main {
                     if (!repository.isEmpty()) {
                         System.out.println("\nСписок дефектов");
                         for (Defect bug : repository.getAll()) {
-                            System.out.println(bug.getBugInfo());
+                            System.out.println(bug.toString());
                         }
 
                     } else {

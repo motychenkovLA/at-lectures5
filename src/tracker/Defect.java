@@ -8,12 +8,14 @@ public class Defect {
     private String summary;
     private String priority;
     private int daysToFix;
+    private Attachment attachment;
 
-    public Defect(String summary, String priority, int daysToFix) {
+    public Defect(String summary, String priority, int daysToFix, Attachment attachment) {
         this.summary = summary;
         this.priority = priority;
         this.daysToFix = daysToFix;
         this.id = bugsAmount;
+        this.attachment = attachment;
 
         bugsAmount++;
     }
@@ -50,10 +52,11 @@ public class Defect {
         return daysToFix;
     }
 
-    public String getBugInfo() {
+    @Override
+    public String toString() {
         return String.format(
-                "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d",
-                id, summary, priority, daysToFix);
+                "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Вложение: %s",
+                id, summary, priority, daysToFix, attachment.toString());
 
     }
 }
