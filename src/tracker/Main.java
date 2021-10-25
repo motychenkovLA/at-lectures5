@@ -1,50 +1,41 @@
 package tracker;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 
-    // todo 0 - 4 пробела отступ плз - сделала
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // todo 1 - CONSTANT_FORMAT - исправила
-        final int ARRAY_SIZE = 10;
-        String[] arrayResume = new String[ARRAY_SIZE];
-        String[] arrayPriority = new String[ARRAY_SIZE];
-        int[] arrayDays = new int[ARRAY_SIZE];
+        final int MAX_LONG = 10;
         String playProgram = "Выберете операцию:" + "\nAdd" + "\nList" + "\nQuit";
         String operation;
         boolean runProgram = true;
-        String goodBye = "Quit";
-        int index = 0;
+        int id = 0;
+        Bug[] bugs = new Bug[MAX_LONG];
         while (runProgram){
             System.out.println(playProgram);
             operation = scanner.nextLine();
             switch (operation) {
                 case "Add":
-                    if (index < ARRAY_SIZE) {
+                    if (id < MAX_LONG) {
                         System.out.println("Введите резюме дефекта:");
-                        arrayResume[index] = scanner.nextLine();
+                        String resume = scanner.nextLine();
                         System.out.println(
                                 "Укажите критичность дефекта:" + "\nВысокий" + "\nСредний" + "\nНизкий");
-                        arrayPriority[index] = scanner.nextLine();
+                        String priority = scanner.nextLine();
                         System.out.println("Укажите ожидаемое количество дней на исправление дефекта:");
-                        arrayDays[index] = scanner.nextInt();
+                        int days = scanner.nextInt();
                         scanner.nextLine();
-                        index++;
+                        Bug bug = new Bug(id, resume, priority, days);
+                        bugs[id] = bug;
+                        id++;
                     } else {
                         System.out.println("Вы добавили максимально-возможное количество дефектов.");
                     }
                     break;
                 case "List":
-                    // todo 3 - какой-то очень сложный цикл ещё и с тремя if-ами
-                    //   почему просто не перебрать дефекты до последнего заведенного? - исправлено
-                    for (int indSearch = 0; indSearch < index; indSearch++) {
-                        System.out.println(
-                                "Номер:" + indSearch + " Резюме: " + arrayResume[indSearch] + " Приоритет: "
-                                        + arrayPriority[indSearch] + " Дней на исправление: " + arrayDays[indSearch]
-                                        + "\n");
+                    for (int indSearch = 0; indSearch < id; indSearch++) {
+                        System.out.println(bugs[indSearch].getBugList());
                     }
                     break;
                 case "Quit":
@@ -55,8 +46,6 @@ public class Main {
                     System.out.println("Введена неверная операция! Повторите попытку");
                     break;
             }
-            // todo 3 - дублирование проверки, которая делается в case;
-            //   лучше ввести переменную вроде runProgram и менять ее в нужном case - не понимаю что не так? - исправлено
         }
 
     }
