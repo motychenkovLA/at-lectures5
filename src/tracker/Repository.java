@@ -18,6 +18,12 @@ public class Repository {
     }
 
     public Defect[] getAll() {
-        return bugs;
+        Defect[] localBugs = new Defect[index];
+
+        for (int i = 0; i < index; i++) {
+            localBugs[i] = bugs[i];
+        }
+
+        return localBugs;
     }
 }

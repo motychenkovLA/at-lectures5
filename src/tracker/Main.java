@@ -48,7 +48,7 @@ public class Main {
                         Defect[] bugs = repository.getAll().clone();
 
                         System.out.println("\nСписок дефектов");
-                        for (int i = 0; i < Defect.getBugsAmount(); i++) {
+                        for (int i = 0; i < bugs.length; i++) {
                             System.out.println(bugs[i].getBugInfo());
                         }
                     } else {
