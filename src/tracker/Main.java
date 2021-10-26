@@ -6,11 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // todo 0 - почему long, если она int, и вообще это скорее MAX_BUG_COUNT - исправила на MAX_SIZE
         final int MAX_SIZE = 10;
-        // todo 1 - это тогда тоже константа - исправила
         final String PLAY_PROGRAM = "Выберете операцию:" + "\nAdd" + "\nList" + "\nQuit";
-        // todo 1 - инициализируется 6 строками ниже, почему не объявить там - исправила
         boolean runProgram = true;
         int id = 0;
         Bug[] bugs = new Bug[MAX_SIZE];
@@ -36,7 +33,6 @@ public class Main {
                     }
                     break;
                 case "List":
-                    // todo 1 - тут в принципе можно indSearch просто i назвать, в простых циклах обычно так именуют - исправила
                     for (int i = 0; i < id; i++) {
                         System.out.println(bugs[i].getBugInfo());
                     }
