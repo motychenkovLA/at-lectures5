@@ -38,6 +38,10 @@ public class Main {
                         System.out.print("Введите тип вложения: comment, defect: ");
                         String attachmentType = scanner.nextLine();
 
+                        // todo 3 - для пустого вложения лучше
+                        //   либо (простой вариант) использовать null,
+                        //   либо (более сложный вариант) вынести ввод вложения в отдельный метод с циклом,
+                        //   чтобы просил нормально ввести дефект пока у пользователя не получится
                         Attachment attachment = new Attachment();
 
                         if (attachmentType.equals("comment")) {
