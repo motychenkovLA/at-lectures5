@@ -2,13 +2,12 @@ package tracker;
 
 public class Defect {
 
-    private long id;
+    private static long id = 0;
     private String resume;
     private String critical;
     private int countDays;
 
-    public Defect(long id, String resume, String critical, int countDays) {
-        this.id = id;
+    public Defect(String resume, String critical, int countDays) {
         this.resume = resume;
         this.critical = critical;
         this.countDays = countDays;

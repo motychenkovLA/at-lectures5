@@ -3,9 +3,9 @@ package tracker;
 import java.util.Scanner;
 
 public class Main {
-    static final int COUNT_OF_BUGS = 10;
-    static Defect[] bugList = new Defect[COUNT_OF_BUGS];
-    static long bugNumber = 0L;
+    static final int countBugs = 10;
+    static Repository repository = new Repository(countBugs);
+
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -37,7 +37,7 @@ public class Main {
 
     public static void add() {
 
-        if (bugNumber >= COUNT_OF_BUGS) {
+        if (repository.isFull()) {
             System.out.println('\n' + "Невозможно добавить больше дефектов");
             return;
         }
@@ -52,23 +52,19 @@ public class Main {
         int countDays = scanner.nextInt();
         scanner.nextLine();
 
-        Defect defect = new Defect(bugNumber, resume, critical, countDays);
+        Defect defect = new Defect(resume, critical, countDays);
+        repository.add(defect);
 
         System.out.println("===================================");
-
-        bugList[(int) bugNumber] = defect;
-
-        bugNumber++;
-
     }
 
     public static void list() {
-        if (bugNumber == 0) {
+        if (repository.isEmpty()) {
             System.out.println("Список пуст");
             return;
         }
-        for (int i = 0; i < bugNumber; i++) {
-            System.out.println(bugList[i].getDisplayInf());
+        for (Defect def : repository.getAll()) {
+            System.out.println(def.getDisplayInf());
         }
         System.out.println("===================================");
     }
