@@ -49,6 +49,7 @@ public class Main {
         String critical = scanner.nextLine();
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
+        // todo 1 - можно вынести в отдельный метод nextInt + nextLine
         int countDays = scanner.nextInt();
         scanner.nextLine();
 
@@ -64,6 +65,7 @@ public class Main {
         System.out.println("Выберите тип вложения - комментарий (comment) или ссылка на вложение (link)");
 
         while (true) {
+            // todo 0 - что-то с отступами
         String attachmentType = scanner.nextLine();
             switch (attachmentType) {
                 case ("comment"):
