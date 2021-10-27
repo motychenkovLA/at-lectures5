@@ -3,8 +3,8 @@ package tracker;
 import java.util.Scanner;
 
 public class Main {
-    static final int countBugs = 10;
-    static Repository repository = new Repository(countBugs);
+    static final int COUNT_BUGS = 10;
+    static Repository repository = new Repository(COUNT_BUGS);
 
     static Scanner scanner = new Scanner(System.in);
 
@@ -52,10 +52,33 @@ public class Main {
         int countDays = scanner.nextInt();
         scanner.nextLine();
 
-        Defect defect = new Defect(resume, critical, countDays);
+        Attachment attachment = addAttachment();
+
+        Defect defect = new Defect(resume, critical, countDays, attachment);
         repository.add(defect);
 
         System.out.println("===================================");
+    }
+
+    public static Attachment addAttachment() {
+        System.out.println("Выберите тип вложения - комментарий (comment) или ссылка на вложение (link)");
+
+        while (true) {
+        String attachmentType = scanner.nextLine();
+            switch (attachmentType) {
+                case ("comment"):
+                    System.out.println("Введите комментарий к дефекту:");
+                    String comment = scanner.nextLine();
+                    return new CommentAttachment(comment);
+                case ("link"):
+                    System.out.println("Введите номер дефекта:");
+                    String defectLink = scanner.nextLine();
+                    return new DefectAttachment(defectLink);
+                default:
+                    System.out.println('\n' + "Введите значение из списка - comment или link");
+                    break;
+            }
+        }
     }
 
     public static void list() {

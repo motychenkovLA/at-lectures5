@@ -8,12 +8,14 @@ public class Defect {
     private String resume;
     private String critical;
     private int countDays;
+    private Attachment attachment;
 
-    public Defect(String resume, String critical, int countDays) {
+    public Defect(String resume, String critical, int countDays, Attachment attachment) {
         this.id = number;
         this.resume = resume;
         this.critical = critical;
         this.countDays = countDays;
+        this.attachment = attachment;
 
         number++;
     }
@@ -47,6 +49,12 @@ public class Defect {
     }
 
     public String getDisplayInf() {
-        return this.getId() + "| " + this.getResume() + "| " + this.getCritical() + "| " + this.getCountDays();
+        return
+                id + "| " +
+                resume + "| " +
+                critical + "| " +
+                countDays + "| " +
+                attachment + "| "
+                ;
     }
 }
