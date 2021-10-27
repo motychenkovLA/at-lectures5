@@ -22,7 +22,7 @@ public class Main {
 
             switch (action) {
                 case "add":
-                    commandAddBug(repository);
+                    commandAddBug(repository, scanner);
                     break;
                 case "list":
                     commandBugsList(repository);
@@ -37,9 +37,8 @@ public class Main {
         }
     }
 
-    public static void commandAddBug(Repository repository) {
+    public static void commandAddBug(Repository repository, Scanner scanner) {
         // todo 3 - создается ещё один сканнер
-        Scanner scanner = new Scanner(System.in);
 
         if (!repository.isFull()) {
 
@@ -53,10 +52,9 @@ public class Main {
             System.out.print("Введите количество дней на исправление дефекта: ");
             // todo 1 - scanner.nextInt() + scanner.nextLine() можно в отдельный метод вынести,
             //   чтоб каждый раз не писать и не забыть где-нибудь
-            int daysToFix = scanner.nextInt();
-            scanner.nextLine();
+            int daysToFix = inputNum(scanner);
 
-            Attachment attachment = addAttachment();
+            Attachment attachment = addAttachment(scanner);
 
             Defect bug = new Defect(summary, priority, daysToFix, attachment);
             repository.addBug(bug);
@@ -66,11 +64,10 @@ public class Main {
         }
     }
 
-    public static Attachment addAttachment() {
+    public static Attachment addAttachment(Scanner scanner) {
         // todo 1 - в принципе эта переменная не нужна, можно сразу return
-        Attachment attachment;
         // todo 3 - ещё один дубль сканера
-        Scanner scanner = new Scanner(System.in);
+
         while (true) {
             System.out.print("Введите тип вложения: comment, defect: ");
             String attachmentType = scanner.nextLine();
@@ -78,29 +75,33 @@ public class Main {
             if (attachmentType.equals("comment")) {
                 System.out.print("Введите комментарий: ");
                 String comment = scanner.nextLine();
-                attachment = new CommentAttachment(comment);
-                return attachment;
+                return new CommentAttachment(comment);
             }
             if (attachmentType.equals("defect")) {
                 System.out.print("Введите номер дефекта: ");
-                long bugId = scanner.nextInt();
-                scanner.nextLine();
-                attachment = new DefectAttachment(bugId);
-                return attachment;
+                long bugId = inputNum(scanner);
+                return new DefectAttachment(bugId);
             }
             System.out.println("Ошибка: такого типа вложения нет");
         }
     }
 
+    public static int inputNum(Scanner scanner){
+        int num = scanner.nextInt();
+        scanner.nextLine();
+        return num;
+    }
+
     public static void commandBugsList(Repository repository) {
         // todo 1 - if (isEmpty) { вывести сообщение; return; } остальной метод вне else без скобок
-        if (!repository.isEmpty()) {
-            System.out.println("\nСписок дефектов");
-            for (Defect bug : repository.getAll()) {
-                System.out.println(bug.toString());
-            }
-        } else {
+        if (repository.isEmpty()) {
             System.out.println("Ошибка: список дефектов пуст");
+            return;
+        }
+
+        System.out.println("\nСписок дефектов");
+        for (Defect bug : repository.getAll()) {
+            System.out.println(bug.toString());
         }
     }
 }
