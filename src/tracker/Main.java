@@ -49,9 +49,7 @@ public class Main {
         String critical = scanner.nextLine();
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
-        // todo 1 - можно вынести в отдельный метод nextInt + nextLine
-        int countDays = scanner.nextInt();
-        scanner.nextLine();
+        int countDays = scan();
 
         Attachment attachment = addAttachment();
 
@@ -65,8 +63,7 @@ public class Main {
         System.out.println("Выберите тип вложения - комментарий (comment) или ссылка на вложение (link)");
 
         while (true) {
-            // todo 0 - что-то с отступами
-        String attachmentType = scanner.nextLine();
+            String attachmentType = scanner.nextLine();
             switch (attachmentType) {
                 case ("comment"):
                     System.out.println("Введите комментарий к дефекту:");
@@ -74,7 +71,7 @@ public class Main {
                     return new CommentAttachment(comment);
                 case ("link"):
                     System.out.println("Введите номер дефекта:");
-                    String defectLink = scanner.nextLine();
+                    int defectLink = scan();
                     return new DefectAttachment(defectLink);
                 default:
                     System.out.println('\n' + "Введите значение из списка - comment или link");
@@ -92,5 +89,11 @@ public class Main {
             System.out.println(def.getDisplayInf());
         }
         System.out.println("===================================");
+    }
+
+    public static int scan(){
+        int count = scanner.nextInt();
+        scanner.nextLine();
+        return count;
     }
 }
