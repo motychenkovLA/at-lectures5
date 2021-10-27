@@ -2,7 +2,6 @@ package tracker;
 
 public class DefectAttachment extends Attachment {
 
-    // todo 1 - final без set-get, поле в принципе не меняется и от этого класса нужен только toString
     private final long bugId;
 
     public DefectAttachment(long bugId) {

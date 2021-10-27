@@ -38,6 +38,7 @@ public class Main {
     }
 
     public static void commandAddBug(Repository repository) {
+        // todo 3 - создается ещё один сканнер
         Scanner scanner = new Scanner(System.in);
 
         if (!repository.isFull()) {
@@ -50,14 +51,11 @@ public class Main {
             String priority = scanner.nextLine();
 
             System.out.print("Введите количество дней на исправление дефекта: ");
+            // todo 1 - scanner.nextInt() + scanner.nextLine() можно в отдельный метод вынести,
+            //   чтоб каждый раз не писать и не забыть где-нибудь
             int daysToFix = scanner.nextInt();
             scanner.nextLine();
 
-
-            // todo 3 - для пустого вложения лучше
-            //   либо (простой вариант) использовать null,
-            //   либо (более сложный вариант) вынести ввод вложения в отдельный метод с циклом,
-            //   чтобы просил нормально ввести дефект пока у пользователя не получится
             Attachment attachment = addAttachment();
 
             Defect bug = new Defect(summary, priority, daysToFix, attachment);
@@ -69,7 +67,9 @@ public class Main {
     }
 
     public static Attachment addAttachment() {
+        // todo 1 - в принципе эта переменная не нужна, можно сразу return
         Attachment attachment;
+        // todo 3 - ещё один дубль сканера
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Введите тип вложения: comment, defect: ");
@@ -93,6 +93,7 @@ public class Main {
     }
 
     public static void commandBugsList(Repository repository) {
+        // todo 1 - if (isEmpty) { вывести сообщение; return; } остальной метод вне else без скобок
         if (!repository.isEmpty()) {
             System.out.println("\nСписок дефектов");
             for (Defect bug : repository.getAll()) {
