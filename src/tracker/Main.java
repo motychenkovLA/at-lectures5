@@ -38,8 +38,6 @@ public class Main {
     }
 
     public static void commandAddBug(Repository repository, Scanner scanner) {
-        // todo 3 - создается ещё один сканнер
-
         if (!repository.isFull()) {
 
             System.out.println("\nДобавление дефекта");
@@ -50,8 +48,6 @@ public class Main {
             String priority = scanner.nextLine();
 
             System.out.print("Введите количество дней на исправление дефекта: ");
-            // todo 1 - scanner.nextInt() + scanner.nextLine() можно в отдельный метод вынести,
-            //   чтоб каждый раз не писать и не забыть где-нибудь
             int daysToFix = inputNum(scanner);
 
             Attachment attachment = addAttachment(scanner);
@@ -65,9 +61,6 @@ public class Main {
     }
 
     public static Attachment addAttachment(Scanner scanner) {
-        // todo 1 - в принципе эта переменная не нужна, можно сразу return
-        // todo 3 - ещё один дубль сканера
-
         while (true) {
             System.out.print("Введите тип вложения: comment, defect: ");
             String attachmentType = scanner.nextLine();
@@ -93,7 +86,6 @@ public class Main {
     }
 
     public static void commandBugsList(Repository repository) {
-        // todo 1 - if (isEmpty) { вывести сообщение; return; } остальной метод вне else без скобок
         if (repository.isEmpty()) {
             System.out.println("Ошибка: список дефектов пуст");
             return;
