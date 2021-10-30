@@ -6,20 +6,21 @@ public class Defect {
 
     private final long id;
     private String summary;
-    private String priority;
+    private Priority priority;
     private int daysToFix;
     private Attachment attachment;
+    private Status status;
 
-    public Defect(String summary, String priority, int daysToFix, Attachment attachment) {
+    public Defect(String summary, Priority priority, int daysToFix, Attachment attachment) {
         this.summary = summary;
         this.priority = priority;
         this.daysToFix = daysToFix;
         this.id = bugsAmount;
         this.attachment = attachment;
+        this.status = Status.OPEN;
 
         bugsAmount++;
     }
-
 
     public long getId() {
         return id;
@@ -35,11 +36,11 @@ public class Defect {
     }
 
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
@@ -52,11 +53,21 @@ public class Defect {
         return daysToFix;
     }
 
+
     @Override
     public String toString() {
         return String.format(
-                "Дефект: %d | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Вложение: %s",
-                id, summary, priority, daysToFix, attachment.toString());
+                "Дефект: %d | Статус: %s | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Вложение: %s",
+                id, status.toString(), summary, priority.toString(), daysToFix, attachment.toString());
+    }
 
+    public boolean changeStatus(String status) {
+        for (Status element : Status.values()) {
+            if (element.toString().equals(status)) {
+                this.status = element;
+                return true;
+            }
+        }
+        return false;
     }
 }

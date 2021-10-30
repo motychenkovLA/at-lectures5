@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.EnumMap;
 import java.util.Scanner;
 
 public class Main {
@@ -15,9 +16,11 @@ public class Main {
             System.out.println("\n---Меню---");
             System.out.println("Добавить дефект: add");
             System.out.println("Вывести список дефектов: list");
+            System.out.println("Изменить статус дефекта: change");
             System.out.println("Выйти: exit");
 
             System.out.print("Введите команду: ");
+
             String action = scanner.nextLine();
 
             switch (action) {
@@ -29,6 +32,9 @@ public class Main {
                     break;
                 case "exit":
                     loop = false;
+                    break;
+                case "change":
+                    commandChangePriority(repository, scanner);
                     break;
                 default:
                     System.out.println("Ошибка: такой команды нет");
@@ -44,12 +50,11 @@ public class Main {
             System.out.print("Введите резюме дефекта: ");
             String summary = scanner.nextLine();
 
-            System.out.print("Введите критичность дефекта: блокирующий, высокий, средний, низкий: ");
-            String priority = scanner.nextLine();
 
             System.out.print("Введите количество дней на исправление дефекта: ");
             int daysToFix = inputNum(scanner);
 
+            Priority priority = addPriority(scanner);
             Attachment attachment = addAttachment(scanner);
 
             Defect bug = new Defect(summary, priority, daysToFix, attachment);
@@ -79,7 +84,21 @@ public class Main {
         }
     }
 
-    public static int inputNum(Scanner scanner){
+    public static Priority addPriority(Scanner scanner) {
+        while (true) {
+            System.out.print("Введите критичность дефекта: Блокирующий, Высокий, Средний, Низкий: ");
+            String priority = scanner.nextLine();
+            for (Priority element : Priority.values()) {
+                if (element.toString().equals(priority)) {
+                    return element;
+                }
+            }
+            System.out.println("Ошибка: некорретная критичность");
+        }
+
+    }
+
+    public static int inputNum(Scanner scanner) {
         int num = scanner.nextInt();
         scanner.nextLine();
         return num;
@@ -94,6 +113,26 @@ public class Main {
         System.out.println("\nСписок дефектов");
         for (Defect bug : repository.getAll()) {
             System.out.println(bug.toString());
+        }
+    }
+
+    public static void commandChangePriority(Repository repository, Scanner scanner) {
+        if (repository.isEmpty()) {
+            System.out.println("Ошибка: список дефектов пуст");
+            return;
+        }
+
+        System.out.print("Введите номер дефекта: ");
+        int index = inputNum(scanner);
+        if (repository.getElementByIndex(index) == null) {
+            System.out.println("Ошибка: ошибка такого дефекта нет");
+            return;
+        }
+
+        System.out.print("Введите новый статус: Открыт, Анализ, Исправление, Тестирование, Закрыт, Отклонен: ");
+        String status = scanner.nextLine();
+        if (!repository.getElementByIndex(index).changeStatus(status)) {
+            System.out.println("Ошибка: ошибка такого статуса нет");
         }
     }
 }

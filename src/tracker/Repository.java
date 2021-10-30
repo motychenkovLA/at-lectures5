@@ -4,7 +4,7 @@ public class Repository {
 
     private final int bugsNum;
     private final Defect[] bugs;
-    private int index = 0;
+    private int currentElement = 0;
 
 
     public Repository(int numOfBugs) {
@@ -13,15 +13,15 @@ public class Repository {
     }
 
     public void addBug(Defect bug) {
-        bugs[index] = bug;
-        index++;
+        bugs[currentElement] = bug;
+        currentElement++;
 
     }
 
     public Defect[] getAll() {
-        Defect[] localBugs = new Defect[index];
+        Defect[] localBugs = new Defect[currentElement];
 
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < currentElement; i++) {
             localBugs[i] = bugs[i];
         }
 
@@ -29,10 +29,17 @@ public class Repository {
     }
 
     public boolean isFull() {
-        return bugsNum == index;
+        return bugsNum == currentElement;
     }
 
     public boolean isEmpty() {
-        return index == 0;
+        return currentElement == 0;
+    }
+
+    public Defect getElementByIndex(int index){
+        if (index >=0 && index<currentElement){
+            return bugs[index];
+        }
+        return null;
     }
 }
