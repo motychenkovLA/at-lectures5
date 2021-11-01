@@ -88,6 +88,7 @@ public class Main {
         while (true) {
             System.out.print("Введите критичность дефекта: Блокирующий, Высокий, Средний, Низкий: ");
             String priority = scanner.nextLine();
+            // todo 3 - аналогично как для Status, само распознавание Priority по читабельному имени лучше вынести в Priority
             for (Priority element : Priority.values()) {
                 if (element.toString().equals(priority)) {
                     return element;

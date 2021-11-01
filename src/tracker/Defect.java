@@ -61,6 +61,8 @@ public class Defect {
                 id, status.toString(), summary, priority.toString(), daysToFix, attachment.toString());
     }
 
+    // todo 3 - сетить Status должен setStatus,
+    //   а собирать Status из String, проверяя валидность, это уже ответственность самого Status
     public boolean changeStatus(String status) {
         for (Status element : Status.values()) {
             if (element.toString().equals(status)) {
