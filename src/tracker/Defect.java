@@ -53,6 +53,9 @@ public class Defect {
         return daysToFix;
     }
 
+    public void setStatus(Status status){
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -63,13 +66,5 @@ public class Defect {
 
     // todo 3 - сетить Status должен setStatus,
     //   а собирать Status из String, проверяя валидность, это уже ответственность самого Status
-    public boolean changeStatus(String status) {
-        for (Status element : Status.values()) {
-            if (element.toString().equals(status)) {
-                this.status = element;
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

@@ -1,6 +1,5 @@
 package tracker;
 
-import java.util.EnumMap;
 import java.util.Scanner;
 
 public class Main {
@@ -89,14 +88,11 @@ public class Main {
             System.out.print("Введите критичность дефекта: Блокирующий, Высокий, Средний, Низкий: ");
             String priority = scanner.nextLine();
             // todo 3 - аналогично как для Status, само распознавание Priority по читабельному имени лучше вынести в Priority
-            for (Priority element : Priority.values()) {
-                if (element.toString().equals(priority)) {
-                    return element;
-                }
+            if (Priority.getPriorityByRuName(priority) != null) {
+                return Priority.getPriorityByRuName(priority);
             }
             System.out.println("Ошибка: некорретная критичность");
         }
-
     }
 
     public static int inputNum(Scanner scanner) {
@@ -132,9 +128,11 @@ public class Main {
 
         System.out.print("Введите новый статус: Открыт, Анализ, Исправление, Тестирование, Закрыт, Отклонен: ");
         String status = scanner.nextLine();
-        if (!repository.getElementByIndex(index).changeStatus(status)) {
+        if (Status.getStatusByRuName(status) == null) {
             System.out.println("Ошибка: ошибка такого статуса нет");
+            return;
         }
+        repository.getElementByIndex(index).setStatus(Status.getStatusByRuName(status));
     }
 }
 

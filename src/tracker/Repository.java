@@ -38,9 +38,16 @@ public class Repository {
 
     // todo ? - с одной стороны технически верно, потому что мы извне гарантируем что index = id,
     //   с другой - наверное все таки стоит вытаскивать по id
-    public Defect getElementByIndex(int index){
-        if (index >=0 && index<currentElement){
-            return bugs[index];
+    public Defect getElementByIndex(int index) {
+
+        if (index < 0) {
+            return null;
+        }
+
+        for (int i = 0; i < currentElement; i++) {
+            if (index == bugs[i].getId()) {
+                return bugs[i];
+            }
         }
         return null;
     }
