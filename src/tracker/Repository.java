@@ -32,4 +32,19 @@ public class Repository {
     public boolean isFull() {
         return index == countDefect;
     }
+
+    public boolean checkID(int id){
+        Defect[] defect = getAll();
+        for (int i = 0; i < defect.length; i++) {
+            if (id==defect[i].getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Defect getDefect(int id){
+        Defect[] defect = getAll();
+        return defect[id];
+    }
 }

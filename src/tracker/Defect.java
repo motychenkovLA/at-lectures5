@@ -5,13 +5,15 @@ public class Defect {
     private static int number = 0;
 
     private final long id;
+    private Status status;
     private String resume;
-    private String critical;
+    private Critical critical;
     private int countDays;
-    private Attachment attachment;
+    private final Attachment attachment;
 
-    public Defect(String resume, String critical, int countDays, Attachment attachment) {
+    public Defect(String resume, Critical critical, int countDays, Attachment attachment) {
         this.id = number;
+        this.status = Status.OPEN;
         this.resume = resume;
         this.critical = critical;
         this.countDays = countDays;
@@ -32,11 +34,11 @@ public class Defect {
         this.resume = resume;
     }
 
-    public String getCritical() {
+    public Critical getCritical() {
         return critical;
     }
 
-    public void setCritical(String critical) {
+    public void setCritical(Critical critical) {
         this.critical = critical;
     }
 
@@ -48,9 +50,18 @@ public class Defect {
         this.countDays = countDays;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public String getDisplayInf() {
         return
                 id + "| " +
+                status + "| "+
                 resume + "| " +
                 critical + "| " +
                 countDays + "| " +

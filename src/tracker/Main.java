@@ -2,6 +2,7 @@ package tracker;
 
 import java.util.Scanner;
 
+
 public class Main {
     static final int COUNT_BUGS = 10;
     static Repository repository = new Repository(COUNT_BUGS);
@@ -14,6 +15,7 @@ public class Main {
             System.out.println('\n' + "Выберите, что хотите сделать:\n" +
                     "- Добавить новый дефект (введите add)\n" +
                     "- Вывести список дефектов (введите list)\n" +
+                    "- Изменить дефект (введите change)\n" +
                     "- Выйти из программы (введите quit)");
             String result = scanner.nextLine();
 
@@ -23,6 +25,9 @@ public class Main {
                     break;
                 case "list":
                     list();
+                    break;
+                case "change":
+                    change();
                     break;
                 case "quit":
                     scanner.close();
@@ -45,8 +50,17 @@ public class Main {
         System.out.println("Введите резюме дефекта:");
         String resume = scanner.nextLine();
 
-        System.out.println("Введите критичность дефекта - низкий, средний, высокий, блокер");
-        String critical = scanner.nextLine();
+        System.out.println("Введите критичность дефекта - Низкий, Средний, Высокий, Блокер");
+        Critical critical = null;
+        while (true) {
+            String critic = scanner.nextLine();
+            if (Critical.checkCritical(critic)) {
+                critical = Critical.toCritical(critic);
+                break;
+            } else {
+                System.out.println("Введите значение из списка");
+            }
+        }
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
         int countDays = scan();
@@ -91,7 +105,40 @@ public class Main {
         System.out.println("===================================");
     }
 
-    public static int scan(){
+    public static void change() {
+        if (repository.isEmpty()) {
+            System.out.println("Список пуст");
+            return;
+        }
+        Defect defect;
+        System.out.println("Введите id дефекта");
+        while (true) {
+            int defectToChange = scan();
+            if (repository.checkID(defectToChange)) {
+                defect = repository.getDefect(defectToChange);
+
+                System.out.println("Текущий статус дефекта - " + defect.getStatus());
+                System.out.println("Введите новый статус дефекта - Открыт, В работе, В тестировании, Переоткрыт, Дубль, Закрыт");
+
+                while (true) {
+                    String newStatus = scanner.nextLine();
+                    if (Status.checkStatus(newStatus)) {
+                        defect.setStatus(Status.toStatus(newStatus));
+                        break;
+                    } else {
+                        System.out.println("Введите значение из списка");
+                    }
+                }
+                break;
+            } else {
+                System.out.println("Дефект с таким id отсутствует");
+            }
+        }
+        System.out.println("Статус дефекта изменен на - " + defect.getStatus());
+        System.out.println("===================================");
+    }
+
+    public static int scan() {
         int count = scanner.nextInt();
         scanner.nextLine();
         return count;
