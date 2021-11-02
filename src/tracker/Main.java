@@ -88,7 +88,6 @@ public class Main {
             System.out.print("Введите критичность дефекта: Блокирующий, Высокий, Средний, Низкий: ");
             String ruNamePriority = scanner.nextLine();
             Priority priority = Priority.getPriorityByRuName(ruNamePriority);
-            // todo 1 - полученный приорити лучше в переменную вынести, чтобы два раза не искать
             if (priority != null) {
                 return priority;
             }
@@ -123,7 +122,6 @@ public class Main {
         System.out.print("Введите номер дефекта: ");
         int id = inputNum(scanner);
         Defect bug = repository.getElementById(id);
-        // todo 1 - найденный дефект по id можно вынести в переменную, чтобы не дублировать поиск
         if (bug == null) {
             System.out.println("Ошибка: такого дефекта нет");
             return;
@@ -133,7 +131,6 @@ public class Main {
         String ruNameStatus = scanner.nextLine();
 
         Status status = Status.getStatusByRuName(ruNameStatus);
-        // todo 1 - аналогично с поиском статуса по имени
         if (status == null) {
             System.out.println("Ошибка: такого статуса нет");
             return;
