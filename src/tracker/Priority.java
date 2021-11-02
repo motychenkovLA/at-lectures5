@@ -17,9 +17,9 @@ public enum Priority {
         return ruName;
     }
 
-    public static Priority getPriorityByRuName(String priority) {
+    public static Priority getPriorityByRuName(String ruNamePriority) {
         for (Priority element : Priority.values()) {
-            if (element.toString().equals(priority)) {
+            if (element.toString().equals(ruNamePriority)) {
                 return element;
             }
         }

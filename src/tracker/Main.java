@@ -86,10 +86,11 @@ public class Main {
     public static Priority addPriority(Scanner scanner) {
         while (true) {
             System.out.print("Введите критичность дефекта: Блокирующий, Высокий, Средний, Низкий: ");
-            String priority = scanner.nextLine();
+            String ruNamePriority = scanner.nextLine();
+            Priority priority = Priority.getPriorityByRuName(ruNamePriority);
             // todo 1 - полученный приорити лучше в переменную вынести, чтобы два раза не искать
-            if (Priority.getPriorityByRuName(priority) != null) {
-                return Priority.getPriorityByRuName(priority);
+            if (priority != null) {
+                return priority;
             }
             System.out.println("Ошибка: некорретная критичность");
         }
@@ -120,21 +121,24 @@ public class Main {
         }
 
         System.out.print("Введите номер дефекта: ");
-        int index = inputNum(scanner);
+        int id = inputNum(scanner);
+        Defect bug = repository.getElementById(id);
         // todo 1 - найденный дефект по id можно вынести в переменную, чтобы не дублировать поиск
-        if (repository.getElementByIndex(index) == null) {
-            System.out.println("Ошибка: ошибка такого дефекта нет");
+        if (bug == null) {
+            System.out.println("Ошибка: такого дефекта нет");
             return;
         }
 
         System.out.print("Введите новый статус: Открыт, Анализ, Исправление, Тестирование, Закрыт, Отклонен: ");
-        String status = scanner.nextLine();
+        String ruNameStatus = scanner.nextLine();
+
+        Status status = Status.getStatusByRuName(ruNameStatus);
         // todo 1 - аналогично с поиском статуса по имени
-        if (Status.getStatusByRuName(status) == null) {
-            System.out.println("Ошибка: ошибка такого статуса нет");
+        if (status == null) {
+            System.out.println("Ошибка: такого статуса нет");
             return;
         }
-        repository.getElementByIndex(index).setStatus(Status.getStatusByRuName(status));
+        bug.setStatus(status);
     }
 }
 

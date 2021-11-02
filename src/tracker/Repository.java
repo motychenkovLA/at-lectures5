@@ -37,12 +37,9 @@ public class Repository {
     }
 
     // todo 1 - это ...byId получается теперь
-    public Defect getElementByIndex(int index) {
+    public Defect getElementById(int index) {
 
         // todo 1 - не стоит проверять, репозиторий не отвечает за то какие у дефектов бывают id
-        if (index < 0) {
-            return null;
-        }
 
         for (int i = 0; i < currentElement; i++) {
             if (index == bugs[i].getId()) {

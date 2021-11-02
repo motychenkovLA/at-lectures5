@@ -19,9 +19,9 @@ public enum Status {
         return ruName;
     }
 
-    public static Status getStatusByRuName(String status) {
+    public static Status getStatusByRuName(String ruNameStatus) {
         for (Status element : Status.values()) {
-            if (element.toString().equals(status)) {
+            if (element.toString().equals(ruNameStatus)) {
                 return element;
             }
         }
