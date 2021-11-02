@@ -36,10 +36,10 @@ public class Repository {
         return currentElement == 0;
     }
 
-    // todo ? - с одной стороны технически верно, потому что мы извне гарантируем что index = id,
-    //   с другой - наверное все таки стоит вытаскивать по id
+    // todo 1 - это ...byId получается теперь
     public Defect getElementByIndex(int index) {
 
+        // todo 1 - не стоит проверять, репозиторий не отвечает за то какие у дефектов бывают id
         if (index < 0) {
             return null;
         }

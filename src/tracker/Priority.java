@@ -1,13 +1,11 @@
 package tracker;
 
-// todo 3 - два класса в одном файле
 public enum Priority {
     LOW("Низкий"),
     MEDIUM("Средний"),
     HIGH("Высокий"),
     HIGHEST("Блокирующий");
 
-    // todo 0 - поля лучше не называть так же как класс в котором они лежат. readableName, displayName, ruName, и т.д.
     private final String ruName;
 
     Priority(String priority) {

@@ -8,7 +8,6 @@ public enum Status {
     CLOSE("Закрыт"),
     REJECT("Отклонен");
 
-    // todo 0 - поля лучше не называть так же как класс в котором они лежат. readableName, displayName, ruName, и т.д.
     private final String ruName;
 
     Status(String status) {

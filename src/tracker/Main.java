@@ -87,7 +87,7 @@ public class Main {
         while (true) {
             System.out.print("Введите критичность дефекта: Блокирующий, Высокий, Средний, Низкий: ");
             String priority = scanner.nextLine();
-            // todo 3 - аналогично как для Status, само распознавание Priority по читабельному имени лучше вынести в Priority
+            // todo 1 - полученный приорити лучше в переменную вынести, чтобы два раза не искать
             if (Priority.getPriorityByRuName(priority) != null) {
                 return Priority.getPriorityByRuName(priority);
             }
@@ -121,6 +121,7 @@ public class Main {
 
         System.out.print("Введите номер дефекта: ");
         int index = inputNum(scanner);
+        // todo 1 - найденный дефект по id можно вынести в переменную, чтобы не дублировать поиск
         if (repository.getElementByIndex(index) == null) {
             System.out.println("Ошибка: ошибка такого дефекта нет");
             return;
@@ -128,6 +129,7 @@ public class Main {
 
         System.out.print("Введите новый статус: Открыт, Анализ, Исправление, Тестирование, Закрыт, Отклонен: ");
         String status = scanner.nextLine();
+        // todo 1 - аналогично с поиском статуса по имени
         if (Status.getStatusByRuName(status) == null) {
             System.out.println("Ошибка: ошибка такого статуса нет");
             return;

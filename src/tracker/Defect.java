@@ -63,8 +63,4 @@ public class Defect {
                 "Дефект: %d | Статус: %s | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Вложение: %s",
                 id, status.toString(), summary, priority.toString(), daysToFix, attachment.toString());
     }
-
-    // todo 3 - сетить Status должен setStatus,
-    //   а собирать Status из String, проверяя валидность, это уже ответственность самого Status
-
 }
