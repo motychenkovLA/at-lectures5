@@ -135,7 +135,7 @@ public class Main {
             }
         }
         System.out.println("Статус дефекта изменен на - " + defect.getStatus());
-        System.out.println("===================================");
+        System.out.println("====================================");
     }
 
     public static int scan() {
