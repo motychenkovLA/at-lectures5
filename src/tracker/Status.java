@@ -8,6 +8,7 @@ public enum Status {
     DOUBLE,
     CLOSE;
 
+    // todo 3 - open никак не связан с OPEN
     public static final String open = "Открыт";
     public static final String inProgress = "В работе";
     public static final String inTesting = "В тестировании";

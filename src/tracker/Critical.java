@@ -6,6 +6,7 @@ public enum Critical {
     HIGH,
     BLOCKER;
 
+    // todo 3 - low никак не связан с LOW
     private static final String low = "Низкий";
     private static final String medium = "Средний";
     private static final String high = "Высокий";
