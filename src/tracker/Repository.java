@@ -30,7 +30,7 @@ public class Repository {
     }
 
     public boolean isFull() {
-        return index == countDefect;
+        return index == countDefect-1;
     }
 
     public boolean checkID(int id){
@@ -44,7 +44,6 @@ public class Repository {
     }
 
     public Defect getDefect(int id){
-        Defect[] defect = getAll();
-        return defect[id];
+        return defects[id];
     }
 }

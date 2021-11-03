@@ -63,7 +63,7 @@ public class Main {
         }
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
-        int countDays = scan();
+        int countDays = scanInt();
 
         Attachment attachment = addAttachment();
 
@@ -85,7 +85,7 @@ public class Main {
                     return new CommentAttachment(comment);
                 case ("link"):
                     System.out.println("Введите номер дефекта:");
-                    int defectLink = scan();
+                    int defectLink = scanInt();
                     return new DefectAttachment(defectLink);
                 default:
                     System.out.println('\n' + "Введите значение из списка - comment или link");
@@ -113,7 +113,7 @@ public class Main {
         Defect defect;
         System.out.println("Введите id дефекта");
         while (true) {
-            int defectToChange = scan();
+            int defectToChange = scanInt();
             if (repository.checkID(defectToChange)) {
                 defect = repository.getDefect(defectToChange);
 
@@ -138,7 +138,7 @@ public class Main {
         System.out.println("====================================");
     }
 
-    public static int scan() {
+    public static int scanInt() {
         int count = scanner.nextInt();
         scanner.nextLine();
         return count;
