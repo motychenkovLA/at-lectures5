@@ -51,6 +51,7 @@ public class Main {
         String resume = scanner.nextLine();
 
         System.out.println("Введите критичность дефекта - Низкий, Средний, Высокий, Блокер");
+        // todo 1 - лучше вынести ввод Critical в отдельный метод для читаемости, как Attachment
         Critical critical = null;
         while (true) {
             String critic = scanner.nextLine();
@@ -114,12 +115,14 @@ public class Main {
         System.out.println("Введите id дефекта");
         while (true) {
             int defectToChange = scan();
+            // todo 0 - можно if (! условие) { sout("такого id нет"); continue; } и остальную логику вне скобок
             if (repository.checkID(defectToChange)) {
                 defect = repository.getDefect(defectToChange);
 
                 System.out.println("Текущий статус дефекта - " + defect.getStatus());
                 System.out.println("Введите новый статус дефекта - Открыт, В работе, В тестировании, Переоткрыт, Дубль, Закрыт");
 
+                // todo 1 - лучше вынести в отдельный метод, который будет возвращать Status
                 while (true) {
                     String newStatus = scanner.nextLine();
                     if (Status.checkStatus(newStatus)) {

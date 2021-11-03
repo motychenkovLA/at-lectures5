@@ -8,6 +8,7 @@ public enum Status {
     DOUBLE,
     CLOSE;
 
+    // todo 3 - три раза дублируется читаемое название в разных методах, лучше сделать его полем
     public static boolean checkStatus(String status) {
         return status.equals("Открыт") || status.equals("В работе") || status.equals("В тестировании") ||
                 status.equals("Переоткрыт") || status.equals("Дубль") || status.equals("Закрыт");

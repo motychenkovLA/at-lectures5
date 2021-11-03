@@ -58,6 +58,7 @@ public class Defect {
         this.status = status;
     }
 
+    // todo 1 - toString
     public String getDisplayInf() {
         return
                 id + "| " +
