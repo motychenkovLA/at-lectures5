@@ -51,6 +51,7 @@ public class Main {
         String resume = scanner.nextLine();
 
         System.out.println("Введите критичность дефекта - Низкий, Средний, Высокий, Блокер");
+        // todo 1 - лучше вынести ввод Critical в отдельный метод для читаемости, как Attachment
         Critical critical = null;
         while (true) {
             String critic = scanner.nextLine();
@@ -63,7 +64,7 @@ public class Main {
         }
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
-        int countDays = scanInt();
+        int countDays = scan();
 
         Attachment attachment = addAttachment();
 
@@ -85,7 +86,7 @@ public class Main {
                     return new CommentAttachment(comment);
                 case ("link"):
                     System.out.println("Введите номер дефекта:");
-                    int defectLink = scanInt();
+                    int defectLink = scan();
                     return new DefectAttachment(defectLink);
                 default:
                     System.out.println('\n' + "Введите значение из списка - comment или link");
@@ -113,13 +114,15 @@ public class Main {
         Defect defect;
         System.out.println("Введите id дефекта");
         while (true) {
-            int defectToChange = scanInt();
+            int defectToChange = scan();
+            // todo 0 - можно if (! условие) { sout("такого id нет"); continue; } и остальную логику вне скобок
             if (repository.checkID(defectToChange)) {
                 defect = repository.getDefect(defectToChange);
 
                 System.out.println("Текущий статус дефекта - " + defect.getStatus());
                 System.out.println("Введите новый статус дефекта - Открыт, В работе, В тестировании, Переоткрыт, Дубль, Закрыт");
 
+                // todo 1 - лучше вынести в отдельный метод, который будет возвращать Status
                 while (true) {
                     String newStatus = scanner.nextLine();
                     if (Status.checkStatus(newStatus)) {
@@ -138,7 +141,7 @@ public class Main {
         System.out.println("====================================");
     }
 
-    public static int scanInt() {
+    public static int scan() {
         int count = scanner.nextInt();
         scanner.nextLine();
         return count;

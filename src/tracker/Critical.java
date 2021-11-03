@@ -6,11 +6,13 @@ public enum Critical {
     HIGH,
     BLOCKER;
 
+    // todo 3 - три раза дублируется читаемое название в разных методах, лучше сделать его полем
     public static boolean checkCritical(String critical) {
         return critical.equals("Низкий") || critical.equals("Средний") || critical.equals("Высокий") ||
                 critical.equals("Блокер");
     }
 
+    // todo 0 - можно fromString или from<название поля с читаемым именем>
     public static Critical toCritical(String critical) {
         switch (critical) {
             case "Низкий":
