@@ -2,7 +2,6 @@ package tracker;
 
 import java.util.Scanner;
 
-
 public class Main {
     static final int COUNT_BUGS = 10;
     static Repository repository = new Repository(COUNT_BUGS);
@@ -50,21 +49,10 @@ public class Main {
         System.out.println("Введите резюме дефекта:");
         String resume = scanner.nextLine();
 
-        System.out.println("Введите критичность дефекта - Низкий, Средний, Высокий, Блокер");
-        // todo 1 - лучше вынести ввод Critical в отдельный метод для читаемости, как Attachment
-        Critical critical = null;
-        while (true) {
-            String critic = scanner.nextLine();
-            if (Critical.checkCritical(critic)) {
-                critical = Critical.toCritical(critic);
-                break;
-            } else {
-                System.out.println("Введите значение из списка");
-            }
-        }
+        Critical critical = addCritical();
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
-        int countDays = scan();
+        int countDays = scanInt();
 
         Attachment attachment = addAttachment();
 
@@ -72,6 +60,19 @@ public class Main {
         repository.add(defect);
 
         System.out.println("===================================");
+    }
+
+    public static Critical addCritical() {
+        System.out.println("Введите критичность дефекта - Низкий, Средний, Высокий, Блокер");
+
+        while (true) {
+            String critic = scanner.nextLine();
+            if (Critical.checkCritical(critic)) {
+                return Critical.fromString(critic);
+            } else {
+                System.out.println("Введите значение из списка");
+            }
+        }
     }
 
     public static Attachment addAttachment() {
@@ -86,7 +87,7 @@ public class Main {
                     return new CommentAttachment(comment);
                 case ("link"):
                     System.out.println("Введите номер дефекта:");
-                    int defectLink = scan();
+                    int defectLink = scanInt();
                     return new DefectAttachment(defectLink);
                 default:
                     System.out.println('\n' + "Введите значение из списка - comment или link");
@@ -101,7 +102,7 @@ public class Main {
             return;
         }
         for (Defect def : repository.getAll()) {
-            System.out.println(def.getDisplayInf());
+            System.out.println(def.toString());
         }
         System.out.println("===================================");
     }
@@ -113,35 +114,35 @@ public class Main {
         }
         Defect defect;
         System.out.println("Введите id дефекта");
+        int defectToChange;
         while (true) {
-            int defectToChange = scan();
-            // todo 0 - можно if (! условие) { sout("такого id нет"); continue; } и остальную логику вне скобок
-            if (repository.checkID(defectToChange)) {
-                defect = repository.getDefect(defectToChange);
-
-                System.out.println("Текущий статус дефекта - " + defect.getStatus());
-                System.out.println("Введите новый статус дефекта - Открыт, В работе, В тестировании, Переоткрыт, Дубль, Закрыт");
-
-                // todo 1 - лучше вынести в отдельный метод, который будет возвращать Status
-                while (true) {
-                    String newStatus = scanner.nextLine();
-                    if (Status.checkStatus(newStatus)) {
-                        defect.setStatus(Status.toStatus(newStatus));
-                        break;
-                    } else {
-                        System.out.println("Введите значение из списка");
-                    }
-                }
-                break;
-            } else {
+            defectToChange = scanInt();
+            if (!repository.containsId(defectToChange)) {
                 System.out.println("Дефект с таким id отсутствует");
-            }
+            } else break;
         }
+        defect = repository.getDefect(defectToChange);
+
+        System.out.println("Текущий статус дефекта - " + defect.getStatus());
+        System.out.println("Введите новый статус дефекта - Открыт, В работе, В тестировании, Переоткрыт, Дубль, Закрыт");
+
+        defect.setStatus(getStatus());
         System.out.println("Статус дефекта изменен на - " + defect.getStatus());
         System.out.println("====================================");
     }
 
-    public static int scan() {
+    public static Status getStatus() {
+        while (true) {
+            String newStatus = scanner.nextLine();
+            if (Status.checkStatus(newStatus)) {
+                return Status.fromString(newStatus);
+            } else {
+                System.out.println("Введите значение из списка");
+            }
+        }
+    }
+
+    public static int scanInt() {
         int count = scanner.nextInt();
         scanner.nextLine();
         return count;

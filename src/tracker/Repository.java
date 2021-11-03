@@ -6,7 +6,6 @@ public class Repository {
     private final Defect[] defects;
     private int index = 0;
 
-
     public Repository(int countBugs) {
         this.countDefect = countBugs;
         this.defects = new Defect[countDefect];
@@ -33,20 +32,15 @@ public class Repository {
         return index == countDefect-1;
     }
 
-    // todo 0 - ...Id - не капсом
-    // todo 0 - contains... - проверяет наличие в репо все таки
-    public boolean checkID(int id){
-        // todo 1 - getAll копирует массив, можно просто перебрать до index без создания копий
-        Defect[] defect = getAll();
-        for (int i = 0; i < defect.length; i++) {
-            if (id==defect[i].getId()){
+    public boolean containsId(int id){
+        for (int i = 0; i < index; i++) {
+            if (id==index){
                 return true;
             }
         }
         return false;
     }
 
-    // todo 3 - написан id, возвращает по индексу
     public Defect getDefect(int id){
         return defects[id];
     }

@@ -58,8 +58,8 @@ public class Defect {
         this.status = status;
     }
 
-    // todo 1 - toString
-    public String getDisplayInf() {
+    @Override
+    public String toString() {
         return
                 id + "| " +
                 status + "| "+

@@ -8,10 +8,16 @@ public enum Status {
     DOUBLE,
     CLOSE;
 
-    // todo 3 - три раза дублируется читаемое название в разных методах, лучше сделать его полем
+    public static final String open = "Открыт";
+    public static final String inProgress = "В работе";
+    public static final String inTesting = "В тестировании";
+    public static final String reOpen = "Переоткрыт";
+    public static final String doubleSt = "Дубль";
+    public static final String close = "Закрыт";
+
     public static boolean checkStatus(String status) {
-        return status.equals("Открыт") || status.equals("В работе") || status.equals("В тестировании") ||
-                status.equals("Переоткрыт") || status.equals("Дубль") || status.equals("Закрыт");
+        return status.equals(open) || status.equals(inProgress) || status.equals(inTesting) ||
+                status.equals(reOpen) || status.equals(doubleSt) || status.equals(close);
     }
 
     @Override
@@ -33,19 +39,19 @@ public enum Status {
         return "";
     }
 
-    public static Status toStatus(String status) {
+    public static Status fromString(String status) {
         switch (status) {
-            case "Открыт":
+            case open:
                 return OPEN;
-            case "В работе":
+            case inProgress:
                 return IN_PROGRESS;
-            case "В тестировании":
+            case inTesting:
                 return IN_TESTING;
-            case "Переоткрыт":
+            case reOpen:
                 return RE_OPEN;
-            case "Дубль":
+            case doubleSt:
                 return DOUBLE;
-            case "Закрыт":
+            case close:
                 return CLOSE;
         }
         return null;
