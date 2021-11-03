@@ -34,7 +34,7 @@ public class Repository {
 
     public boolean containsId(int id){
         for (int i = 0; i < index; i++) {
-            if (id==index){
+            if (id==i){
                 return true;
             }
         }
