@@ -1,6 +1,5 @@
 package tracker;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -19,11 +18,11 @@ public class Main {
                         System.out.println("Введите резюме дефекта:");
                         String summary = scan.nextLine();
                         System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
-                        String severuty = scan.nextLine();
+                        String severity = scan.nextLine();
                         System.out.println("Введите ожидаемое количество дней на исправление:");
                         int daysToFix = scan.nextInt();
                         scan.nextLine();
-                        Defect defect = new Defect(currentDefectNum, summary,severuty, daysToFix);
+                        Defect defect = new Defect(currentDefectNum, summary,severity, daysToFix);
                         defectss[currentDefectNum] = defect;
                         currentDefectNum++;
                     } else {
