@@ -6,10 +6,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int NUM_BUG = 10;
-        Defect[] defects = new Defect[NUM_BUG];
-
+        //  Defect[] defects = new Defect[NUM_BUG];
+        Repository repository = new Repository(NUM_BUG);
 
         long countReq = 0; // переменная для количества дефектов
+        
         boolean isRun = true; // переменная для бесконечного цикла
 
         while (isRun) {
@@ -37,22 +38,31 @@ public class Main {
                     int daysToFixed = scanner.nextInt();
                     scanner.nextLine();
 
-                    Defect bug = new Defect (countReq,resume,priority,daysToFixed);
-                    defects[(int) countReq] = bug;
-                    countReq = countReq + 1;
+                    Defect defect = new Defect(resume, priority, daysToFixed);
+
+                    repository.add(defect);
+
+                    //defects[(int) countReq] = bug;
+                    // countReq = countReq + 1;
                     break;
                 }
                 case ("List"): {
-                    for (int i = 0; i < countReq; i++) {
+
+                    Defect[] defects = repository.getALL();
+                    for (int i = 0; i < repository.getCurrentDefectCount(); i++) {
+
                         System.out.println(defects[i].getInfo());
                     }
+
+
+
                     break;
                 }
                 case ("Quit"): {
                     isRun = false;
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("Операция не существует");
                     break;
                 }
