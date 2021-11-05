@@ -6,7 +6,8 @@ public class Main {
     public static void main(String[] args) {
         final int MAX_DEFECTS = 10; // максимальное количеств дефектов
         int currentDefectNum = 0; // текущий номер дефекта
-        Defect [] defectss = new Defect[MAX_DEFECTS]; // один массив для 10 дефектов
+        Defect [] defects = new Defect[MAX_DEFECTS]; // один массив для 10 дефектов
+        Repository [] repositories = new Repository[MAX_DEFECTS]; // теперь Repository для хранения дефектов
         boolean isRunning = true;
         while (isRunning) {
             Scanner scan = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class Main {
                         int daysToFix = scan.nextInt();
                         scan.nextLine();
                         Defect defect = new Defect(currentDefectNum, summary,severity, daysToFix);
-                        defectss[currentDefectNum] = defect;
+                        defects[currentDefectNum] = defect;
                         currentDefectNum++;
                     } else {
                         System.out.println("Достигнуто максимальное количество дефектов");
@@ -32,7 +33,7 @@ public class Main {
                 }
                 case ("List"): {
                     for (int i = 0; i < currentDefectNum; i++) {
-                        System.out.println(defectss[i].getInfo());//вывод списка дефектов
+                        System.out.println(defects[i].getInfo());//вывод списка дефектов
                     }
                     break;
                 }
