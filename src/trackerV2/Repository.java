@@ -27,4 +27,11 @@ public class Repository {
         return arrayDefects;
     }
 
+    public boolean isEmpty() {
+        return i == 0;
+    }
+
+    public boolean isFull() {
+        return i == defectCount;
+    }
 }

@@ -6,20 +6,18 @@ public class Defect {
     private String resume;
     private String seriousness;
     private int days;
-    private Attachment attachment;
 
-    public Defect(String resume, String seriousness, int days, Attachment attachment) {
+    public Defect(String resume, String seriousness, int days) {
         this.id = counterOfBugs;
         this.resume = resume;
         this.seriousness = seriousness;
         this.days = days;
-        this.attachment = attachment;
         counterOfBugs++;
     }
 
 
     public String BugInfo() {
-        return ("Номер дефекта: " + id + " | Резюме: " + resume + " | Серьезность: " + seriousness + " | Количество дней на исправление: " + days + " | Вложения: " + attachment.toString());
 
+        return ("Номер дефекта: " + id + " | Резюме: " + resume + " | Серьезность: " + seriousness + " | Количество дней на исправление: " + days);
     }
 }
