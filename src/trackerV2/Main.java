@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        final int AMOUNT_BUGS = 10;
-        Repository repository = new Repository(AMOUNT_BUGS);
+        final int ARRAY_SIZE = 10;
+        Defect[] list = new Defect[ARRAY_SIZE];
+        int i = 0;
+        int a = 0;
 
 
         Scanner scanner = new Scanner(System.in);
@@ -17,7 +19,7 @@ public class Main {
 
             switch (option) {
                 case "Add":
-                    if (!repository.isFull()) {
+                    if (i != ARRAY_SIZE) {
 
                         System.out.println("Введите резюме дефекта:");
                         String resume = scanner.nextLine();
@@ -26,9 +28,9 @@ public class Main {
                         System.out.println("Введите кол-во дней на исправление дефекта:");
                         int days = scanner.nextInt();
                         scanner.nextLine();
-                        Defect bug = new Defect(resume, seriousness, days);
-                        repository.addBug(bug);
-
+                        Defect bug = new Defect(i, resume, seriousness, days);
+                        list[i] = bug;
+                        i++;
                         System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Quit");
                         option = scanner.nextLine();
                     } else {
@@ -37,20 +39,17 @@ public class Main {
                     }
                     break;
                 case "List":
-                    if (!repository.isEmpty()) {
-
-                        System.out.println("Список дефектов: ");
-                        for (Defect bug : repository.getBugs()) {
-                            System.out.println(bug.BugInfo());
-                        }
-                        System.out.println("\nВведите название необходимой опции:\n" + "Add\n" + "List\n" + "Quit");
-                        option = scanner.nextLine();
-                        break;
-
+                    while (a != i) {
+                        System.out.println(list[a].Bug());
+                        a++;
                     }
+                    System.out.println("\nВведите название необходимой опции:\n" + "Add\n" + "List\n" + "Quit");
+                    option = scanner.nextLine();
+                    break;
 
             }
-        }
 
+        }
     }
+
 }
