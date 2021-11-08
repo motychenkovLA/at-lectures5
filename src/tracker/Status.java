@@ -1,59 +1,35 @@
 package tracker;
 
 public enum Status {
-    OPEN,
-    IN_PROGRESS,
-    IN_TESTING,
-    RE_OPEN,
-    DOUBLE,
-    CLOSE;
+    OPEN("Открыт"),
+    IN_PROGRESS("В работе"),
+    IN_TESTING("В тестировании"),
+    RE_OPEN("Переоткрыт"),
+    DOUBLE("Дубль"),
+    CLOSE("Закрыт");
 
-    // todo 3 - open никак не связан с OPEN
-    public static final String open = "Открыт";
-    public static final String inProgress = "В работе";
-    public static final String inTesting = "В тестировании";
-    public static final String reOpen = "Переоткрыт";
-    public static final String doubleSt = "Дубль";
-    public static final String close = "Закрыт";
+    private final String statusRus;
+
+    Status(String status) {
+        this.statusRus = status;
+    }
 
     public static boolean checkStatus(String status) {
-        return status.equals(open) || status.equals(inProgress) || status.equals(inTesting) ||
-                status.equals(reOpen) || status.equals(doubleSt) || status.equals(close);
+        return status.equals(OPEN.statusRus) || status.equals(IN_PROGRESS.statusRus) || status.equals(IN_TESTING.statusRus)
+                || status.equals(RE_OPEN.statusRus) || status.equals(DOUBLE.statusRus) || status.equals(CLOSE.statusRus);
     }
 
     @Override
     public String toString() {
-        switch (this) {
-            case OPEN:
-                return "Открыт";
-            case IN_PROGRESS:
-                return "В работе";
-            case IN_TESTING:
-                return "В тестировании";
-            case RE_OPEN:
-                return "Переоткрыт";
-            case DOUBLE:
-                return "Дубль";
-            case CLOSE:
-                return "Закрыт";
-        }
-        return "";
+        return this.statusRus;
     }
 
-    public static Status fromString(String status) {
-        switch (status) {
-            case open:
-                return OPEN;
-            case inProgress:
-                return IN_PROGRESS;
-            case inTesting:
-                return IN_TESTING;
-            case reOpen:
-                return RE_OPEN;
-            case doubleSt:
-                return DOUBLE;
-            case close:
-                return CLOSE;
+    public static Status fromString(String statusRus) {
+        for (Status value : Status.values()
+        ) {
+            if (value.toString().equals(statusRus)) {
+                return value;
+            }
         }
         return null;
     }

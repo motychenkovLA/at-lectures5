@@ -121,6 +121,7 @@ public class Main {
                 System.out.println("Дефект с таким id отсутствует");
             } else break;
         }
+
         defect = repository.getDefect(defectToChange);
 
         System.out.println("Текущий статус дефекта - " + defect.getStatus());

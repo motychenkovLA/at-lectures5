@@ -29,24 +29,24 @@ public class Repository {
     }
 
     public boolean isFull() {
-        // todo 5 - index - указатель на последнюю пустую ячейку,
-        //  если последняя пустая ячейка это последняя ячейка массива, репо явно не полный.
-        return index == countDefect-1;
+        return index == countDefect;
     }
 
-    // todo 3 - написан id, проверяет по индексу
-    public boolean containsId(int id){
+    public boolean containsId(int id) {
         for (int i = 0; i < index; i++) {
-            if (id==i){
+            if (id == defects[i].getId()) {
                 return true;
             }
         }
         return false;
     }
 
-
-    // todo 3 - написан id, возвращает по индексу
-    public Defect getDefect(int id){
-        return defects[id];
+    public Defect getDefect(int id) {
+        for (int i = 0; i < index; i++) {
+            if (id == defects[i].getId()) {
+                return defects[i];
+            }
+        }
+        return null;
     }
 }
