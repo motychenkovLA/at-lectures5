@@ -13,13 +13,16 @@ public enum Critical {
     }
 
     public static boolean checkCritical(String critical) {
-        return critical.equals(LOW.criticalRus) || critical.equals(MEDIUM.criticalRus) ||
-                critical.equals(HIGH.criticalRus) || critical.equals(BLOCKER.criticalRus);
+        for (Critical value : Critical.values()) {
+            if (value.toString().equals(critical)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Critical fromString(String critical) {
-        for (Critical value : Critical.values()
-        ) {
+        for (Critical value : Critical.values()) {
             if (value.toString().equals(critical)) {
                 return value;
             }

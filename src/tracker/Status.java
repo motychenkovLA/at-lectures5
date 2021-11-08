@@ -15,8 +15,12 @@ public enum Status {
     }
 
     public static boolean checkStatus(String status) {
-        return status.equals(OPEN.statusRus) || status.equals(IN_PROGRESS.statusRus) || status.equals(IN_TESTING.statusRus)
-                || status.equals(RE_OPEN.statusRus) || status.equals(DOUBLE.statusRus) || status.equals(CLOSE.statusRus);
+        for (Status value : Status.values()) {
+            if (value.toString().equals(status)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -25,8 +29,7 @@ public enum Status {
     }
 
     public static Status fromString(String statusRus) {
-        for (Status value : Status.values()
-        ) {
+        for (Status value : Status.values()) {
             if (value.toString().equals(statusRus)) {
                 return value;
             }
