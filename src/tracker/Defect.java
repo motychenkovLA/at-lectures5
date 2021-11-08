@@ -8,41 +8,19 @@
 package tracker;
 public class Defect {
 
-    private final long id; // заприватили все поля (доступ к ним в get, set) + id неизменяемое
+    private final long id;
     private String summary;
     private String severity;
     private int daysToFix;
-    private static long indexNumber = 0; // порядковый номер
+    private static long indexNumber = 0;
 
-    public Defect(long id, String summary, String severity, int daysToFix) {
-        this.id = indexNumber; // пункт 2 в задании (поле final инициализировано в конструкторе)
+    public Defect(String summary, String severity, int daysToFix) {
+        this.id = indexNumber;
         this.summary = summary;
         this.severity = severity;
         this.daysToFix = daysToFix;
-        indexNumber++; // пункт 2
+        indexNumber++;
     }
-    public long getId() {
-        return id;
-    }
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-    public String getSummary() {
-        return summary;
-    }
-    public void setSeverity(String severity) {
-        this.severity = severity;
-    }
-    public String getSeverity() {
-        return severity;
-    }
-    public void setDaysToFix(int daysToFix) {
-        this.daysToFix = daysToFix;
-    }
-    public int getDaysToFix() {
-        return daysToFix;
-    }
-
     public String getInfo () {
         return "ID:" + id + " | " + "РЕЗЮМЕ:" + summary + " | " + "СЕРЬЕЗНОСТЬ:" + severity + " | " +
                 "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFix;
