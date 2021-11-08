@@ -9,6 +9,7 @@ public class Main {
         //  Defect[] defects = new Defect[NUM_BUG];
         Repository repository = new Repository(NUM_BUG);
 
+
         long countReq = 0; // переменная для количества дефектов
         
         boolean isRun = true; // переменная для бесконечного цикла
@@ -38,7 +39,26 @@ public class Main {
                     int daysToFixed = scanner.nextInt();
                     scanner.nextLine();
 
-                    Defect defect = new Defect(resume, priority, daysToFixed);
+                    System.out.println("Выберите тип вложения Комментарий или Ссылка на дефект, либо нажмите Enter");
+                    String kindOfAttachment = scanner.nextLine();
+
+                    Attachment attachment = new Attachment();
+                    switch (kindOfAttachment) {
+                        case ("Комментарий"): {
+                            System.out.println("Введите комментарий к дефекту");
+                             attachment = new CommentAttachment(scanner.nextLine());
+                            break;
+                        }
+                        case ("Ссылка на дефект"): {
+                            System.out.println("Введите Id связанного дефекта");
+                            attachment  = new DefectAttachment(Long.parseLong(scanner.nextLine()));
+                             break;
+                        }
+                    }
+
+
+                    Defect defect = new Defect(resume, priority, daysToFixed, attachment);
+
 
                     repository.add(defect);
 
