@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        final byte MAX_DEFECTS = 3; // Максимальное значение хранящихся дефектов
+        final int MAX_DEFECTS = 3; // Максимальное значение хранящихся дефектов
         String command = ""; // Выбранный пункт меню
         String[][] listOfBugs = new String[MAX_DEFECTS][3]; // Матрица дефектов
         int defects = 0; // Кол-во заведенных дефектов

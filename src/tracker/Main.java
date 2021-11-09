@@ -1,6 +1,5 @@
-// Osin Ilya
-// 10/03/2021
-// Lesson2. Scanner
+// Илья Осин
+// Задание 4
 
 package tracker;
 
@@ -8,48 +7,65 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Цвета для вывода текста
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
     public static void main(String[] args) {
-
-        // Ввод резюме
         Scanner scan = new Scanner(System.in);
-        System.out.println("_____________________________________________");
-        System.out.print("Резюме дефекта: ");
-        String resume = scan.nextLine();
+        final int MAX_DEFECTS = 3; // Максимальное кол-во хранящихся дефектов
+        int defectId = 1; // id дефекта
+        boolean running = true;
+        Defect[] defects = new Defect[MAX_DEFECTS];
 
-        // Ввод критичности
-        System.out.println("_____________________________________________");
-        System.out.println("Введите кричисность дефекта:" + '\n' + '\t' + ANSI_RED + "- Blocker" + ANSI_RESET + '\n' + '\t' + ANSI_YELLOW + "- Critical" + ANSI_RESET + '\n' + '\t' + ANSI_BLUE + "- Major" + ANSI_RESET + '\n' + '\t' + ANSI_WHITE + "- Minor" + ANSI_RESET + '\n' + '\t' + ANSI_GREEN + "- Trivial" + ANSI_RESET + '\n');
-        System.out.print("Критичность: ");
-        String severity = scan.nextLine();
+        while (running) {
+            // Ввод команды
+            System.out.println("Введите команду, чтобы:" + '\n' + '\t' + "Добавить новый дефект: add" + '\n' + '\t' + "Вывести список дефектов: list" + '\n' + '\t' + "Выйти из программы: quit");
+            System.out.print('\n' + "Введите команду: ");
+            String command = scan.nextLine();
+            System.out.println();
+            switch (command) {
+                // Добавление дефекта
+                case "add":
+                    System.out.println();
+                    if (defectId <= MAX_DEFECTS) {
 
-        // Ввод количества дней на исправление
-        System.out.println("_____________________________________________");
-        System.out.print("Ожидаемое кол-во дней на исправление: ");
-        int daysToFix = scan.nextInt();
-        System.out.println("_____________________________________________" + '\n');
+                        // Ввод резюме
+                        System.out.print("Резюме дефекта: ");
+                        String resume = scan.nextLine();
+                        // Ввод критичности
+                        System.out.println("Введите кричисность дефекта:" + '\n' + '\t' + "- Blocker" + '\n' + '\t' + "- Critical" + '\n' + '\t' + "- Major" + '\n' + '\t' + "- Minor" + '\n' + '\t' + "- Trivial" + '\n');
+                        System.out.print("Критичность: ");
+                        String severity = scan.nextLine();
+                        // Ввод количества дней на исправление
+                        System.out.print("Ожидаемое кол-во дней на исправление: ");
+                        int daysToFix = scan.nextInt();
+                        scan.nextLine();
 
-        // Закрыть сканнер
-        scan.close();
+                        Defect defect = new Defect(defectId, resume, severity, daysToFix);
+                        defects[defectId-1] = defect;
+                        defectId++;
+                    }
+                    else {
+                        System.out.println("ВНИМАНИЕ!!! Достигнуто максимальное количество дефектов. Возврат в главное меню...");
+                        System.out.println();
+                    }
+                    break;
 
-        // Вывод результата обработки
-        boolean weekOrNot = daysToFix > 5;
-        System.out.println("Резюме дефекта: " + ANSI_CYAN + resume + ANSI_RESET);
-        System.out.println('\t' + "Критичность: " + ANSI_CYAN + severity + ANSI_RESET);
-        if (weekOrNot == true){
-            System.out.println('\t' + "Дней на исправление: " + ANSI_CYAN + daysToFix + ANSI_RESET + '\n' + '\t' + '\t' + "Больше недели: " + ANSI_GREEN + weekOrNot + ANSI_RESET);
-        }else {
-            System.out.println('\t' + "Дней на исправление: " + ANSI_CYAN + daysToFix + ANSI_RESET + '\n' + '\t' + '\t' + "Больше недели: " + ANSI_RED + weekOrNot + ANSI_RESET);
+                case "list":
+                    System.out.println("Список дефектов:");
+                    for (int row = 0; row < defectId-1; row++) {
+                        System.out.println(defects[row].getDefectInfo());//вывод списка дефектов
+                    }
+                    System.out.println();
+                    break;
+
+                case "quit":
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println("Неверная команда! Повторите ввод...");
+                    System.out.println();
+                    break;
+            }
         }
+        scan.close(); // Закрыть сканнер
     }
 }
