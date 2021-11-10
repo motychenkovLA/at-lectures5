@@ -1,5 +1,6 @@
 package tracker;
 
+// todo 3 - public на все что не private
 class Bug {
 
     private final String id;
@@ -7,6 +8,11 @@ class Bug {
     private String priority;
     private int days;
 
+    // todo 5 - дз:
+    //  поле id сделать неизменяемым,
+    //  > не принимать в конструктор, при создании объекта заполнять автоматически порядковым номером <
+    //
+    // todo 3 - остальные поля куда-то пропали
     Bug(String id) {
         this.id = id;
     }

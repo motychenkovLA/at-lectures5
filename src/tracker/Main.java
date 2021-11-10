@@ -15,6 +15,7 @@ public class Main {
             String operation = scanner.nextLine();
             switch (operation) {
                 case "Add":
+                    // todo 0 - отступ
                         System.out.println("Введите резюме дефекта:");
                         String resume = scanner.nextLine();
                         System.out.println("Укажите критичность дефекта:" + "\nВысокий" + "\nСредний" + "\nНизкий");
@@ -22,6 +23,8 @@ public class Main {
                         System.out.println("Укажите ожидаемое количество дней на исправление дефекта:");
                         int days = scanner.nextInt();
                         scanner.nextLine();
+                    // todo 3 - проверка на заполненность происходит уже после ввода всех полей
+                    //   в репо добавить методы isFull, isEmpty для таких проверок
                         repository.addBug(resume, priority, days);
                     break;
                 case "List":
