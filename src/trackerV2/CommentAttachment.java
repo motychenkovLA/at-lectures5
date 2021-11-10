@@ -10,6 +10,6 @@ public class CommentAttachment extends Attachment {
 
     @Override
     public String toString() {
-        return comment;
+        return String.format(" Комментарий: " + comment);
     }
 }

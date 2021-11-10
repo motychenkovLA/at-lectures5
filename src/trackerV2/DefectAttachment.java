@@ -11,6 +11,6 @@ public class DefectAttachment extends Attachment {
 
     @Override
     public String toString() {
-        return String.valueOf(defectLink);
+        return String.format(" Ссылка: " + defectLink);
     }
 }

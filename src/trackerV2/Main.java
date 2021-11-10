@@ -75,7 +75,7 @@ public class Main {
 
         System.out.println("\nСписок дефектов: ");
         for (Defect bug : repository.getBugs()) {
-            System.out.println(bug.getInfo());
+            System.out.println(bug.toString());
         }
 
     }

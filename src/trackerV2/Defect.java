@@ -17,9 +17,10 @@ public class Defect {
         counterOfBugs++;
     }
 
-
-    public String getInfo() {
-        return  id + " | " + resume + " | " + seriousness + " | " + days + " | " + attachment;
+    @Override
+        public String toString() {
+            return String.format(
+                    "Номер дефекта: " + id + " | Резюме: " + resume + " | Серьезность: " + seriousness + " | Количество дней на исправление: " + days +  attachment.toString());
 
     }
 }
