@@ -18,8 +18,8 @@ public class Defect {
     }
 
 
-    public String BugInfo() {
-        return ("Номер дефекта: " + id + " | Резюме: " + resume + " | Серьезность: " + seriousness + " | Количество дней на исправление: " + days + " | Вложения: " + attachment.toString());
+    public String getInfo() {
+        return  id + " | " + resume + " | " + seriousness + " | " + days + " | " + attachment;
 
     }
 }
