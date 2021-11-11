@@ -15,7 +15,6 @@ public class Main {
             String operation = scanner.nextLine();
             switch (operation) {
                 case "Add":
-                    // todo 0 - отступ - исправлено
                     if (!repository.isFull()) {
                         System.out.println("Введите резюме дефекта:");
                         String resume = scanner.nextLine();
@@ -29,12 +28,11 @@ public class Main {
                     } else {
                         System.out.println("Вы добавили максимальное количество дефектов!");
                     }
-                    // todo 3 - проверка на заполненность происходит уже после ввода всех полей
-                    //   в репо добавить методы isFull, isEmpty для таких проверок - исправлено
                     break;
                 case "List":
                     if (!repository.isEmpty()) {
                         Bug[] bug = repository.getBug();
+                        // todo 1 - bug.length ?
                         int size = repository.getSize();
                         for (int i = 0; i < size; i++) {
                             System.out.println(bug[i].getBugInfo());

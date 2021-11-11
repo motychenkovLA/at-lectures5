@@ -1,6 +1,5 @@
 package tracker;
 
-// todo 3 - public на все что не private - исправлено
 public class Bug {
 
     private final String id;
@@ -9,11 +8,6 @@ public class Bug {
     private int days;
     private static int counter = 0;
 
-    // todo 5 - дз:
-    //  поле id сделать неизменяемым,
-    //  > не принимать в конструктор, при создании объекта заполнять автоматически порядковым номером < - исправлено
-    // Исправила
-    // todo 3 - остальные поля куда-то пропали - исправлено
     public Bug(String resume, String priority, int days) {
         this.id = nextId();
         this.resume = resume;
@@ -52,7 +46,6 @@ public class Bug {
     private String nextId() {
         String code = "USP-";
         counter++;
-        // todo 1 - вне цикла нет смысла через StringBuilder собирать вместо обычного + - исправила
         String id = code + counter;
         return id;
     }
