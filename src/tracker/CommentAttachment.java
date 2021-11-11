@@ -7,7 +7,6 @@ public class CommentAttachment extends Attachment {
         this.comment = comment;
     }
 
-
     @Override
     public String toString() {
         return "Комментарий: " + this.comment;

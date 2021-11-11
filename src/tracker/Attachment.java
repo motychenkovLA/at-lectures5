@@ -1,8 +1,7 @@
 package tracker;
 
 public class Attachment {
-    public String toString () {
+    public String toString() {
         return "Отсутствует";
     }
-
 }

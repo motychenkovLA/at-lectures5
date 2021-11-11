@@ -7,7 +7,6 @@ public class Main {
     final static int MAX_DEFECTS = 10;
     static Repository repository = new Repository(MAX_DEFECTS);
     static Scanner scan = new Scanner(System.in);
-    private Attachment attachment;
 
     public static void main(String[] args) {
         boolean isRunning = true;
@@ -46,7 +45,6 @@ public class Main {
             System.out.println("Введите ожидаемое количество дней на исправление:");
             int daysToFix = scan.nextInt();
             scan.nextLine();
-
             System.out.println("Выберите тип вложения: Комментарий/ Ссылка: ");
             String attachmentType = scan.nextLine();
             Attachment attachment = new Attachment();
@@ -54,22 +52,20 @@ public class Main {
             if (attachmentType.equals("Комментарий")) {
                 System.out.println("Введите комментарий: ");
                 attachment = new CommentAttachment(scan.nextLine());
-            }else if (attachmentType.equals("Ссылка")) {
+            } else if (attachmentType.equals("Ссылка")) {
                 System.out.println("Введите номер дефекта: ");
                 long defectId = scan.nextInt();
                 scan.nextLine();
                 attachment = new DefectAttachment(defectId);
-            }else System.out.println("Такого типа вложения нет");
+            } else {
+                System.out.println("Такого типа вложения нет");
+            }
             
             Defect defect = new Defect(summary,severity, daysToFix, attachment);
             repository.add(defect); // созданный дефект добавили в репозиторий
         } else {
             System.out.println("Достигнуто максимальное количество дефектов");
         }
-
-
     }
-
-
 }
 
