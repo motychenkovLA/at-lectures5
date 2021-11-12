@@ -1,82 +1,100 @@
-
 package trackerV2;
-
 import java.util.Scanner;
-
 public class Main {
-    static final int AMOUNT_BUGS = 10;
-    static Repository repository = new Repository(AMOUNT_BUGS);
-    static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-
-        System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Quit");
-        String option = scanner.nextLine();
-
-        while (!"Quit".equals(option)) {
-
-            switch (option) {
+        final int ARRAY_SIZE = 10;
+        Repository repository = new Repository(ARRAY_SIZE);
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Change\n" + "Quit");
+            String choice = scanner.nextLine();
+            switch (choice) {
                 case "Add":
-                    add();
-                    System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Quit");
-                    option = scanner.nextLine();
+                    AddingBug(repository, scanner);
                     break;
                 case "List":
-                    list();
-                    System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Quit");
-                    option = scanner.nextLine();
+                    bugsList(repository);
+                    break;
+                case "Quit":
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                case "Change":
+                    changeSeriousness(repository, scanner);
                     break;
             }
         }
     }
+    public static void AddingBug(Repository repository, Scanner scanner) {
+        if (repository.isFull()) {
+            System.out.println("Лимит превышен!\\n\" + \"Введите название необходимой опции:\\n\" + \"Add\\n\" + \"List\\n\" + \"Quit");
 
-    public static void add() {
+        } else {
+            System.out.print("Введите резюме дефекта: ");
+            String resume = scanner.nextLine();
+            System.out.print("Введите кол-во дней на исправление дефекта: ");
+            int daysToFix = inputNum(scanner);
+            Seriousness seriousness = addSeriousness(scanner);
+            Attachment attachment = addAttachment(scanner);
+            Defect bug = new Defect(resume, seriousness, daysToFix, attachment);
+            repository.addBug(bug);
 
-        System.out.println("Введите резюме дефекта:");
-        String resume = scanner.nextLine();
-        System.out.println("Введите серьезность дефекта:\n" + " - Критичный\n" + " - Высокий\n" + " - Средний\n" + " - Низкий");
-        String seriousness = scanner.nextLine();
-        System.out.println("Введите кол-во дней на исправление дефекта:");
-        int days = scanner.nextInt();
-        scanner.nextLine();
-        Attachment attachment = addAttachment();
-        Defect bug = new Defect(resume, seriousness, days, attachment);
-        repository.addBug(bug);
-
-
+        }
     }
-
-    public static Attachment addAttachment() {
-        System.out.println("Выберите тип вложения (Link/Comment):");
-
+    public static Attachment addAttachment(Scanner scanner) {
         while (true) {
-
+            System.out.print("Выберите тип вложения (Link/Comment): ");
             String attachmentType = scanner.nextLine();
-            switch (attachmentType) {
-                case ("Comment"):
-                    System.out.println("Добавьте комментарий:");
-                    String comment = scanner.nextLine();
-                    return new CommentAttachment(comment);
-                case ("Link"):
-                    System.out.println("Добавьте ссылку:");
-                    int link = Scan();
-                    return new DefectAttachment(link);
+            if (attachmentType.equals("Comment")) {
+                System.out.print("Добавьте комментарий: ");
+                String comment = scanner.nextLine();
+                return new CommentAttachment(comment);
+            }
+            if (attachmentType.equals("Link")) {
+                System.out.print("Добавьте ссылку дефекта: ");
+                long bugId = inputNum(scanner);
+                return new DefectAttachment(bugId);
             }
         }
     }
-
-    public static int Scan() {
-        int count = scanner.nextInt();
-        scanner.nextLine();
-        return count;
+    public static Seriousness addSeriousness(Scanner scanner) {
+        while (true) {
+            System.out.print("Выберите тип вложения (Блокирующий, Высокий, Средний, Низкий): ");
+            String nameSeriousness = scanner.nextLine();
+            Seriousness seriousness = Seriousness.getSeriousnessByRuName(nameSeriousness);
+            if (seriousness != null) {
+                return seriousness;
+            }
+        }
     }
-
-    public static void list() {
-
-        System.out.println("\nСписок дефектов: ");
-        for (Defect bug : repository.getBugs()) {
+    public static int inputNum(Scanner scanner) {
+        int num = scanner.nextInt();
+        scanner.nextLine();
+        return num;
+    }
+    public static void bugsList(Repository repository) {
+        System.out.println("\nСписок дефектов:");
+        for (Defect bug : repository.getDefects()) {
             System.out.println(bug.toString());
         }
+    }
+    public static void changeSeriousness(Repository repository, Scanner scanner) {
+        System.out.print("Введите номер дефекта: ");
+        int id = inputNum(scanner);
+        Defect bug = repository.getElementById(id);
+        if (bug == null) {
+            System.out.println("\nУказанный дефект отсутствует.");
+            return;
+        }
 
+        System.out.print("Введите новый статус: Открыт, Закрыт, Отклонен: ");
+        String nameStatus = scanner.nextLine();
+
+        Status status = Status.getStatusByName(nameStatus);
+        if (status == null) {
+            System.out.println("Статус отсутствует.");
+            return;
+        }
+        bug.setStatus(status);
     }
 }
