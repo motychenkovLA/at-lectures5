@@ -7,18 +7,34 @@ public class Defect {
     private int daysToFix;
     private static long indexNumber = 0;
     private Attachment attachment;
+    private Status status;
+    private Critical critical;
 
-    public Defect(String summary, String severity, int daysToFix, Attachment attachment) {
+    public Defect(String summary, Critical critical, int daysToFix, Attachment attachment) {
         this.id = indexNumber;
         this.summary = summary;
-        this.severity = severity;
+        this.critical = critical;
         this.daysToFix = daysToFix;
         this.attachment = attachment;
+        this.status = Status.OPEN;
         indexNumber++;
 
     }
     public String getInfo () {
-        return "ID:" + id + " | " + "РЕЗЮМЕ:" + summary + " | " + "СЕРЬЕЗНОСТЬ:" + severity + " | " +
-                "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ:" + daysToFix + " | " + "Вложение - " +  attachment;
+        return "ID:" + id + " | " + "РЕЗЮМЕ: " + summary + " | " + "СЕРЬЕЗНОСТЬ: " + critical + " | " +
+                "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ: " + daysToFix + " | " + "Вложение - " +  attachment+ " | " +
+                "Статус: " +  status;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setCritical(Critical critical) {
+        this.critical = critical;
     }
 }

@@ -26,4 +26,16 @@ public class Repository {
     public int getCurrentSize() {
         return currentSize;
     }
+
+    public Defect getDefectById (long id) {
+        Defect targetDefect = null;
+        for (int i = 0; i < currentSize; i++) {
+            if (defects[i].getId() == id) {
+                targetDefect = defects[i];
+                break;
+            }
+
+        }
+        return targetDefect;
+    }
 }
