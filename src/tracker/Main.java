@@ -1,6 +1,6 @@
 package tracker;
 
-import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             System.out.println(" Выберите действие Add (Новый дефект)" +
                     " List (Вывести список дефектов)" +
-                    " Quit (Вернуться в главное меню)");
+                    " Quit (Вернуться в главное меню)" + "Change (Изменить дефект)");
             String action = scanner.nextLine();
             switch (action) {
                 case ("Add"): {
@@ -32,8 +32,10 @@ public class Main {
                     System.out.println("Введите резюме дефекта:");
                     String resume = scanner.nextLine();
 
-                    System.out.println("Введите критичность дефекта (Высокий, Средний, Низкий ):");
-                    String priority = scanner.nextLine();
+                    System.out.println ("Введите критичность дефекта (high, middle, low)");
+                    String priorityString = scanner.nextLine().toUpperCase();
+                    Priority priority = Priority.valueOf(priorityString);
+
 
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта:");
                     int daysToFixed = scanner.nextInt();
@@ -56,8 +58,11 @@ public class Main {
                         }
                     }
 
+                    Status status = Status.valueOf("OPEN");
 
-                    Defect defect = new Defect(resume, priority, daysToFixed, attachment);
+
+                    Defect defect = new Defect(resume, priority, daysToFixed, status , attachment );
+
 
 
                     repository.add(defect);
@@ -73,6 +78,22 @@ public class Main {
 
                         System.out.println(defects[i].getInfo());
                     }
+
+
+
+                    break;
+                }
+                case ("Change"): {
+                    System.out.println("Введите id дефекта");
+                    long idChange = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.println("Введите Статус дефекта OPEN INPROGRESS TESTING CLOSE" );
+                    String statusString = scanner.nextLine().toUpperCase();
+                    Status status = Status.valueOf(statusString);
+
+                    Defect defect = repository.getDefectById(idChange); // возвращается весь дефект по айди
+                    defect.setStatus(status);
+
 
 
 
