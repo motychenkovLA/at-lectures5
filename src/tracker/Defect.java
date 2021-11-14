@@ -9,17 +9,19 @@ public class Defect {
     private String resume;
     private String severity;
     private int daysToFix;
+    private Attachment attachment;
 
-    public Defect(String resume, String severity, int daysToFix) {
+    public Defect(String resume, String severity, int daysToFix, Attachment attachment) {
         this.id = index;
         this.resume = resume;
         this.severity = severity;
         this.daysToFix = daysToFix;
+        this.attachment = attachment;
         index++;
     }
 
     public String getDefectInfo() {
         return "id: " + id + " | " + "Резюме: " + resume + " | " + "Серьезность: " + severity + " | " +
-                "Кол-во дней на исправление: " + daysToFix;
+                "Кол-во дней на исправление: " + daysToFix + " | " + "Вложение: " + attachment;
     }
 }
