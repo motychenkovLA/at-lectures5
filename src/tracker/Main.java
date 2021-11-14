@@ -8,11 +8,10 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        final int MAX_DEFECTS = 3; // Максимальное кол-во хранящихся дефектов
-        int defectId = 1; // id дефекта
+        final int MAX_DEFECTS = 3;
+        Repository repository = new Repository(MAX_DEFECTS);
         boolean running = true;
-        Defect[] defects = new Defect[MAX_DEFECTS];
+        Scanner scan = new Scanner(System.in);
 
         while (running) {
             // Ввод команды
@@ -24,10 +23,9 @@ public class Main {
                 // Добавление дефекта
                 case "add":
                     System.out.println();
-                    if (defectId <= MAX_DEFECTS) {
-
+                    if (!repository.filled()) {
                         // Ввод резюме
-                        System.out.print("Резюме дефекта: ");
+                        System.out.print("Введите резюме дефекта: ");
                         String resume = scan.nextLine();
                         // Ввод критичности
                         System.out.println("Введите кричисность дефекта:" + '\n' + '\t' + "- Blocker" + '\n' + '\t' + "- Critical" + '\n' + '\t' + "- Major" + '\n' + '\t' + "- Minor" + '\n' + '\t' + "- Trivial" + '\n');
@@ -38,11 +36,9 @@ public class Main {
                         int daysToFix = scan.nextInt();
                         scan.nextLine();
 
-                        Defect defect = new Defect(defectId, resume, severity, daysToFix);
-                        defects[defectId-1] = defect;
-                        defectId++;
-                    }
-                    else {
+                        Defect defect = new Defect(resume,severity, daysToFix);
+                        repository.addDefectInRepo(defect); // созданный дефект добавили в репозиторий
+                    }else {
                         System.out.println("ВНИМАНИЕ!!! Достигнуто максимальное количество дефектов. Возврат в главное меню...");
                         System.out.println();
                     }
@@ -50,8 +46,8 @@ public class Main {
 
                 case "list":
                     System.out.println("Список дефектов:");
-                    for (int row = 0; row < defectId-1; row++) {
-                        System.out.println(defects[row].getDefectInfo());//вывод списка дефектов
+                    for (int i = 0; i < repository.getRepoIndex(); i++) {
+                        System.out.println(repository.getAll()[i].getDefectInfo());
                     }
                     System.out.println();
                     break;
