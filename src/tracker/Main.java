@@ -1,5 +1,4 @@
 // Илья Осин
-// Задание 4
 
 package tracker;
 
@@ -15,7 +14,11 @@ public class Main {
 
         while (running) {
             // Ввод команды
-            System.out.println("Введите команду, чтобы:" + '\n' + '\t' + "Добавить новый дефект: add" + '\n' + '\t' + "Вывести список дефектов: list" + '\n' + '\t' + "Выйти из программы: quit");
+            System.out.println("Введите команду, чтобы:" + '\n' + '\t'
+                    + "Добавить новый дефект: add" + '\n' + '\t'
+                    + "Вывести список дефектов: list" + '\n' + '\t'
+                    + "Изменить статус дефекта: change" + '\n' + '\t'
+                    + "Выйти из программы: quit");
             System.out.print('\n' + "Введите команду: ");
             String command = scan.nextLine();
             System.out.println();
@@ -29,9 +32,14 @@ public class Main {
                         String resume = scan.nextLine();
 
                         // Ввод критичности
-                        System.out.println("Введите кричисность дефекта:" + '\n' + '\t' + "- Blocker" + '\n' + '\t' + "- Critical" + '\n' + '\t' + "- Major" + '\n' + '\t' + "- Minor" + '\n' + '\t' + "- Trivial");
+                        System.out.println("Введите кричисность дефекта:" + '\n' + '\t'
+                                + "- BLOCKER" + '\n' + '\t'
+                                + "- CRITICAL" + '\n' + '\t'
+                                + "- MAJOR" + '\n' + '\t'
+                                + "- MINOR" + '\n' + '\t'
+                                + "- TRIVIAL");
                         System.out.print("Критичность: ");
-                        String severity = scan.nextLine();
+                        Severity severity = Severity.valueOf(scan.nextLine());
 
                         // Ввод количества дней на исправление
                         System.out.print("Ожидаемое кол-во дней на исправление: ");
@@ -58,7 +66,7 @@ public class Main {
                                 attachment = new DefectAttachment(Long.parseLong(scan.nextLine()));
                                 break;
                         }
-                        Defect defect = new Defect(resume,severity,daysToFix,attachment);
+                        Defect defect = new Defect(resume,severity,daysToFix,attachment, Status.OPEN);
                         repository.addDefectInRepo(defect); // созданный дефект добавили в репозиторий
                     }else {
                         System.out.println("ВНИМАНИЕ!!! Достигнуто максимальное количество дефектов. Возврат в главное меню...");
@@ -68,10 +76,25 @@ public class Main {
 
                 case "list":
                     System.out.println("Список дефектов:");
-                    for (int i = 0; i < repository.getRepoIndex(); i++) {
-                        System.out.println(repository.getAll()[i].getDefectInfo());
+                    for (long i = 0; i < repository.getRepoIndex(); i++) {
+                        System.out.println(repository.getAll()[Math.toIntExact(i)].getDefectInfo());
                     }
                     System.out.println();
+                    break;
+
+                // Изменение статуса дефекта
+                case "change":
+                    System.out.print("Введите Id дефекта: ");
+                    long changingDefectId = scan.nextLong();
+                    scan.nextLine();
+                    System.out.println();
+                    System.out.println("Введите новый статус:" + '\n' + '\t'
+                            + "- OPEN" + '\n' + '\t'
+                            + "- IN_PROGRESS" + '\n' + '\t'
+                            + "- TESTING" + '\n' + '\t'
+                            + "- CLOSE");
+                    Status status = Status.valueOf(scan.nextLine());
+                    repository.getDefectById(changingDefectId).setStatus(status);
                     break;
 
                 case "quit":

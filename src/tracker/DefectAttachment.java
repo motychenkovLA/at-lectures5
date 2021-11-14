@@ -1,7 +1,7 @@
 package tracker;
 
 public class DefectAttachment extends Attachment {
-    private long value;
+    private final long value;
 
     public DefectAttachment(long value) {
         this.value = value;

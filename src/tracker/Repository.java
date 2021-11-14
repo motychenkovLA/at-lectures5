@@ -2,8 +2,8 @@ package tracker;
 
 public class Repository {
 
-    private int maxRepoIndex;
-    private Defect[] defects;
+    private final int maxRepoIndex;
+    private final Defect[] defects;
     private int repoIndex = 0;
 
     public Repository(int maxRepoIndex) {
@@ -26,5 +26,17 @@ public class Repository {
 
     public int getRepoIndex(){
         return repoIndex;
+    }
+
+    public Defect getDefectById (long id) {
+        Defect currentDefect = null;
+        for (int i = 0; i < repoIndex; i++) {
+            if (defects[i].getId() == id) {
+                currentDefect = defects[i];
+                break;
+            }
+
+        }
+        return currentDefect;
     }
 }
