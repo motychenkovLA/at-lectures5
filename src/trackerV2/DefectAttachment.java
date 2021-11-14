@@ -6,6 +6,7 @@ public class DefectAttachment extends Attachment {
     public DefectAttachment(long bugId) {
         this.bugId = bugId;
     }
+
     @Override
     public String toString() {
         return String.format("№ %d", bugId);

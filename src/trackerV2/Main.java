@@ -1,5 +1,7 @@
 package trackerV2;
+
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         final int ARRAY_SIZE = 10;
@@ -20,11 +22,12 @@ public class Main {
                     System.exit(0);
                     break;
                 case "Change":
-                    changeSeriousness(repository, scanner);
+                    changePriority(repository, scanner);
                     break;
             }
         }
     }
+
     public static void AddingBug(Repository repository, Scanner scanner) {
         if (repository.isFull()) {
             System.out.println("Лимит превышен!\\n\" + \"Введите название необходимой опции:\\n\" + \"Add\\n\" + \"List\\n\" + \"Quit");
@@ -34,13 +37,14 @@ public class Main {
             String resume = scanner.nextLine();
             System.out.print("Введите кол-во дней на исправление дефекта: ");
             int daysToFix = inputNum(scanner);
-            Seriousness seriousness = addSeriousness(scanner);
+            Priority priority = addPriority(scanner);
             Attachment attachment = addAttachment(scanner);
-            Defect bug = new Defect(resume, seriousness, daysToFix, attachment);
+            Defect bug = new Defect(resume, priority, daysToFix, attachment);
             repository.addBug(bug);
 
         }
     }
+
     public static Attachment addAttachment(Scanner scanner) {
         while (true) {
             System.out.print("Выберите тип вложения (Link/Comment): ");
@@ -57,28 +61,32 @@ public class Main {
             }
         }
     }
-    public static Seriousness addSeriousness(Scanner scanner) {
+
+    public static Priority addPriority(Scanner scanner) {
         while (true) {
             System.out.print("Выберите тип вложения (Блокирующий, Высокий, Средний, Низкий): ");
-            String nameSeriousness = scanner.nextLine();
-            Seriousness seriousness = Seriousness.getSeriousnessByRuName(nameSeriousness);
-            if (seriousness != null) {
-                return seriousness;
+            String namePriority = scanner.nextLine();
+            Priority priority = Priority.getPriorityByName(namePriority);
+            if (priority != null) {
+                return priority;
             }
         }
     }
+
     public static int inputNum(Scanner scanner) {
         int num = scanner.nextInt();
         scanner.nextLine();
         return num;
     }
+
     public static void bugsList(Repository repository) {
         System.out.println("\nСписок дефектов:");
         for (Defect bug : repository.getDefects()) {
             System.out.println(bug.toString());
         }
     }
-    public static void changeSeriousness(Repository repository, Scanner scanner) {
+
+    public static void changePriority(Repository repository, Scanner scanner) {
         System.out.print("Введите номер дефекта: ");
         int id = inputNum(scanner);
         Defect bug = repository.getElementById(id);

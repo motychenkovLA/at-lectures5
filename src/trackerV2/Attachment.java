@@ -1,3 +1,4 @@
 package trackerV2;
 
-public abstract class Attachment { }
+public abstract class Attachment {
+}

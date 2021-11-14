@@ -1,21 +1,24 @@
 package trackerV2;
 
-public enum Seriousness {
+public enum Priority {
     LOW("Низкий"),
     MEDIUM("Средний"),
     HIGH("Высокий"),
     HIGHEST("Блокирующий");
     private final String name;
-    Seriousness(String seriousness) {
-        this.name = seriousness;
+
+    Priority(String priority) {
+        this.name = priority;
     }
+
     @Override
     public String toString() {
         return name;
     }
-    public static Seriousness getSeriousnessByRuName(String nameSeriousness) {
-        for (Seriousness element : Seriousness.values()) {
-            if (element.toString().equals(nameSeriousness)) {
+
+    public static Priority getPriorityByName(String namePriority) {
+        for (Priority element : Priority.values()) {
+            if (element.toString().equals(namePriority)) {
                 return element;
             }
         }
