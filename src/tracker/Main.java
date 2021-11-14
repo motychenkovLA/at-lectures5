@@ -12,11 +12,7 @@ public class Main {
 
         int base_bug_quantity = 0;
 
-        String[] solid_bug_resume = new String[BUG_QUANTITY];
-
-        String[] solid_bug_criticality = new String[BUG_QUANTITY];
-
-        int[] solid_bug_fix_days = new int[BUG_QUANTITY];
+        Defect[] defects = new Defect[BUG_QUANTITY];
 
         Scanner base_bug = new Scanner(System.in);
 
@@ -48,11 +44,17 @@ public class Main {
                         System.out.print("Введите количество дней для исправления дефекта в числовом формате: ");
                         int bug_fix_days = base_bug.nextInt();
 
-                        solid_bug_resume[base_bug_quantity] = bug_resume;
+                        //solid_bug_resume[base_bug_quantity] = bug_resume;
 
-                        solid_bug_criticality[base_bug_quantity] = bug_criticality;
+                        defects[base_bug_quantity] = new Defect(base_bug_quantity);
 
-                        solid_bug_fix_days[base_bug_quantity] = bug_fix_days;
+                        defects[base_bug_quantity].setResume(bug_resume);
+
+                        //solid_bug_criticality[base_bug_quantity] = bug_criticality;
+                        defects[base_bug_quantity].setCriticality(bug_criticality);
+
+                        //solid_bug_fix_days[base_bug_quantity] = bug_fix_days;
+                        defects[base_bug_quantity].setBug_fix_days(bug_fix_days);
 
                         base_bug_quantity++;
 
@@ -65,7 +67,7 @@ public class Main {
 
                 case 2: {
 
-                    if (base_bug_quantity > 0) {
+                    /*if (base_bug_quantity > 0) {
 
                         for (int i = 0; i < base_bug_quantity; i++) {
 
@@ -73,7 +75,16 @@ public class Main {
                                     + "Резюме дефекта: " + solid_bug_resume[i] + " | "
                                     + "Приоритет дефекта: " + solid_bug_criticality[i] + " | "
                                     + "Колличетсво дней на исправление дефекта: " + solid_bug_fix_days[i]);
+                        }*/
+
+                    if (base_bug_quantity > 0) {
+
+                        for (int i = 0; i < base_bug_quantity; i++) {
+
+                                System.out.println(defects[i].getDefect());
+
                         }
+
                     } else {
 
                         System.out.println("ПУСТО");
