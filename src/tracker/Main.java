@@ -12,7 +12,7 @@ public class Main {
 
         int base_bug_quantity = 0;
 
-        Defect[] defects = new Defect[BUG_QUANTITY];
+        Repository repository = new Repository(BUG_QUANTITY);
 
         Scanner base_bug = new Scanner(System.in);
 
@@ -44,17 +44,7 @@ public class Main {
                         System.out.print("Введите количество дней для исправления дефекта в числовом формате: ");
                         int bug_fix_days = base_bug.nextInt();
 
-                        //solid_bug_resume[base_bug_quantity] = bug_resume;
-
-                        defects[base_bug_quantity] = new Defect(base_bug_quantity);
-
-                        defects[base_bug_quantity].setResume(bug_resume);
-
-                        //solid_bug_criticality[base_bug_quantity] = bug_criticality;
-                        defects[base_bug_quantity].setCriticality(bug_criticality);
-
-                        //solid_bug_fix_days[base_bug_quantity] = bug_fix_days;
-                        defects[base_bug_quantity].setBug_fix_days(bug_fix_days);
+                        repository.add(new Defect(bug_resume, bug_criticality, bug_fix_days));
 
                         base_bug_quantity++;
 
@@ -67,29 +57,19 @@ public class Main {
 
                 case 2: {
 
-                    /*if (base_bug_quantity > 0) {
+                    Defect[] repositoryAllBug = repository.getAll();
 
-                        for (int i = 0; i < base_bug_quantity; i++) {
-
-                            System.out.println("Номер дефекта: " + i + " | "
-                                    + "Резюме дефекта: " + solid_bug_resume[i] + " | "
-                                    + "Приоритет дефекта: " + solid_bug_criticality[i] + " | "
-                                    + "Колличетсво дней на исправление дефекта: " + solid_bug_fix_days[i]);
-                        }*/
-
-                    if (base_bug_quantity > 0) {
-
-                        for (int i = 0; i < base_bug_quantity; i++) {
-
-                                System.out.println(defects[i].getDefect());
-
-                        }
-
-                    } else {
+                    if (repository.place()) {
 
                         System.out.println("ПУСТО");
-
+                    } else {
+                        for (Defect defect : repositoryAllBug) {
+                            if (defect != null) {
+                                System.out.println(defect.getDefectInformation());
+                            }
+                        }
                     }
+
                 }
                 break;
 
