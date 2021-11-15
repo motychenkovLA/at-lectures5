@@ -44,7 +44,32 @@ public class Main {
                         System.out.print("Введите количество дней для исправления дефекта в числовом формате: ");
                         int bug_fix_days = base_bug.nextInt();
 
-                        repository.add(new Defect(bug_resume, bug_criticality, bug_fix_days));
+                        System.out.print("Выбирите тип вложения к дефекту:"
+                                + System.lineSeparator() + "1. Комментарий"
+                                + System.lineSeparator() + "2. Ссылка на другой дефект"
+                                + System.lineSeparator() + "Введите номер подпункта: ");
+                        int pointAttachment = base_bug.nextInt();
+
+                        switch (pointAttachment) {
+                            case 1: {
+                                base_bug.nextLine();
+                                System.out.println("Введите комментарий к дефекту: ");
+                                String inputDate = base_bug.nextLine();
+                                String resultDate = new CommentAttachment(inputDate).toString();
+                                Defect defect = new Defect(bug_resume, bug_criticality, bug_fix_days, resultDate);
+                                repository.add(defect);
+                            }
+                            break;
+                            case 2: {
+                                base_bug.nextLine();
+                                System.out.println("Введите ID дефекта на которого вы ссылаетесь: ");
+                                int inputDate = base_bug.nextInt();
+                                String resultDate = new DefectAttachment(inputDate).toString();
+                                Defect defect = new Defect(bug_resume, bug_criticality, bug_fix_days, resultDate);
+                                repository.add(defect);
+                            }
+                            break;
+                        }
 
                         base_bug_quantity++;
 
