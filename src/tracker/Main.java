@@ -21,7 +21,8 @@ public class Main {
             System.out.println("Меню баг-трекинговой системы:"
                     + System.lineSeparator() + "1. Add"
                     + System.lineSeparator() + "2. List"
-                    + System.lineSeparator() + "3. Quit");
+                    + System.lineSeparator() + "3. Change"
+                    + System.lineSeparator() + "4. Quit");
 
             System.out.print("Введите цифровой номер требуемого пункта: ");
 
@@ -38,8 +39,38 @@ public class Main {
                         System.out.print("Введите резюме дефекта: ");
                         String bug_resume = base_bug.nextLine();
 
-                        System.out.print("Введите критичность дефекта одним значением (Низкий, Средний, Высокий, Блокирующий): ");
-                        String bug_criticality = base_bug.next();
+                        System.out.print("Выберите критичность дефекта:"
+                                + System.lineSeparator() + "1. Blocker"
+                                + System.lineSeparator() + "2. Critical"
+                                + System.lineSeparator() + "3. Major"
+                                + System.lineSeparator() + "4. Minor"
+                                + System.lineSeparator() + "Введите номер подпункта: ");
+                        DefectSeverity defectSeverity = DefectSeverity.Default;
+                        int defectSeverityInputDate = base_bug.nextInt();
+
+                        switch (defectSeverityInputDate) {
+                            case 1: {
+                                defectSeverity = DefectSeverity.Blocker;
+                            }
+                            break;
+                            case 2: {
+                                defectSeverity = DefectSeverity.Critical;
+                            }
+                            break;
+                            case 3: {
+                                defectSeverity = DefectSeverity.Major;
+                            }
+                            break;
+                            case 4: {
+                                defectSeverity = DefectSeverity.Minor;
+                            }
+                            break;
+                            default: {
+
+                                System.out.println("Не корректное значение пункта! Введите номер под пункта согласно меню!");
+
+                            }
+                        }
 
                         System.out.print("Введите количество дней для исправления дефекта в числовом формате: ");
                         int bug_fix_days = base_bug.nextInt();
@@ -56,7 +87,7 @@ public class Main {
                                 System.out.println("Введите комментарий к дефекту: ");
                                 String inputDate = base_bug.nextLine();
                                 String resultDate = new CommentAttachment(inputDate).toString();
-                                Defect defect = new Defect(bug_resume, bug_criticality, bug_fix_days, resultDate);
+                                Defect defect = new Defect(bug_resume, defectSeverity, bug_fix_days, resultDate, DefectStatus.Open);
                                 repository.add(defect);
                             }
                             break;
@@ -65,10 +96,15 @@ public class Main {
                                 System.out.println("Введите ID дефекта на которого вы ссылаетесь: ");
                                 int inputDate = base_bug.nextInt();
                                 String resultDate = new DefectAttachment(inputDate).toString();
-                                Defect defect = new Defect(bug_resume, bug_criticality, bug_fix_days, resultDate);
+                                Defect defect = new Defect(bug_resume, defectSeverity, bug_fix_days, resultDate, DefectStatus.Open);
                                 repository.add(defect);
                             }
                             break;
+                            default: {
+
+                                System.out.println("Не корректное значение пункта! Введите номер под пункта согласно меню!");
+
+                            }
                         }
 
                         base_bug_quantity++;
@@ -99,6 +135,65 @@ public class Main {
                 break;
 
                 case 3: {
+
+                    Defect[] defects = repository.getAll();
+
+                    System.out.println("Введите ID дефекта, за затем его статус: ");
+
+                    int idInputDate = base_bug.nextInt();
+
+                    for (Defect defect : defects) {
+                        if (defect == null) {
+                            continue;
+                        } else if (defect.getId() == idInputDate) {
+                            System.out.println("Выбранный дефект: ");
+                            Defect selectedDefect = defect;
+                            System.out.println(selectedDefect.getDefectInformation());
+                            System.out.println("Выбирите новый статус дефекта:"
+                                    + System.lineSeparator() + "1. Open"
+                                    + System.lineSeparator() + "2. Retest"
+                                    + System.lineSeparator() + "3. Fixed"
+                                    + System.lineSeparator() + "4. Closed"
+                                    + System.lineSeparator() + "Введите номер подпункта: ");
+                            int defectStatusInputDate = base_bug.nextInt();
+                            switch (defectStatusInputDate) {
+                                case 1: {
+                                    selectedDefect.setStatus(DefectStatus.Open);
+                                    System.out.println("Статус дефекта: " + selectedDefect.getId()
+                                            + "изменен на: " + selectedDefect.getStatus());
+                                }
+                                break;
+                                case 2: {
+                                    selectedDefect.setStatus(DefectStatus.Retest);
+                                    System.out.println("Статус дефекта: " + selectedDefect.getId()
+                                            + "изменен на: " + selectedDefect.getStatus());
+                                }
+                                break;
+                                case 3: {
+                                    selectedDefect.setStatus(DefectStatus.Fixed);
+                                    System.out.println("Статус дефекта: " + selectedDefect.getId()
+                                            + "изменен на: " + selectedDefect.getStatus());
+                                }
+                                break;
+                                case 4: {
+                                    selectedDefect.setStatus(DefectStatus.Closed);
+                                    System.out.println("Статус дефекта: " + selectedDefect.getId()
+                                            + "изменен на: " + selectedDefect.getStatus());
+                                }
+                                break;
+                                default: {
+                                    System.out.println("Не корректное значение пункта! Введите номер под пункта согласно меню!");
+
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                break;
+
+                case 4: {
 
                     System.out.println("Завершение работы баг-трегинговой системы");
 
