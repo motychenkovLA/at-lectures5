@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.Objects;
+
 public class Bug {
 
     private final String id;
@@ -7,6 +9,7 @@ public class Bug {
     private String priority;
     private int days;
     private static int counter = 0;
+    Attachment attachment;
 
     public Bug(String resume, String priority, int days) {
         this.id = nextId();
@@ -39,8 +42,16 @@ public class Bug {
         this.days = days;
     }
 
-    public String getBugInfo() {
-        return "ID: " + id + "\nРезюме: " + resume + "\nКритичность: " + priority + "\nДни на исправление: " + days + "\n";
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    public String toString() {
+        if (attachment != null) {
+            return "ID: " + id + "\nРезюме: " + resume + "\nКритичность: " + priority + "\nДни на исправление: " + days + "\n" + attachment;
+        } else {
+            return "ID: " + id + "\nРезюме: " + resume + "\nКритичность: " + priority + "\nДни на исправление: " + days + "\n";
+        }
     }
 
     private String nextId() {
@@ -48,5 +59,22 @@ public class Bug {
         counter++;
         String id = code + counter;
         return id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bug bug = (Bug) o;
+        return Objects.equals(id, bug.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -25,17 +25,35 @@ public class Main {
                         scanner.nextLine();
                         Bug bug = new Bug(resume, priority, days);
                         repository.addBug(bug);
+                        System.out.println("Какое вложение необходимо добавить?" + "\nComment" + "\nLink");
+                        String attach = scanner.nextLine();
+                        switch (attach) {
+                            case "Comment":
+                                String comment = scanner.nextLine();
+                                CommentAttach commentAttach = new CommentAttach(comment);
+                                bug.setAttachment(commentAttach);
+                                break;
+                            case "Link":
+                                String linkBug = scanner.nextLine();
+                                if (repository.getBugId(linkBug) != null) {
+                                    BugAttach bugAttach = new BugAttach(linkBug);
+                                    bug.setAttachment(bugAttach);
+                                } else {
+                                    System.out.println("Такого дефекта не заведено в системе!");
+                                }
+                                break;
+                        }
+
                     } else {
                         System.out.println("Вы добавили максимальное количество дефектов!");
                     }
                     break;
                 case "List":
                     if (!repository.isEmpty()) {
-                        Bug[] bug = repository.getBug();
-                        // todo 1 - bug.length ?
-                        int size = repository.getSize();
-                        for (int i = 0; i < size; i++) {
-                            System.out.println(bug[i].getBugInfo());
+                        Bug[] bug = repository.getBugs();
+                        // todo 1 - bug.length ? - исправила
+                        for (int i = 0; i < bug.length; i++) {
+                            System.out.println(bug[i]);
                         }
                     } else {
                         System.out.println("Вы не добавили ни одного дефекта!");
