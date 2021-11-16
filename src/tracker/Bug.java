@@ -6,24 +6,20 @@ public class Bug {
 
     private final String id;
     private String resume;
-    private String priority;
     private int days;
     private static int counter = 0;
     Attachment attachment;
+    Status status;
 
-    public Bug(String resume, String priority, int days) {
+    public Bug(String resume, int days) {
         this.id = nextId();
         this.resume = resume;
-        this.priority = priority;
         this.days = days;
+        this.status = Status.OPEN;
     }
 
     public String getResume() {
         return resume;
-    }
-
-    public String getPriority() {
-        return priority;
     }
 
     public int getDays() {
@@ -34,10 +30,6 @@ public class Bug {
         this.resume = resume;
     }
 
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-
     public void setDays(int days) {
         this.days = days;
     }
@@ -46,11 +38,15 @@ public class Bug {
         this.attachment = attachment;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public String toString() {
         if (attachment != null) {
-            return "ID: " + id + "\nРезюме: " + resume + "\nКритичность: " + priority + "\nДни на исправление: " + days + "\n" + attachment;
+            return "ID: " + id + "\nРезюме: " + resume + "\nСтатус: " + status + "\nДни на исправление: " + days + "\n" + attachment;
         } else {
-            return "ID: " + id + "\nРезюме: " + resume + "\nКритичность: " + priority + "\nДни на исправление: " + days + "\n";
+            return "ID: " + id + "\nРезюме: " + resume + "\nСтатус: " + status + "\nДни на исправление: " + days + "\n";
         }
     }
 
