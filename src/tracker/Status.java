@@ -16,6 +16,7 @@ public enum Status {
     public static Status fromValue(String value) {
         Status[] values = values();
         for (Status entry : values) {
+            // todo 3 - чому по name а не по rusName ? получается пользователь пишет OPEN но читает Открыт
             if (entry.name().equals(value)) {
                 return entry;
             }
@@ -24,6 +25,7 @@ public enum Status {
         return null;
     }
 
+    // todo 1 - @Override
     public String toString() {
         return rusName;
 

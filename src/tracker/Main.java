@@ -36,14 +36,18 @@ public class Main {
     }
 
     public static void add(Repository repository, Scanner scanner) {
+        // todo 1 - if (полный) {вывеси ошибку; return;} весь остальной код вне скобок
         if (!repository.isFull()) {
             System.out.println("Введите резюме дефекта:");
             String resume = scanner.nextLine();
             System.out.println("Укажите ожидаемое количество дней на исправление дефекта:");
+            // todo 1 - лучше тогда отдельный метод который будет делать nextInt+nextLine сразу чтоб каждый раз не писать
             int days = scanner.nextInt();
             scanner.nextLine();
             Bug bug = new Bug(resume, days);
             repository.addBug(bug);
+            // (todo ? - под ввод вложения можно выделить отдельный метод)
+            // (todo ? - и можно там уже организовать цикл, чтобы наверняка норм значения были введены)
             System.out.println("Какое вложение необходимо добавить?" + "\nComment" + "\nLink");
             String attach = scanner.nextLine();
             switch (attach) {
@@ -70,9 +74,10 @@ public class Main {
     }
 
     public static void list(Repository repository) {
+        // todo 1 - if (нету) {вывеси ошибку; return;} весь остальной код вне скобок
         if (!repository.isEmpty()) {
             Bug[] bug = repository.getBugs();
-            // todo 1 - bug.length ? - исправила
+            // todo 1 - warning
             for (int i = 0; i < bug.length; i++) {
                 System.out.println(bug[i]);
             }
@@ -85,7 +90,9 @@ public class Main {
         System.out.println("Статус какого дефекта необходимо обновить?");
         String statusBug = scanner.nextLine();
         Bug bug = repository.getBugId(statusBug);
+        // todo 1 - if (нету) {вывеси ошибку; return;} весь остальной код вне скобок
         if (bug != null) {
+            // (todo ? - тут можно в цикле просить пока норм статус не введут)
             System.out.println("Укажите новый статус дефекта:" + "\nWORK - в работе" + "\nREJECTED - отклонен" + "\nSOLUTION - Решен" + "\nIRRELEVANT - неактуален");
             String status = scanner.nextLine();
             Status change = Status.fromValue(status);

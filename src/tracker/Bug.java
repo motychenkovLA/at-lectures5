@@ -7,9 +7,12 @@ public class Bug {
     private final String id;
     private String resume;
     private int days;
+    // todo 1 - статик лучше в самом начале, потом не статик поля
     private static int counter = 0;
+    // todo 3 - private final
     Attachment attachment;
     Status status;
+    // todo 5 - а где критичность ?..
 
     public Bug(String resume, int days) {
         this.id = nextId();
@@ -42,6 +45,7 @@ public class Bug {
         this.status = status;
     }
 
+    // todo 1 - @Override
     public String toString() {
         if (attachment != null) {
             return "ID: " + id + "\nРезюме: " + resume + "\nСтатус: " + status + "\nДни на исправление: " + days + "\n" + attachment;
@@ -53,10 +57,11 @@ public class Bug {
     private String nextId() {
         String code = "USP-";
         counter++;
-        String id = code + counter;
+        String id = code + counter; // todo 1 - warning
         return id;
     }
 
+    // todo 1 - гет-сет лучше в том же порядке расположить что поля
     public String getId() {
         return id;
     }

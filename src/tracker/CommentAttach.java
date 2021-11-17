@@ -1,6 +1,7 @@
 package tracker;
 
 public class CommentAttach extends Attachment {
+    // todo 3 - private final
     String comment;
 
     public CommentAttach(String comment) {
