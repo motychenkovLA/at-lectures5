@@ -6,17 +6,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        final int BUG_QUANTITY = 10;
+        final int BUG_MAX_QUANTITY = 10;
 
-        boolean bug_tracker_launched = true;
+        boolean bugTrackerRun = true;
 
-        int base_bug_quantity = 0;
+        int bugCounter = 0;
 
-        Repository repository = new Repository(BUG_QUANTITY);
+        Repository repository = new Repository(BUG_MAX_QUANTITY);
 
-        Scanner base_bug = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        while (bug_tracker_launched) {
+        while (bugTrackerRun) {
 
             System.out.println("Меню баг-трекинговой системы:"
                     + System.lineSeparator() + "1. Add"
@@ -26,18 +26,18 @@ public class Main {
 
             System.out.print("Введите цифровой номер требуемого пункта: ");
 
-            int bug_menu_num = base_bug.nextInt();
+            int bug_menu_num = scanner.nextInt();
 
             switch (bug_menu_num) {
 
                 case 1: {
 
-                    if (base_bug_quantity < BUG_QUANTITY) {
+                    if (bugCounter < BUG_MAX_QUANTITY) {
 
-                        base_bug.nextLine();
+                        scanner.nextLine();
 
                         System.out.print("Введите резюме дефекта: ");
-                        String bug_resume = base_bug.nextLine();
+                        String bug_resume = scanner.nextLine();
 
                         System.out.print("Выберите критичность дефекта:"
                                 + System.lineSeparator() + "1. Blocker"
@@ -46,9 +46,9 @@ public class Main {
                                 + System.lineSeparator() + "4. Minor"
                                 + System.lineSeparator() + "Введите номер подпункта: ");
                         DefectSeverity defectSeverity = DefectSeverity.Default;
-                        int defectSeverityInputDate = base_bug.nextInt();
+                        int severityInput = scanner.nextInt();
 
-                        switch (defectSeverityInputDate) {
+                        switch (severityInput) {
                             case 1: {
                                 defectSeverity = DefectSeverity.Blocker;
                             }
@@ -72,46 +72,24 @@ public class Main {
                             }
                         }
 
-                        System.out.print("Введите количество дней для исправления дефекта в числовом формате: ");
-                        int bug_fix_days = base_bug.nextInt();
+                        System.out.println("Введите количество дней для исправления дефекта в числовом формате: ");
+                        int bug_fix_days = scanner.nextInt();
 
-                        System.out.print("Выбирите тип вложения к дефекту:"
+                        System.out.println("Выбирите тип вложения к дефекту:"
                                 + System.lineSeparator() + "1. Комментарий"
                                 + System.lineSeparator() + "2. Ссылка на другой дефект"
                                 + System.lineSeparator() + "Введите номер подпункта: ");
-                        int pointAttachment = base_bug.nextInt();
 
-                        switch (pointAttachment) {
-                            case 1: {
-                                base_bug.nextLine();
-                                System.out.println("Введите комментарий к дефекту: ");
-                                String inputDate = base_bug.nextLine();
-                                String resultDate = new CommentAttachment(inputDate).toString();
-                                Defect defect = new Defect(bug_resume, defectSeverity, bug_fix_days, resultDate, DefectStatus.Open);
-                                repository.add(defect);
-                            }
-                            break;
-                            case 2: {
-                                base_bug.nextLine();
-                                System.out.println("Введите ID дефекта на которого вы ссылаетесь: ");
-                                int inputDate = base_bug.nextInt();
-                                String resultDate = new DefectAttachment(inputDate).toString();
-                                Defect defect = new Defect(bug_resume, defectSeverity, bug_fix_days, resultDate, DefectStatus.Open);
-                                repository.add(defect);
-                            }
-                            break;
-                            default: {
+                        scanner.nextLine();
 
-                                System.out.println("Не корректное значение пункта! Введите номер под пункта согласно меню!");
-
-                            }
-                        }
-
-                        base_bug_quantity++;
+                        String inAttDef = scanner.nextLine();
+                        String attachmentDef = Defect.setAttDef(inAttDef, scanner);
+                        Defect defect = new Defect(bug_resume, defectSeverity, bug_fix_days, attachmentDef, DefectStatus.Open);
+                        repository.add(defect);
 
                     } else {
 
-                        System.out.println("Достигнуто максимальное значение заведенных дефектов кратное: " + "(" + BUG_QUANTITY + ")");
+                        System.out.println("Достигнуто максимальное значение заведенных дефектов кратное: " + "(" + BUG_MAX_QUANTITY + ")");
                     }
                 }
                 break;
@@ -140,7 +118,7 @@ public class Main {
 
                     System.out.println("Введите ID дефекта, за затем его статус: ");
 
-                    int idInputDate = base_bug.nextInt();
+                    int idInputDate = scanner.nextInt();
 
                     for (Defect defect : defects) {
                         if (defect == null) {
@@ -155,7 +133,7 @@ public class Main {
                                     + System.lineSeparator() + "3. Fixed"
                                     + System.lineSeparator() + "4. Closed"
                                     + System.lineSeparator() + "Введите номер подпункта: ");
-                            int defectStatusInputDate = base_bug.nextInt();
+                            int defectStatusInputDate = scanner.nextInt();
                             switch (defectStatusInputDate) {
                                 case 1: {
                                     selectedDefect.setStatus(DefectStatus.Open);
@@ -197,7 +175,7 @@ public class Main {
 
                     System.out.println("Завершение работы баг-трегинговой системы");
 
-                    bug_tracker_launched = false;
+                    bugTrackerRun = false;
                 }
                 default: {
 

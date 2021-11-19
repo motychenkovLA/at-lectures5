@@ -1,8 +1,8 @@
 package tracker;
 
-public class CommentAttachment extends Attachment {
+public class CommentAttachment implements Attachment {
 
-    private String inputDate;
+    private final String inputDate;
 
     public CommentAttachment(String inputDate){
         this.inputDate=inputDate;

@@ -1,10 +1,12 @@
 package tracker;
 
+import java.util.Scanner;
+
 public class Defect {
 
-    private static int counter = 0;
+    private static int counter = 1;
 
-    private int id;
+    private final int id;
 
     private String resume;
 
@@ -16,7 +18,7 @@ public class Defect {
 
     private String attachmentDef;
 
-    public String getAttachmentDef(){
+    public String getAttachmentDef() {
         return attachmentDef;
     }
 
@@ -28,7 +30,7 @@ public class Defect {
         return id;
     }
 
-    public DefectStatus getStatus(){
+    public DefectStatus getStatus() {
         return status;
     }
 
@@ -37,13 +39,12 @@ public class Defect {
     }
 
     public Defect(String resume, DefectSeverity criticality, int bug_fix_days, String attachmentDef, DefectStatus status) {
-        this.id = counter;
+        this.id = counter++;
         this.resume = resume;
         this.criticality = criticality;
         this.bug_fix_days = bug_fix_days;
         this.attachmentDef = attachmentDef;
         this.status = status;
-        counter++;
     }
 
     public void setResume(String resume) {
@@ -65,5 +66,25 @@ public class Defect {
                 + "Колличетсво дней на исправление дефекта: " + bug_fix_days + " | "
                 + "Вложение: " + attachmentDef + " | "
                 + "Статус: " + status);
+    }
+
+    public static String setAttDef(String inAttDef, Scanner scanner) {
+
+        switch (inAttDef) {
+            case "1": {
+                System.out.println("Введите комментарий к дефекту: ");
+                String input = scanner.nextLine();
+                return new CommentAttachment(input).toString();
+            }
+            case "2": {
+                System.out.println("Введите ID дефекта на которого вы ссылаетесь: ");
+                int input = scanner.nextInt();
+                scanner.nextLine();
+                return new DefectAttachment(input).toString();
+            }
+            default: {
+                return "Не корректное значение! Введите имя под пункта согласно меню!";
+            }
+        }
     }
 }

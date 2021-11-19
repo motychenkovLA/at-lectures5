@@ -1,8 +1,8 @@
 package tracker;
 
-public class DefectAttachment extends Attachment {
+public class DefectAttachment implements Attachment {
 
-    private int id;
+    private final int id;
 
     public DefectAttachment(int id){
         this.id=id;
@@ -10,6 +10,6 @@ public class DefectAttachment extends Attachment {
 
     @Override
     public String toString(){
-        return Integer.toString(id);
+        return "Ссыллаюсь на дефект - " + this.id;
     }
 }
