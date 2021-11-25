@@ -1,15 +1,24 @@
 package tracker;
 
+import com.sun.istack.internal.NotNull;
+
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     static final int COUNT_BUGS = 10;
     static Repository repository = new Repository(COUNT_BUGS);
 
-    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in);) {
+            menu(scanner);
+        } catch (IllegalArgumentException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+    }
 
+    public static void menu(Scanner scanner) {
         while (true) {
             System.out.println('\n' + "Выберите, что хотите сделать:\n" +
                     "- Добавить новый дефект (введите add)\n" +
@@ -20,13 +29,13 @@ public class Main {
 
             switch (result) {
                 case "add":
-                    add();
+                    add(scanner);
                     break;
                 case "list":
                     list();
                     break;
                 case "change":
-                    change();
+                    change(scanner);
                     break;
                 case "quit":
                     scanner.close();
@@ -39,7 +48,7 @@ public class Main {
         }
     }
 
-    public static void add() {
+    public static void add(Scanner scanner) {
 
         if (repository.isFull()) {
             System.out.println('\n' + "Невозможно добавить больше дефектов");
@@ -49,12 +58,12 @@ public class Main {
         System.out.println("Введите резюме дефекта:");
         String resume = scanner.nextLine();
 
-        Critical critical = addCritical();
+        Critical critical = addCritical(scanner);
 
         System.out.println("Введите ожидаемо количество дней на исправление:");
-        int countDays = scanInt();
+        int countDays = scanInt(scanner);
 
-        Attachment attachment = addAttachment();
+        Attachment attachment = addAttachment(scanner);
 
         Defect defect = new Defect(resume, critical, countDays, attachment);
         repository.add(defect);
@@ -62,7 +71,7 @@ public class Main {
         System.out.println("===================================");
     }
 
-    public static Critical addCritical() {
+    public static Critical addCritical(Scanner scanner) {
         System.out.println("Введите критичность дефекта - Низкий, Средний, Высокий, Блокер");
 
         while (true) {
@@ -75,7 +84,7 @@ public class Main {
         }
     }
 
-    public static Attachment addAttachment() {
+    public static Attachment addAttachment(Scanner scanner) {
         System.out.println("Выберите тип вложения - комментарий (comment) или ссылка на вложение (link)");
 
         while (true) {
@@ -87,7 +96,7 @@ public class Main {
                     return new CommentAttachment(comment);
                 case ("link"):
                     System.out.println("Введите номер дефекта:");
-                    int defectLink = scanInt();
+                    int defectLink = scanInt(scanner);
                     return new DefectAttachment(defectLink);
                 default:
                     System.out.println('\n' + "Введите значение из списка - comment или link");
@@ -107,7 +116,7 @@ public class Main {
         System.out.println("===================================");
     }
 
-    public static void change() {
+    public static void change(Scanner scanner) {
         if (repository.isEmpty()) {
             System.out.println("Список пуст");
             return;
@@ -116,7 +125,7 @@ public class Main {
         System.out.println("Введите id дефекта");
         int defectToChange;
         while (true) {
-            defectToChange = scanInt();
+            defectToChange = scanInt(scanner);
             if (!repository.containsId(defectToChange)) {
                 System.out.println("Дефект с таким id отсутствует");
             } else break;
@@ -127,12 +136,12 @@ public class Main {
         System.out.println("Текущий статус дефекта - " + defect.getStatus());
         System.out.println("Введите новый статус дефекта - Открыт, В работе, В тестировании, Переоткрыт, Дубль, Закрыт");
 
-        defect.setStatus(getStatus());
+        defect.setStatus(getStatus(scanner));
         System.out.println("Статус дефекта изменен на - " + defect.getStatus());
         System.out.println("====================================");
     }
 
-    public static Status getStatus() {
+    public static Status getStatus(Scanner scanner) {
         while (true) {
             String newStatus = scanner.nextLine();
             if (Status.checkStatus(newStatus)) {
@@ -143,9 +152,23 @@ public class Main {
         }
     }
 
-    public static int scanInt() {
-        int count = scanner.nextInt();
-        scanner.nextLine();
-        return count;
+    public static int scanInt(Scanner scanner) {
+        while (true) {
+            String s = scanner.nextLine();
+            if (isDigit(s)) {
+                return Integer.parseInt(s);
+            } else {
+                System.out.println("Введите число");
+            }
+        }
+    }
+
+    private static boolean isDigit(String s) throws NumberFormatException {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
