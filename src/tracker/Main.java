@@ -96,6 +96,8 @@ public class Main {
                     return new CommentAttachment(comment);
                 case ("link"):
                     System.out.println("Введите номер дефекта:");
+                    // todo 1 - тут неплохо бы тоже проверять что id валидный, как в change
+                    //   ввод id тогда есть смысл вынести в отдельный метод
                     int defectLink = scanInt(scanner);
                     return new DefectAttachment(defectLink);
                 default:
@@ -152,6 +154,9 @@ public class Main {
         }
     }
 
+    // todo 1 - тут 2 раза парсится инт из строки (в scanInt и isDigit)
+    //   isDigit нигде больше не используется
+    //   саму логику по парсу-отлову можно целиком сюда перенести
     public static int scanInt(Scanner scanner) {
         while (true) {
             String s = scanner.nextLine();

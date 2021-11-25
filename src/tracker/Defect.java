@@ -72,6 +72,8 @@ public class Defect {
                 ;
     }
 
+    // todo ? - в принципе верно, но мы гарантируем что у дефекта уникальный id,
+    //   поэтому сравнения по одному только id должно быть достаточно
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
