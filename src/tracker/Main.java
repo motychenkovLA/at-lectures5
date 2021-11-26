@@ -1,7 +1,5 @@
 package tracker;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,7 +9,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in);) {
+        try (Scanner scanner = new Scanner(System.in)) {
             menu(scanner);
         } catch (IllegalArgumentException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -85,26 +83,36 @@ public class Main {
     }
 
     public static Attachment addAttachment(Scanner scanner) {
-        System.out.println("Выберите тип вложения - комментарий (comment) или ссылка на вложение (link)");
+        if (repository.isEmpty()) {
+            System.out.println("Введите комментарий к дефекту:");
+            String comment = scanner.nextLine();
+            return new CommentAttachment(comment);
+        } else {
+            System.out.println("Выберите тип вложения - комментарий (comment) или ссылка на вложение (link)");
 
-        while (true) {
-            String attachmentType = scanner.nextLine();
-            switch (attachmentType) {
-                case ("comment"):
-                    System.out.println("Введите комментарий к дефекту:");
-                    String comment = scanner.nextLine();
-                    return new CommentAttachment(comment);
-                case ("link"):
-                    System.out.println("Введите номер дефекта:");
-                    // todo 1 - тут неплохо бы тоже проверять что id валидный, как в change
-                    //   ввод id тогда есть смысл вынести в отдельный метод
-                    int defectLink = scanInt(scanner);
-                    return new DefectAttachment(defectLink);
-                default:
-                    System.out.println('\n' + "Введите значение из списка - comment или link");
-                    break;
+            while (true) {
+                String attachmentType = scanner.nextLine();
+                switch (attachmentType) {
+                    case ("comment"):
+                        System.out.println("Введите комментарий к дефекту:");
+                        String comment = scanner.nextLine();
+                        return new CommentAttachment(comment);
+                    case ("link"):
+                        int defectLink;
+                        while (true){
+                            System.out.println("Введите номер дефекта:");
+                            if ((checkID(defectLink = scanInt(scanner)))) {
+                                return new DefectAttachment(defectLink);
+                            }
+                        }
+
+                    default:
+                        System.out.println('\n' + "Введите значение из списка - comment или link");
+                        break;
+                }
             }
         }
+
     }
 
     public static void list() {
@@ -123,17 +131,17 @@ public class Main {
             System.out.println("Список пуст");
             return;
         }
-        Defect defect;
-        System.out.println("Введите id дефекта");
-        int defectToChange;
-        while (true) {
-            defectToChange = scanInt(scanner);
-            if (!repository.containsId(defectToChange)) {
-                System.out.println("Дефект с таким id отсутствует");
-            } else break;
-        }
 
-        defect = repository.getDefect(defectToChange);
+        Defect defect;
+
+        while (true) {
+            System.out.println("Введите id дефекта");
+            int defectToChange = scanInt(scanner);
+            if (checkID(defectToChange)) {
+                defect = repository.getDefect(defectToChange);
+                break;
+            }
+        }
 
         System.out.println("Текущий статус дефекта - " + defect.getStatus());
         System.out.println("Введите новый статус дефекта - Открыт, В работе, В тестировании, Переоткрыт, Дубль, Закрыт");
@@ -141,6 +149,14 @@ public class Main {
         defect.setStatus(getStatus(scanner));
         System.out.println("Статус дефекта изменен на - " + defect.getStatus());
         System.out.println("====================================");
+    }
+
+    private static boolean checkID(int i) {
+        if (!repository.containsId(i)) {
+            System.out.println("Дефект с таким id отсутствует");
+            return false;
+        }
+        return true;
     }
 
     public static Status getStatus(Scanner scanner) {
@@ -154,26 +170,14 @@ public class Main {
         }
     }
 
-    // todo 1 - тут 2 раза парсится инт из строки (в scanInt и isDigit)
-    //   isDigit нигде больше не используется
-    //   саму логику по парсу-отлову можно целиком сюда перенести
     public static int scanInt(Scanner scanner) {
         while (true) {
-            String s = scanner.nextLine();
-            if (isDigit(s)) {
-                return Integer.parseInt(s);
-            } else {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+//                return i;
+            } catch (NumberFormatException e) {
                 System.out.println("Введите число");
             }
-        }
-    }
-
-    private static boolean isDigit(String s) throws NumberFormatException {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
         }
     }
 }

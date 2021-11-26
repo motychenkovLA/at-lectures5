@@ -72,19 +72,11 @@ public class Defect {
                 ;
     }
 
-    // todo ? - в принципе верно, но мы гарантируем что у дефекта уникальный id,
-    //   поэтому сравнения по одному только id должно быть достаточно
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Defect defect = (Defect) o;
-        return id == defect.id &&
-                countDays == defect.countDays &&
-                status == defect.status &&
-                Objects.equals(resume, defect.resume) &&
-                critical == defect.critical &&
-                Objects.equals(attachment, defect.attachment);
+        return id == defect.id;
     }
 
     @Override
