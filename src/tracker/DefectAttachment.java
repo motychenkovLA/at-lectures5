@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.Objects;
+
 public class DefectAttachment extends Attachment {
  private long value;
 
@@ -11,4 +13,19 @@ public class DefectAttachment extends Attachment {
     public String toString() {
         return "Связанный дефект № :" + this.value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DefectAttachment that = (DefectAttachment) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }
+
+

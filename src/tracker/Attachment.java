@@ -8,4 +8,8 @@ public class Attachment {
     public String toString() {
         return "Вложение не задано";
     }
+
+
 }
+
+
