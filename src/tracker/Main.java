@@ -89,8 +89,14 @@ public class Main {
                         // countReq = countReq + 1;
                         break;
                     }
-                    case ("List"): {
-                        list(repository);
+                    case ("List"):
+                        {
+
+                            Defect[] defects = repository.getALL();
+                            for (int i = 0; i < repository.getCurrentDefectCount(); i++) {
+
+                                System.out.println(defects[i].getInfo());
+                            }
                         break;
                     }
                     case ("Change"): {
@@ -117,13 +123,6 @@ public class Main {
                     }
                 }
             }
-        }
-    }
-
-    public static void list(Repository repository) {
-        Defect[] defects = repository.getALL();
-        for (Defect def:defects) {
-            System.out.println(def.getInfo());
         }
     }
 }
