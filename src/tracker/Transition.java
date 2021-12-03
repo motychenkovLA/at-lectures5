@@ -1,46 +1,50 @@
 package tracker;
 
-
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Transition {
-    // todo 3 - public но при этом с get/set ?
-    // todo 1 - final
-    public   Status from;
-    public   Status to;
+
+    private final Status from;
+    private final Status to;
 
     public Transition(Status from, Status to) {
         this.from = from;
         this.to = to;
-    }
-    // todo 1 - зачем?
-    public Transition(Status from) {
-        this.from = from;
     }
 
     public Status getFrom() {
         return from;
     }
 
-    public void setFrom(Status from) {
-        this.from = from;
-    }
-
     public Status getTo() {
         return to;
     }
 
-    public void setTo(Status to) {
-        this.to = to;
+    public static final Set<Transition> transitions = new HashSet<>();
+
+    static  {
+        transitions.add(new Transition(Status.OPEN, Status.IN_TESTING));
+        transitions.add(new Transition(Status.OPEN, Status.DOUBLE));
+        transitions.add(new Transition(Status.IN_TESTING, Status.CLOSE));
+        transitions.add(new Transition(Status.IN_TESTING, Status.RE_OPEN));
+        transitions.add(new Transition(Status.IN_PROGRESS, Status.IN_TESTING));
+        transitions.add(new Transition(Status.CLOSE, Status.RE_OPEN));
+        transitions.add(new Transition(Status.DOUBLE, Status.RE_OPEN));
+        transitions.add(new Transition(Status.IN_PROGRESS, Status.DOUBLE));
+        transitions.add(new Transition(Status.RE_OPEN, Status.IN_PROGRESS));
     }
 
-
-    //    public final static Map<Status, Status[]> statusMap = new HashMap<>();
-//
-//    private static void putMap(){
-//        statusMap.put(Status.OPEN, new Status[]{Status.IN_TESTING, Status.CLOSE});
-//    }
-
-
+    public static List<Status> statusList(Status status) {
+        List<Status> statusList = new ArrayList<>();
+        for (Transition t : transitions
+        ) {
+            if (t.getFrom().equals(status)) {
+                statusList.add(t.getTo());
+            }
+        }
+        return statusList;
+    }
 }
