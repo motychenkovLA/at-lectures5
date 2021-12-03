@@ -7,6 +7,7 @@ public class Main {
     static Repository repository = new Repository(COUNT_BUGS);
     public static final Set<Transition> transitions = new HashSet<>();
 
+    // todo 3 - static block
     private static void setTransitions() {
         transitions.add(new Transition(Status.OPEN, Status.IN_TESTING));
         transitions.add(new Transition(Status.OPEN, Status.DOUBLE));
@@ -165,6 +166,10 @@ public class Main {
         System.out.println("====================================");
     }
 
+    // todo 3 - наверное лучше вынести список допустимых переходов в Transition
+    //  и там же сделать этот статик метод
+    //  по сути, он предоставляет информацию о нашей системе, так же как репо о дефектах,
+    //  за работу с консолью не отвечает
     private static List<Status> statusList(Status status) {
         List<Status> statusList = new ArrayList<>();
         for (Transition t : transitions

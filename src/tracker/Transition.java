@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Transition {
+    // todo 3 - public но при этом с get/set ?
+    // todo 1 - final
     public   Status from;
     public   Status to;
 
@@ -12,6 +14,7 @@ public class Transition {
         this.from = from;
         this.to = to;
     }
+    // todo 1 - зачем?
     public Transition(Status from) {
         this.from = from;
     }
