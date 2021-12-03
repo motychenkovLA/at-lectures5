@@ -1,27 +1,41 @@
 package tracker;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Repository {
 
     private final int countDefect;
-    private final Defect[] defects;
     private int index = 0;
 
-    public Repository(int countBugs) {
-        this.countDefect = countBugs;
-        this.defects = new Defect[countDefect];
-    }
+    private Map<Long, Defect> repo = new HashMap<>();
 
     public void add(Defect defect) {
-        defects[index] = defect;
+        repo.put((long) index, defect);
         index++;
     }
 
     public Defect[] getAll() {
         Defect[] def = new Defect[index];
-        for (int i = 0; i < index; i++) {
-            def[i] = defects[i];
+        int i = 0;
+        for (Map.Entry<Long, Defect> entry : repo.entrySet()) {
+            Defect value = entry.getValue();
+            def[i] = value;
+            i++;
         }
         return def;
+    }
+
+    public boolean containsId(long id) {
+        return repo.containsKey(id);
+    }
+
+    public Defect getDefect(long id) {
+        return repo.get(id);
+    }
+
+    public Repository(int countBugs) {
+        this.countDefect = countBugs;
     }
 
     public boolean isEmpty() {
@@ -30,23 +44,5 @@ public class Repository {
 
     public boolean isFull() {
         return index == countDefect;
-    }
-
-    public boolean containsId(int id) {
-        for (int i = 0; i < index; i++) {
-            if (id == defects[i].getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Defect getDefect(int id) {
-        for (int i = 0; i < index; i++) {
-            if (id == defects[i].getId()) {
-                return defects[i];
-            }
-        }
-        return null;
     }
 }
