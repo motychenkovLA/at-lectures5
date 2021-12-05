@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -8,36 +9,38 @@ public class Main {
         final int NUM_OF_BUGS = 3;
 
         Repository repository = new Repository(NUM_OF_BUGS);
-        Scanner scanner = new Scanner(System.in);
-        boolean loop = true;
 
-        while (loop) {
-            System.out.println("\n---Меню---");
-            System.out.println("Добавить дефект: add");
-            System.out.println("Вывести список дефектов: list");
-            System.out.println("Изменить статус дефекта: change");
-            System.out.println("Выйти: exit");
+        try (Scanner scanner = new Scanner(System.in)) {
+            boolean loop = true;
 
-            System.out.print("Введите команду: ");
+            while (loop) {
+                System.out.println("\n---Меню---");
+                System.out.println("Добавить дефект: add");
+                System.out.println("Вывести список дефектов: list");
+                System.out.println("Изменить статус дефекта: change");
+                System.out.println("Выйти: exit");
 
-            String action = scanner.nextLine();
+                System.out.print("Введите команду: ");
 
-            switch (action) {
-                case "add":
-                    commandAddBug(repository, scanner);
-                    break;
-                case "list":
-                    commandBugsList(repository);
-                    break;
-                case "exit":
-                    loop = false;
-                    break;
-                case "change":
-                    commandChangePriority(repository, scanner);
-                    break;
-                default:
-                    System.out.println("Ошибка: такой команды нет");
-                    break;
+                String action = scanner.nextLine();
+
+                switch (action) {
+                    case "add":
+                        commandAddBug(repository, scanner);
+                        break;
+                    case "list":
+                        commandBugsList(repository);
+                        break;
+                    case "exit":
+                        loop = false;
+                        break;
+                    case "change":
+                        commandChangePriority(repository, scanner);
+                        break;
+                    default:
+                        System.out.println("Ошибка: такой команды нет");
+                        break;
+                }
             }
         }
     }
@@ -50,7 +53,7 @@ public class Main {
             String summary = scanner.nextLine();
 
 
-            System.out.print("Введите количество дней на исправление дефекта: ");
+           System.out.print("Введите количество дней на исправление дефекта: ");
             int daysToFix = inputNum(scanner);
 
             Priority priority = addPriority(scanner);
@@ -75,7 +78,7 @@ public class Main {
                 return new CommentAttachment(comment);
             }
             if (attachmentType.equals("defect")) {
-                System.out.print("Введите номер дефекта: ");
+               System.out.print("Введите номер дефекта: ");
                 long bugId = inputNum(scanner);
                 return new DefectAttachment(bugId);
             }
@@ -96,9 +99,13 @@ public class Main {
     }
 
     public static int inputNum(Scanner scanner) {
-        int num = scanner.nextInt();
-        scanner.nextLine();
-        return num;
+        while (true){
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите число");
+            }
+        }
     }
 
     public static void commandBugsList(Repository repository) {
