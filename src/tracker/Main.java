@@ -46,7 +46,6 @@ public class Main {
     }
 
     public static void commandAddBug(Repository repository, Scanner scanner) {
-        // todo 1 - if (repo.isFull()) { ошибка; return; } весь остальной код вне блока
         if (repository.isFull()) {
             System.out.println("Ошибка: список полный, нельзя добавить дефект");
             return;

@@ -25,7 +25,7 @@ public class CommentAttachment extends Attachment {
             return false;
         }
         CommentAttachment attachment = (CommentAttachment) obj;
-        return comment.equals(attachment.comment); // todo 3 - сравнение строк через ==
+        return comment.equals(attachment.comment);
     }
 
     @Override
