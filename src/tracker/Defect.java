@@ -78,10 +78,10 @@ public class Defect {
         Defect defect = (Defect) obj;
         return id == defect.id &&
                 status == defect.status &&
-                summary == defect.summary &&
+                summary == defect.summary && // todo 3 - сравнение строк через ==
                 priority == defect.priority &&
                 daysToFix == defect.daysToFix &&
-                attachment == defect.attachment;
+                attachment == defect.attachment; // todo 3 - сравнение атачей через ==
     }
 
     @Override
