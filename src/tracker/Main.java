@@ -21,6 +21,7 @@ public class Main {
                     "- Добавить новый дефект (введите add)\n" +
                     "- Вывести список дефектов (введите list)\n" +
                     "- Изменить дефект (введите change)\n" +
+                    "- Вывести статистику по дефектам (введите stats)\n" +
                     "- Выйти из программы (введите quit)");
             String result = scanner.nextLine();
 
@@ -33,6 +34,9 @@ public class Main {
                     break;
                 case "change":
                     changeStatus(scanner);
+                    break;
+                case "stats":
+                    stats();
                     break;
                 case "quit":
                     scanner.close();
@@ -173,6 +177,23 @@ public class Main {
             } catch (NumberFormatException e) {
                 System.out.println("Введите число");
             }
+        }
+    }
+
+    public static void stats() {
+        if (repository.isEmpty()) {
+            System.out.println("Список пуст");
+            return;
+        }
+
+        System.out.println("Максимальное количество дней - " + repository.maxDay());
+        System.out.println("Среднее количество дней - " + repository.averageDay());
+        System.out.println("Минимальное количество дней - " + repository.minDay());
+
+        for (Map.Entry<String, Long> entry : repository.defectStats().entrySet()) {
+            String key = entry.getKey();
+            Long value = entry.getValue();
+            System.out.println(key + " - " + value);
         }
     }
 }
