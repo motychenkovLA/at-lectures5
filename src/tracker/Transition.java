@@ -16,6 +16,7 @@ public class Transition {
         this.to = to;
     }
 
+    // todo 3 - static block
     public void setTransitions(){
         transitions.add(new Transition(Status.OPEN, Status.ANALYSIS));
         transitions.add(new Transition(Status.ANALYSIS, Status.FIX));
@@ -25,6 +26,8 @@ public class Transition {
         transitions.add(new Transition(Status.TEST, Status.CLOSE));
     }
 
+    // todo 1 - красивее будет сделать Transition.isAvailable(Status from, Status to)
+    //  и внутри уже создать новый экземпляр и чекнуть, есть ли он в сете
     public boolean isChangeStatusAvailable(){
         return transitions.contains(this);
     }

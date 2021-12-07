@@ -15,6 +15,7 @@ public class Repository {
     }
 
     public Defect[] getAll() {
+        // todo 1 - особо смысла нет возвращать именно массив вместо Collection
         return bugsMap.values().toArray(new Defect[0]);
     }
 
@@ -22,6 +23,7 @@ public class Repository {
         return bugsMap.isEmpty();
     }
 
+    // todo 0 - параметр называется index но это id
     public Defect getElementById(long index) {
         return bugsMap.get(index);
     }
