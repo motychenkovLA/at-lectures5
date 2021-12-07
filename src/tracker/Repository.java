@@ -1,47 +1,28 @@
 package tracker;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Repository {
 
-    private final int bugsNum;
-    private final Defect[] bugs;
-    private int currentElement = 0;
+    private final Map<Long, Defect> bugsMap = new HashMap();
 
-
-    public Repository(int numOfBugs) {
-        this.bugsNum = numOfBugs;
-        this.bugs = new Defect[bugsNum];
+    public Repository() {
     }
 
     public void addBug(Defect bug) {
-        bugs[currentElement] = bug;
-        currentElement++;
-
+        bugsMap.put(bug.getId(), bug);
     }
 
     public Defect[] getAll() {
-        Defect[] localBugs = new Defect[currentElement];
-
-        for (int i = 0; i < currentElement; i++) {
-            localBugs[i] = bugs[i];
-        }
-
-        return localBugs;
-    }
-
-    public boolean isFull() {
-        return bugsNum == currentElement;
+        return bugsMap.values().toArray(new Defect[0]);
     }
 
     public boolean isEmpty() {
-        return currentElement == 0;
+        return bugsMap.isEmpty();
     }
 
-    public Defect getElementById(int index) {
-        for (int i = 0; i < currentElement; i++) {
-            if (index == bugs[i].getId()) {
-                return bugs[i];
-            }
-        }
-        return null;
+    public Defect getElementById(long index) {
+        return bugsMap.get(index);
     }
 }

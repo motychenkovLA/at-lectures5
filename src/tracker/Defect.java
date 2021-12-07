@@ -59,6 +59,10 @@ public class Defect {
         this.status = status;
     }
 
+    public Status getStatus(){
+        return status;
+    }
+
     @Override
     public String toString() {
         return String.format(

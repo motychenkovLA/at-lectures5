@@ -15,9 +15,7 @@ public enum Status {
     }
 
     @Override
-    public String toString() {
-        return ruName;
-    }
+    public String toString() {return ruName;}
 
     public static Status getStatusByRuName(String ruNameStatus) {
         for (Status element : Status.values()) {

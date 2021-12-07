@@ -6,9 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        final int NUM_OF_BUGS = 1;
-
-        Repository repository = new Repository(NUM_OF_BUGS);
+        Repository repository = new Repository();
 
         try (Scanner scanner = new Scanner(System.in)) {
             boolean loop = true;
@@ -35,7 +33,7 @@ public class Main {
                         loop = false;
                         break;
                     case "change":
-                        commandChangePriority(repository, scanner);
+                        commandChangeStatus(repository, scanner);
                         break;
                     default:
                         System.out.println("Ошибка: такой команды нет");
@@ -46,10 +44,6 @@ public class Main {
     }
 
     public static void commandAddBug(Repository repository, Scanner scanner) {
-        if (repository.isFull()) {
-            System.out.println("Ошибка: список полный, нельзя добавить дефект");
-            return;
-        }
 
         System.out.println("\nДобавление дефекта");
         System.out.print("Введите резюме дефекта: ");
@@ -63,6 +57,7 @@ public class Main {
 
         Defect bug = new Defect(summary, priority, daysToFix, attachment);
         repository.addBug(bug);
+        System.out.println(bug.getStatus());
     }
 
     public static void commandBugsList(Repository repository) {
@@ -77,14 +72,14 @@ public class Main {
         }
     }
 
-    public static void commandChangePriority(Repository repository, Scanner scanner) {
+    public static void commandChangeStatus(Repository repository, Scanner scanner) {
         if (repository.isEmpty()) {
             System.out.println("Ошибка: список дефектов пуст");
             return;
         }
 
         System.out.print("Введите номер дефекта: ");
-        int id = inputNum(scanner);
+        long id = inputNum(scanner);
         Defect bug = repository.getElementById(id);
         if (bug == null) {
             System.out.println("Ошибка: такого дефекта нет");
@@ -99,6 +94,14 @@ public class Main {
             System.out.println("Ошибка: такого статуса нет");
             return;
         }
+
+        Transition transition = new Transition(bug.getStatus(), status);
+        transition.setTransitions();
+        if (!transition.isChangeStatusAvailable()){
+            System.out.println("Ошибка: данная смена статуса невозможна");
+            return;
+        }
+
         bug.setStatus(status);
     }
 
@@ -113,7 +116,7 @@ public class Main {
                 return new CommentAttachment(comment);
             }
             if (attachmentType.equals("defect")) {
-               System.out.print("Введите номер дефекта: ");
+                System.out.print("Введите номер дефекта: ");
                 long bugId = inputNum(scanner);
                 return new DefectAttachment(bugId);
             }
@@ -134,7 +137,7 @@ public class Main {
     }
 
     public static int inputNum(Scanner scanner) {
-        while (true){
+        while (true) {
             try {
                 return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
@@ -142,7 +145,6 @@ public class Main {
             }
         }
     }
-
 }
 
 
