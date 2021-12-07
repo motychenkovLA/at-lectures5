@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class Repository {
 
-    // todo 3 - справа создается HashMap без параметризации типов
     private final Map<Long, Defect> bugsMap = new HashMap<Long, Defect>();
 
     public Repository() {
