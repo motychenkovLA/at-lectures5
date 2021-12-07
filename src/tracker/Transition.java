@@ -11,7 +11,6 @@ public class Transition {
 
     private static final Set<Transition> transitions = new HashSet<>();
 
-    // todo 3 - static block
     static {
         transitions.add(new Transition(Status.OPEN, Status.ANALYSIS));
         transitions.add(new Transition(Status.ANALYSIS, Status.FIX));
@@ -27,8 +26,6 @@ public class Transition {
     }
 
 
-    // todo 1 - красивее будет сделать Transition.isAvailable(Status from, Status to)
-    //  и внутри уже создать новый экземпляр и чекнуть, есть ли он в сете
     public static boolean isAvailable(Status from, Status to) {
         Transition transition = new Transition(from, to);
         return transitions.contains(transition);

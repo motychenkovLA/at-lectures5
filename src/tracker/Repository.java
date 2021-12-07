@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Repository {
 
+    // todo 3 - справа создается HashMap без параметризации типов
     private final Map<Long, Defect> bugsMap = new HashMap();
 
     public Repository() {
@@ -16,7 +17,6 @@ public class Repository {
     }
 
     public Collection<Defect> getAll() {
-        // todo 1 - особо смысла нет возвращать именно массив вместо Collection
         return bugsMap.values();
     }
 
@@ -24,7 +24,6 @@ public class Repository {
         return bugsMap.isEmpty();
     }
 
-    // todo 0 - параметр называется index но это id
     public Defect getElementById(long id) {
         return bugsMap.get(id);
     }
