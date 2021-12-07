@@ -185,15 +185,16 @@ public class Main {
             System.out.println("Список пуст");
             return;
         }
+        IntSummaryStatistics intSummaryStatistics = repository.listDays();
 
-        System.out.println("Максимальное количество дней - " + repository.maxDay());
-        System.out.println("Среднее количество дней - " + repository.averageDay());
-        System.out.println("Минимальное количество дней - " + repository.minDay());
+        System.out.println("Максимальное количество дней - " + intSummaryStatistics.getMax());
+        System.out.println("Среднее количество дней - " + (int) intSummaryStatistics.getAverage());
+        System.out.println("Минимальное количество дней - " + intSummaryStatistics.getMin());
 
-        for (Map.Entry<String, Long> entry : repository.defectStats().entrySet()) {
-            String key = entry.getKey();
+        for (Map.Entry<Critical, Long> entry : repository.defectStats().entrySet()) {
+            Critical key = entry.getKey();
             Long value = entry.getValue();
-            System.out.println(key + " - " + value);
+            System.out.println(key.toString() + " - " + value);
         }
     }
 }

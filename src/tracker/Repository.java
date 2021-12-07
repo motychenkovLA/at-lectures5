@@ -35,39 +35,17 @@ public class Repository {
         return repo.isEmpty();
     }
 
-    private List<Integer> listDays() {
-        // todo 3 - stream
-        List<Integer> integerList = new ArrayList<>();
-        for (Map.Entry<Long, Defect> entry : repo.entrySet()) {
-            Defect value = entry.getValue();
-            integerList.add(value.getCountDays());
-        }
-        return integerList;
-        // todo 3 - у IntStream есть .summaryStatistics() который выдает набор из main/min/avg сразу
-        //   можно все в один метод переписать
+    public IntSummaryStatistics listDays() {
+        IntSummaryStatistics intSummaryStatistics = new IntSummaryStatistics();
+        repo.values().stream()
+                .mapToInt(Defect::getCountDays)
+                .forEach(intSummaryStatistics);
+
+        return intSummaryStatistics;
     }
 
-    public int maxDay() {
-        // todo 3 - не безопасный get -> orElse / orElseGet
-        return listDays().stream().max(Comparator.naturalOrder()).get();
-    }
-
-    public int averageDay() {
-        // todo 3 - не безопасный get -> orElse / orElseGet
-        return (int) listDays().stream().mapToInt(e -> e).average().getAsDouble();
-    }
-
-    public int minDay() {
-        // todo 3 - не безопасный get -> orElse / orElseGet
-        return listDays().stream().min(Comparator.naturalOrder()).get();
-    }
-
-    public Map<String, Long> defectStats() {
-        // todo 1 - entrySet().stream(), но используется только getValue()
-        // todo 1 - Map<Critical, Long>, не зачем заранее переводить в строку
-        Map<String, Long> map= repo.entrySet().stream().collect(
-                Collectors.groupingBy(repo->repo.getValue().getCritical().toString(), Collectors.counting()));
-
-        return map;
+    public Map<Critical, Long> defectStats() {
+        return repo.values().stream().collect(
+                Collectors.groupingBy(Defect::getCritical, Collectors.counting()));
     }
 }
