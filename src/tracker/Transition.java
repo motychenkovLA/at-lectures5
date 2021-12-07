@@ -9,15 +9,10 @@ public class Transition {
     private final Status from;
     private final Status to;
 
-    private final Set<Transition> transitions = new HashSet<>();
-
-    public Transition(Status from, Status to) {
-        this.from = from;
-        this.to = to;
-    }
+    private static final Set<Transition> transitions = new HashSet<>();
 
     // todo 3 - static block
-    public void setTransitions(){
+    static {
         transitions.add(new Transition(Status.OPEN, Status.ANALYSIS));
         transitions.add(new Transition(Status.ANALYSIS, Status.FIX));
         transitions.add(new Transition(Status.ANALYSIS, Status.REJECT));
@@ -26,15 +21,22 @@ public class Transition {
         transitions.add(new Transition(Status.TEST, Status.CLOSE));
     }
 
+    private Transition(Status from, Status to) {
+        this.from = from;
+        this.to = to;
+    }
+
+
     // todo 1 - красивее будет сделать Transition.isAvailable(Status from, Status to)
     //  и внутри уже создать новый экземпляр и чекнуть, есть ли он в сете
-    public boolean isChangeStatusAvailable(){
-        return transitions.contains(this);
+    public static boolean isAvailable(Status from, Status to) {
+        Transition transition = new Transition(from, to);
+        return transitions.contains(transition);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from,to);
+        return Objects.hash(from, to);
     }
 
     @Override

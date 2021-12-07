@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,9 +15,9 @@ public class Repository {
         bugsMap.put(bug.getId(), bug);
     }
 
-    public Defect[] getAll() {
+    public Collection<Defect> getAll() {
         // todo 1 - особо смысла нет возвращать именно массив вместо Collection
-        return bugsMap.values().toArray(new Defect[0]);
+        return bugsMap.values();
     }
 
     public boolean isEmpty() {
@@ -24,7 +25,7 @@ public class Repository {
     }
 
     // todo 0 - параметр называется index но это id
-    public Defect getElementById(long index) {
-        return bugsMap.get(index);
+    public Defect getElementById(long id) {
+        return bugsMap.get(id);
     }
 }

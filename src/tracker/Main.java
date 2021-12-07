@@ -95,9 +95,7 @@ public class Main {
             return;
         }
 
-        Transition transition = new Transition(bug.getStatus(), status);
-        transition.setTransitions();
-        if (!transition.isChangeStatusAvailable()){
+        if (!Transition.isAvailable(bug.getStatus(), status)){
             System.out.println("Ошибка: данная смена статуса невозможна");
             return;
         }
