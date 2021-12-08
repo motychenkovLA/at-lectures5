@@ -8,10 +8,12 @@ public class Main {
     static Repository repository = new Repository(MAX_DEFECTS);
     static Scanner scan = new Scanner(System.in);
 
+    //try (Scanner scan = new Scanner(System.in)){}
+
     public static void main(String[] args) {
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("Выберите: Add/ Change/ List /Quit");
+            System.out.println("Выберите: Add/ Change/ List/ Quit");
             String menu = scan.nextLine();
             switch (menu) {
                 case ("Add"): {
@@ -29,8 +31,21 @@ public class Main {
                     System.out.println("Введите id дефекта: ");
                     long defId = scan.nextLong();
                     scan.nextLine();
+
+
+                    //try {
+                    //    System.out.println("Введите новый статус: Открыт/ Исправление/ Тестирование:");
+                    //    String stringStatus = scan.nextLine().toUpperCase()
+                    //            break;
+                    //} catch (IllegalArgumentException e) {
+                    //    System.out.println("Некорректная критичность, попробуйте ввести снова!");
+                    //}
+
+
                     System.out.println("Введите новый статус: Открыт/ Исправление/ Тестирование:");
                     String stringStatus = scan.nextLine().toUpperCase();
+
+
                     Status status = Status.valueOf(stringStatus);
                     repository.getDefectById(defId).setStatus(status);
                     break;
@@ -52,12 +67,9 @@ public class Main {
             System.out.println("Введите резюме дефекта:");
             String summary = scan.nextLine();
 
-
-            System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest/:");
+            System.out.println("Введите критичность дефекта (Low/ Medium/ High/ Highest):");
             String stringSeverity = scan.nextLine().toUpperCase();
             Critical critical = Critical.valueOf(stringSeverity);
-
-
 
             System.out.println("Введите ожидаемое количество дней на исправление:");
             int daysToFix = scan.nextInt();

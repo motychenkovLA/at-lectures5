@@ -1,4 +1,7 @@
 package tracker;
+
+import java.util.Objects;
+
 public class Defect {
 
     private final long id;
@@ -21,7 +24,7 @@ public class Defect {
 
     }
     public String getInfo () {
-        return "ID:" + id + " | " + "РЕЗЮМЕ: " + summary + " | " + "СЕРЬЕЗНОСТЬ: " + critical + " | " +
+        return "ID:" + id + " | " + "РЕЗЮМЕ: " + summary + " | " + "КРИТИЧНОСТЬ: " + critical + " | " +
                 "КОЛИЧЕСТВО ДНЕЙ НА ИСПРАВЛЕНИЕ: " + daysToFix + " | " + "Вложение - " +  attachment+ " | " +
                 "Статус: " +  status;
     }
@@ -36,5 +39,24 @@ public class Defect {
 
     public void setCritical(Critical critical) {
         this.critical = critical;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; //проверка самих ссылок
+        if (!(o instanceof Defect)) return false; //instanceof возвращает true
+        Defect defect = (Defect) o; //приведение типов ссылки
+        return getId() == defect.getId() &&
+                daysToFix == defect.daysToFix &&
+                Objects.equals(summary, defect.summary) &&
+                Objects.equals(severity, defect.severity) &&
+                Objects.equals(attachment, defect.attachment) &&
+                status == defect.status &&
+                critical == defect.critical; //проверка каждого поля
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), summary, severity, daysToFix, attachment, status, critical);
     }
 }
