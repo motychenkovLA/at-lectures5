@@ -6,18 +6,16 @@ public class Main {
 
     final static int MAX_DEFECTS = 10;
     static Repository repository = new Repository(MAX_DEFECTS);
-    static Scanner scan = new Scanner(System.in);
-
-    //try (Scanner scan = new Scanner(System.in)){}
 
     public static void main(String[] args) {
+        try (Scanner scan = new Scanner(System.in)){
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("Выберите: Add/ Change/ List/ Quit");
             String menu = scan.nextLine();
             switch (menu) {
                 case ("Add"): {
-                    add();
+                    add(scan);
                     break;
                 }
                 case ("List"): {
@@ -31,24 +29,17 @@ public class Main {
                     System.out.println("Введите id дефекта: ");
                     long defId = scan.nextLong();
                     scan.nextLine();
-
-
-                    //try {
-                    //    System.out.println("Введите новый статус: Открыт/ Исправление/ Тестирование:");
-                    //    String stringStatus = scan.nextLine().toUpperCase()
-                    //            break;
-                    //} catch (IllegalArgumentException e) {
-                    //    System.out.println("Некорректная критичность, попробуйте ввести снова!");
-                    //}
-
-
-                    System.out.println("Введите новый статус: Открыт/ Исправление/ Тестирование:");
-                    String stringStatus = scan.nextLine().toUpperCase();
-
-
-                    Status status = Status.valueOf(stringStatus);
-                    repository.getDefectById(defId).setStatus(status);
-                    break;
+                    Status status = null;
+                    while (status == null) {
+                        try {
+                            System.out.println("Введите новый статус: OPEN/ FIX/ TEST:");
+                            String stringStatus = scan.nextLine().toUpperCase();
+                            status = Status.valueOf(stringStatus);
+                            repository.getDefectById(defId).setStatus(status);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Некорректная критичность, попробуйте ввести снова!");
+                        }
+                    }
                 }
                 case ("Quit"):
                     isRunning = false;
@@ -62,7 +53,9 @@ public class Main {
             }
         }
     }
-    private static void add() {
+}
+
+    private static void add (Scanner scan) {
         if (!repository.isFull()) {
             System.out.println("Введите резюме дефекта:");
             String summary = scan.nextLine();
@@ -89,7 +82,7 @@ public class Main {
             } else {
                 System.out.println("Такого типа вложения нет");
             }
-            
+
             Defect defect = new Defect(summary,critical, daysToFix, attachment);
             repository.add(defect); // созданный дефект добавили в репозиторий
         } else {
@@ -97,4 +90,3 @@ public class Main {
         }
     }
 }
-

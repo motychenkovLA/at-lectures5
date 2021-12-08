@@ -15,17 +15,17 @@ public class CommentAttachment extends Attachment {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true; //проверяем сами ссылки
-        if (o == null || getClass() != o.getClass()) return false;//проверяем на null и берем в getClass
-        CommentAttachment that = (CommentAttachment) o;//приведение типов
-        return Objects.equals(comment, that.comment);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true; //проверяем сами ссылки
+//        if (o == null || getClass() != o.getClass()) return false;//проверяем на null и берем в getClass
+//        CommentAttachment that = (CommentAttachment) o;//приведение типов
+//        return Objects.equals(comment, that.comment);
+//    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(comment);
-    }
+   // @Override
+   // public int hashCode() {
+     //   return Objects.hash(comment);
+  //  }
 }
 

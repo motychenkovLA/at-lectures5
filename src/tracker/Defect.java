@@ -44,15 +44,9 @@ public class Defect {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true; //проверка самих ссылок
-        if (!(o instanceof Defect)) return false; //instanceof возвращает true
+        if (o == null || getClass() != o.getClass()) return false;
         Defect defect = (Defect) o; //приведение типов ссылки
-        return getId() == defect.getId() &&
-                daysToFix == defect.daysToFix &&
-                Objects.equals(summary, defect.summary) &&
-                Objects.equals(severity, defect.severity) &&
-                Objects.equals(attachment, defect.attachment) &&
-                status == defect.status &&
-                critical == defect.critical; //проверка каждого поля
+        return this.getId() == defect.getId(); //сравнивание
     }
 
     @Override
