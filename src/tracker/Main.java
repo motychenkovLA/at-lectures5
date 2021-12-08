@@ -19,27 +19,12 @@ public class Main {
                     break;
                 }
                 case ("List"): {
-                    for (int i = 0; i < repository.getCurrentSize(); i++) {
-                        System.out.println(repository.getAll()[i].getInfo());//вывод списка дефектов
-                    }
+                    list();
                     break;
                 }
                 case ("Change"): {
-
-                    System.out.println("Введите id дефекта: ");
-                    long defId = scan.nextLong();
-                    scan.nextLine();
-                    Status status = null;
-                    while (status == null) {
-                        try {
-                            System.out.println("Введите новый статус: OPEN/ FIX/ TEST:");
-                            String stringStatus = scan.nextLine().toUpperCase();
-                            status = Status.valueOf(stringStatus);
-                            repository.getDefectById(defId).setStatus(status);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("Некорректная критичность, попробуйте ввести снова!");
-                        }
-                    }
+                    change(scan);
+                    break;
                 }
                 case ("Quit"):
                     isRunning = false;
@@ -87,6 +72,29 @@ public class Main {
             repository.add(defect); // созданный дефект добавили в репозиторий
         } else {
             System.out.println("Достигнуто максимальное количество дефектов");
+        }
+    }
+
+    private static void list () {
+        for (int i = 0; i < repository.getCurrentSize(); i++) {
+            System.out.println(repository.getAll()[i].getInfo());//вывод списка дефектов
+        }
+    }
+
+    private static void change (Scanner scan) {
+        System.out.println("Введите id дефекта: ");
+        long defId = scan.nextLong();
+        scan.nextLine();
+        Status status = null;
+        while (status == null) {
+            try {
+                System.out.println("Введите новый статус: OPEN/ FIX/ TEST:");
+                String stringStatus = scan.nextLine().toUpperCase();
+                status = Status.valueOf(stringStatus);
+                repository.getDefectById(defId).setStatus(status);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Некорректная критичность, попробуйте ввести снова!");
+            }
         }
     }
 }
