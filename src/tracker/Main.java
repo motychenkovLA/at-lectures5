@@ -81,13 +81,7 @@ public class Main {
             default:
                 defect.setStatus(status);
             }
-
-
-
         }
-
-
-
         public static void add(Scanner scanner, Repository repository){
 
         if (countReq > NUM_BUG - 1) {
@@ -105,8 +99,6 @@ public class Main {
 
             } catch (IllegalArgumentException a) {
                 System.out.println("Некорректный ввод,попробуйте снова");
-
-
             }
         }
 
@@ -119,8 +111,6 @@ public class Main {
 
             } catch (InputMismatchException b) {
                 System.out.println("Некорректный ввод,попробуйте снова");
-
-
             }
         }
 
@@ -142,11 +132,7 @@ public class Main {
         }
 
         Status status = Status.valueOf("OPEN");
-
-
         Defect defect = new Defect(resume, priority, daysToFixed, status, attachment);
-
-
         repository.add(defect);
     }
 }
