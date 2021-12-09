@@ -4,9 +4,11 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Main {
-    private static final int NUM_BUG = 10;
+    private static final long NUM_BUG = 10;
     //  Defect[] defects = new Defect[NUM_BUG];
-    private static Repository repository = new Repository(NUM_BUG);
+    private static Repository repository = new Repository();
+    private static Transition transition = new Transition();
+
     private static Priority priority = null;
     private static Integer daysToFixed = null;
     private static String priorityString = null;
@@ -14,6 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         boolean isRun = true; // переменная для бесконечного цикла
+        transition.initSet();
         try (Scanner scanner = new Scanner(System.in)) {
             while (isRun) {
                 System.out.println(" Выберите действие " +
@@ -59,14 +62,33 @@ public class Main {
         System.out.println("Введите id дефекта");
         long idChange = scanner.nextLong();
         scanner.nextLine();
-        System.out.println("Введите Статус дефекта OPEN INPROGRESS TESTING CLOSE");
+        System.out.println("Введите Статус дефекта : OPEN, INPROGRESS, TESTING, CLOSE");
         String statusString = scanner.nextLine().toUpperCase();
         Status status = Status.valueOf(statusString);
-        Defect defect = repository.getDefectById(idChange); // возвращается весь дефект по айди
-        defect.setStatus(status);
-    }
+        //transition.setStringSet(statusString);
 
-    public static void add(Scanner scanner, Repository repository){
+        Defect defect = repository.getDefectById(idChange); // возвращается весь дефект по айди
+        Status statusOld = defect.getStatus();
+        switch (statusOld.toString()){
+            case ("OPEN"):
+                boolean isChek = transition.checkSet(status.toString());
+                if (isChek) {
+                    defect.setStatus(status);
+            } else System.out.println("Недопустимый статус");
+
+            break;
+
+            default:
+                defect.setStatus(status);
+            }
+
+
+
+        }
+
+
+
+        public static void add(Scanner scanner, Repository repository){
 
         if (countReq > NUM_BUG - 1) {
             System.out.println("Невозможно добавить больше 10 дефектов");

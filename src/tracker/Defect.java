@@ -40,6 +40,10 @@ public class Defect {
         return id;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
