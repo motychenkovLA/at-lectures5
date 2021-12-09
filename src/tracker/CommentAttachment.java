@@ -23,9 +23,9 @@ public class CommentAttachment extends Attachment {
 //        return Objects.equals(comment, that.comment);
 //    }
 
-   // @Override
-   // public int hashCode() {
-     //   return Objects.hash(comment);
-  //  }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(comment);
+//    }
 }
 

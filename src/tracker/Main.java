@@ -85,16 +85,21 @@ public class Main {
         System.out.println("Введите id дефекта: ");
         long defId = scan.nextLong();
         scan.nextLine();
-        Status status = null;
-        while (status == null) {
-            try {
-                System.out.println("Введите новый статус: OPEN/ FIX/ TEST:");
-                String stringStatus = scan.nextLine().toUpperCase();
-                status = Status.valueOf(stringStatus);
-                repository.getDefectById(defId).setStatus(status);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Некорректная критичность, попробуйте ввести снова!");
+
+        if (defId < repository.getCurrentSize()) {
+            Status status = null;
+            while (status == null) {
+                try {
+                    System.out.println("Введите новый статус: OPEN/ FIX/ TEST:");
+                    String stringStatus = scan.nextLine().toUpperCase();
+                    status = Status.valueOf(stringStatus);
+                    repository.getDefectById(defId).setStatus(status);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Некорректная критичность, попробуйте ввести снова!");
+                }
             }
-        }
+            } else {
+                System.out.println("Такого дефекта нет");
+            }
     }
 }
