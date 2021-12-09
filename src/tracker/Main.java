@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.InputMismatchException;
+import java.util.IntSummaryStatistics;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +17,7 @@ public class Main {
                 System.out.println("Добавить дефект: add");
                 System.out.println("Вывести список дефектов: list");
                 System.out.println("Изменить статус дефекта: change");
+                System.out.println("Вывести статистику по дефектам: stats");
                 System.out.println("Выйти: exit");
 
                 System.out.print("Введите команду: ");
@@ -34,6 +36,9 @@ public class Main {
                         break;
                     case "change":
                         commandChangeStatus(repository, scanner);
+                        break;
+                    case "stats":
+                        commandStatistics(repository, scanner);
                         break;
                     default:
                         System.out.println("Ошибка: такой команды нет");
@@ -78,7 +83,7 @@ public class Main {
             return;
         }
 
-        System.out.print("Введите номер дефекта: ");
+        System.out.print("\nВведите номер дефекта: ");
         long id = inputNum(scanner);
         Defect bug = repository.getElementById(id);
         if (bug == null) {
@@ -95,12 +100,31 @@ public class Main {
             return;
         }
 
-        if (!Transition.isAvailable(bug.getStatus(), status)){
+        if (!Transition.isAvailable(bug.getStatus(), status)) {
             System.out.println("Ошибка: данная смена статуса невозможна");
             return;
         }
 
         bug.setStatus(status);
+    }
+
+    private static void commandStatistics(Repository repository, Scanner scanner) {
+        if (repository.isEmpty()) {
+            System.out.println("Ошибка: список дефектов пуст");
+            return;
+        }
+
+        System.out.println("\nСтатитистика по дефектам:");
+
+        repository.getStatisticsByStatus().forEach((key, value) -> {
+            System.out.printf("Дефектов в статусе %s: %d", key, value);
+            System.out.println();
+        });
+
+        IntSummaryStatistics daysToFixStatistics = repository.getStatisticsByDaysToFix();
+        System.out.println("Минимальное кол-во дней на исправление дефекта: " + daysToFixStatistics.getMin());
+        System.out.println("Максимальное кол-во дней на исправление дефекта: " + daysToFixStatistics.getMax());
+        System.out.println("Среднее кол-во дней на исправление дефекта: " + daysToFixStatistics.getAverage());
     }
 
     public static Attachment addAttachment(Scanner scanner) {
