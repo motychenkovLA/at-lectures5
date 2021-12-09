@@ -31,14 +31,14 @@ public class Main {
                     case "list":
                         commandBugsList(repository);
                         break;
-                    case "exit":
-                        loop = false;
-                        break;
                     case "change":
                         commandChangeStatus(repository, scanner);
                         break;
                     case "stats":
                         commandStatistics(repository, scanner);
+                        break;
+                    case "exit":
+                        loop = false;
                         break;
                     default:
                         System.out.println("Ошибка: такой команды нет");
@@ -62,7 +62,6 @@ public class Main {
 
         Defect bug = new Defect(summary, priority, daysToFix, attachment);
         repository.addBug(bug);
-        System.out.println(bug.getStatus());
     }
 
     public static void commandBugsList(Repository repository) {
