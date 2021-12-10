@@ -1,23 +1,28 @@
 package tracker;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Transition {
-    Set<String> stringSet = new HashSet<>();
-    //stringSet.add("OPEN");
-    public void setStringSet (String stat)
-    {
-        stringSet.add(stat);
+    private Status from;
+    private Status to;
+
+    public Transition(Status from, Status to) {
+        this.from = from;
+        this.to = to;
     }
 
-    public void initSet ()
-    {
-        stringSet.add("INPROGRESS");
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transition that = (Transition) o;
+        return from == that.from && to == that.to;
     }
 
-    public boolean checkSet (String stat)
-    {
-        return stringSet.contains(stat);
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to);
     }
 }
