@@ -3,7 +3,7 @@ package tracker;
 public class Repository {
     private int capacity; // вместительность репо
     private Defect[] defects; // контейнер для хранилища дефектов
-    private int currentSize = 0; // текущий "размер" репо
+    private static int currentSize = 0; // текущий "размер" репо
 
     public Repository(int capacity) {
         this.capacity = capacity;
