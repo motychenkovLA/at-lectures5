@@ -1,21 +1,26 @@
 package tracker;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Repository {
     private int capacity; // вместительность репо
-    private Defect[] defects; // контейнер для хранилища дефектов
-    private static int currentSize = 0; // текущий "размер" репо
+    private Map <Long, Defect> defects;
+    private static long currentSize = 0L; // id
 
     public Repository(int capacity) {
         this.capacity = capacity;
-        defects = new Defect[capacity]; //массив в репозитории
+        this.defects = new HashMap<>();
     }
 
     public void add(Defect defect) {
-        defects[currentSize] = defect;
+        defects.put(currentSize,defect);
         currentSize++;
     }
 
-    public Defect[] getAll() {
+    public Map <Long, Defect> getAll() {
+
         return this.defects;
     }
 
@@ -23,15 +28,15 @@ public class Repository {
         return currentSize >= capacity;
     }
 
-    public int getCurrentSize() {
+    public long getCurrentSize() {
         return currentSize;
     }
 
     public Defect getDefectById (long id) {
         Defect targetDefect = null;
-        for (int i = 0; i < currentSize; i++) {
-            if (defects[i].getId() == id) {
-                targetDefect = defects[i];
+        for (long i = 0; i < currentSize; i++) {
+            if (defects.get(i).getId() == id) {
+                targetDefect = defects.get(i);
                 break;
             }
 

@@ -1,11 +1,17 @@
 package tracker;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     final static int MAX_DEFECTS = 10;
     static Repository repository = new Repository(MAX_DEFECTS);
+
+    private static Set<Transition> transitionSet = new HashSet<>();
+    static {
+        transitionSet.add (new Transition(Status.OPEN, Status.FIX));
+        transitionSet.add (new Transition(Status.FIX, Status.TEST));
+    }
 
     public static void main(String[] args) {
         try (Scanner scan = new Scanner(System.in)){
@@ -76,24 +82,36 @@ public class Main {
     }
 
     private static void list () {
-        for (int i = 0; i < repository.getCurrentSize(); i++) {
-            System.out.println(repository.getAll()[i].getInfo());//вывод списка дефектов
+        for (Map.Entry<Long, Defect> privet: repository.getAll().entrySet()){
+            System.out.println(privet.getValue().getInfo());
         }
     }
 
+
     private static void change (Scanner scan) {
+
         System.out.println("Введите id дефекта: ");
         long defId = scan.nextLong();
         scan.nextLine();
 
         if (defId < repository.getCurrentSize()) {
-            Status status = null;
-            while (status == null) {
+
+//            Status status = null;
+//            while (status == null) {
+
+            while (true) {
                 try {
-                    System.out.println("Введите новый статус: OPEN/ FIX/ TEST:");
-                    String stringStatus = scan.nextLine().toUpperCase();
-                    status = Status.valueOf(stringStatus);
-                    repository.getDefectById(defId).setStatus(status);
+                    Status oldStatus = repository.getDefectById(defId).getStatus();
+                    System.out.println("Текущий статус: " + oldStatus+ "Введите новый статус: OPEN/ FIX/ TEST:");
+                    Status newStatus = Status.valueOf(scan.nextLine().toUpperCase());
+                    if (transitionSet.contains(new Transition(oldStatus, newStatus))) {
+                        repository.getDefectById(defId).setStatus(newStatus);
+                        break;
+                    }
+                    else {
+                        System.out.println("Не валидный статус");
+                    }
+
                 } catch (IllegalArgumentException e) {
                     System.out.println("Некорректная критичность, попробуйте ввести снова!");
                 }
@@ -101,5 +119,6 @@ public class Main {
             } else {
                 System.out.println("Такого дефекта нет");
             }
+
     }
 }

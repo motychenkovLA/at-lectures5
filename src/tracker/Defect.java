@@ -41,6 +41,10 @@ public class Defect {
         this.critical = critical;
     }
 
+    public Status getStatus () {
+        return status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true; //проверка самих ссылок
