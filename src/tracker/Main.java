@@ -1,6 +1,3 @@
-// Илья Осин
-// ДЗ7
-
 package tracker;
 
 import java.util.Scanner;
@@ -21,13 +18,14 @@ public class Main {
                     + "Изменить статус дефекта: change" + '\n' + '\t'
                     + "Выйти из программы: quit");
             System.out.print('\n' + "Введите команду: ");
-            String command = scan.nextLine();
+            String command = scan.nextLine().toUpperCase();
             System.out.println();
             switch (command) {
                 // Добавление дефекта
-                case "add":
+                case "ADD":
                     System.out.println();
-                    if (!repository.filled()) {
+                    if (!repository.isFull()) {
+
                         // Ввод резюме
                         System.out.print("Введите резюме дефекта: ");
                         String resume = scan.nextLine();
@@ -39,8 +37,9 @@ public class Main {
                                 + "- MAJOR" + '\n' + '\t'
                                 + "- MINOR" + '\n' + '\t'
                                 + "- TRIVIAL");
+
                         System.out.print("Критичность: ");
-                        Severity severity = Severity.valueOf(scan.nextLine());
+                        Severity severity = Severity.valueOf(scan.nextLine().toUpperCase());
 
                         // Ввод количества дней на исправление
                         System.out.print("Ожидаемое кол-во дней на исправление: ");
@@ -48,19 +47,19 @@ public class Main {
                         scan.nextLine();
                         System.out.println("Тип вложения:" + '\n' + '\t' + "- Комментарий" + '\n' + '\t' + "- Ссылка");
                         System.out.print("Тип вложения: ");
-                        String typeOfAttachment = scan.nextLine();
+                        String typeOfAttachment = scan.nextLine().toUpperCase();
 
                         // Вложение к дефекту
                         Attachment attachment = new Attachment();
                         switch (typeOfAttachment){
-                            case "Комментарий":
+                            case "КОММЕНТАРИЙ":
                                 System.out.println();
                                 System.out.print("Комментарий: ");
                                 System.out.println();
                                 attachment = new CommentAttachment(scan.nextLine());
                                 break;
 
-                            case "Ссылка":
+                            case "ССЫЛКА":
                                 System.out.println();
                                 System.out.print("Введите Id связанного дефекта: ");
                                 System.out.println();
@@ -75,7 +74,7 @@ public class Main {
                     }
                     break;
 
-                case "list":
+                case "LIST":
                     System.out.println("Список дефектов:");
                     for (long i = 0; i < repository.getRepoIndex(); i++) {
                         System.out.println(repository.getAll()[Math.toIntExact(i)].getDefectInfo());
@@ -84,21 +83,30 @@ public class Main {
                     break;
 
                 // Изменение статуса дефекта
-                case "change":
+                case "CHANGE":
                     System.out.print("Введите Id дефекта: ");
                     long changingDefectId = scan.nextLong();
                     scan.nextLine();
                     System.out.println();
-                    System.out.println("Введите новый статус:" + '\n' + '\t'
-                            + "- OPEN" + '\n' + '\t'
-                            + "- IN_PROGRESS" + '\n' + '\t'
-                            + "- TESTING" + '\n' + '\t'
-                            + "- CLOSE");
-                    Status status = Status.valueOf(scan.nextLine());
-                    repository.getDefectById(changingDefectId).setStatus(status);
-                    break;
+                    if (changingDefectId < repository.getRepoIndex()) {
+                            try {
+                                System.out.println("Введите новый статус:" + '\n' + '\t'
+                                        + "- OPEN" + '\n' + '\t'
+                                        + "- IN_PROGRESS" + '\n' + '\t'
+                                        + "- TESTING" + '\n' + '\t'
+                                        + "- CLOSED");
+                                Status status = Status.valueOf(scan.nextLine().toUpperCase());
+                                repository.getDefectById(changingDefectId).setStatus(status);
+                                System.out.println("Статус дефекта изменен на " + status);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Некорректное значение! Повторите ввод...");
+                                continue;
+                            }
+                    }else {
+                            System.out.println("Дефект не найден");
+                        }break;
 
-                case "quit":
+                case "QUIT":
                     running = false;
                     break;
 

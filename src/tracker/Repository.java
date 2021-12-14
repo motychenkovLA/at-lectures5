@@ -1,4 +1,3 @@
-//ДЗ7
 package tracker;
 
 public class Repository {
@@ -21,7 +20,7 @@ public class Repository {
         return this.defects;
     }
 
-    public boolean filled(){
+    public boolean isFull(){
         return repoIndex == maxRepoIndex;
     }
 

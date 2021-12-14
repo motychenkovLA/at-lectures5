@@ -1,5 +1,6 @@
-//ДЗ7
 package tracker;
+
+import java.util.Objects;
 
 public class Defect {
 
@@ -32,5 +33,22 @@ public class Defect {
     public String getDefectInfo() {
         return "id: " + id + " | " + "Резюме: " + resume + " | " + "Серьезность: " + severity + " | " +
                 "Кол-во дней на исправление: " + daysToFix + " | " + "Вложение: " + attachment + " | " + "Статус: " + status;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Defect defect = (Defect) o;
+        return id == defect.id &&
+                daysToFix == defect.daysToFix &&
+                status == defect.status &&
+                Objects.equals(resume, defect.resume) &&
+                severity == defect.severity &&
+                Objects.equals(attachment, defect.attachment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status, resume, severity, daysToFix, attachment);
     }
 }
