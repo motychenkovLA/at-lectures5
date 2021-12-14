@@ -31,17 +31,20 @@ public class Defect {
                 + daysToFixed + "|Статус:" + status + "|" + attachment;
     }
 
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public long getId() {
         return id;
     }
 
+    public int getDaysToFixed() {
+        return daysToFixed;
+    }
+
     public Status getStatus() {
         return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

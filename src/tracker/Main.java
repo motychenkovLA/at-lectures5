@@ -30,7 +30,10 @@ public class Main {
                         "\n Add (Новый дефект)" +
                         "\n List (Вывести список дефектов)" +
                         "\n Quit (Вернуться в главное меню)" +
-                        "\n Change (Изменить дефект)");
+                        "\n Change (Изменить дефект)"+
+                        "\n Stat (Статистика по дефектам)")
+
+                ;
                 String action = scanner.nextLine();
                 switch (action) {
                     case ("Add"): {
@@ -49,6 +52,17 @@ public class Main {
                         isRun = false;
                         break;
                     }
+                    case ("Stat"): {
+                        System.out.println("Максимальное количество дней на исправление = " + repository.getMax());
+                        System.out.println("Минимальное количество дней на исправление = " + repository.getMin());
+                        System.out.println("Среднее количество дней на исправление = " + repository.getAvg());
+                        System.out.println("|Статус OPEN |"  + repository.getTableStatusOpen()+ "|");
+                        System.out.println("|Статус INPROGRESS |"  + repository.getTableStatusInprogress()+ "|");
+                        System.out.println("|Статус TESTING |"  + repository.getTableStatusTesting()+ "|");
+                        System.out.println("|Статус CLOSE |"  + repository.getTableStatusClose()+ "|");
+                        break;
+                    }
+
                     default: {
                         System.out.println("Операция не существует");
                         break;

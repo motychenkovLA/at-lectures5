@@ -3,7 +3,7 @@ package tracker;
 import java.util.Objects;
 
 public class DefectAttachment extends Attachment {
- private long value;
+    private long value;
 
     public DefectAttachment(long value) {
         this.value = value;
