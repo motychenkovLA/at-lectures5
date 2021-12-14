@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,14 @@ public class Repository {
 
     public boolean isFull() {
         return currentSize >= capacity;
+    }
+
+    public boolean isEmpty () {
+        return defects.size() == 0;
+    }
+
+    public List <Defect> getDefectList () {
+        return new ArrayList<>(defects.values());
     }
 
     public long getCurrentSize() {

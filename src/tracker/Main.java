@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -17,7 +18,7 @@ public class Main {
         try (Scanner scan = new Scanner(System.in)){
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("Выберите: Add/ Change/ List/ Quit");
+            System.out.println("Выберите: Add/ Change/ List/ Stats/ Quit");
             String menu = scan.nextLine();
             switch (menu) {
                 case ("Add"): {
@@ -32,6 +33,12 @@ public class Main {
                     change(scan);
                     break;
                 }
+
+                case ("Stats"): {
+                    stats ();
+                    break;
+                }
+
                 case ("Quit"):
                     isRunning = false;
                     System.out.println("До свидания!");
@@ -102,7 +109,7 @@ public class Main {
             while (true) {
                 try {
                     Status oldStatus = repository.getDefectById(defId).getStatus();
-                    System.out.println("Текущий статус: " + oldStatus+ "Введите новый статус: OPEN/ FIX/ TEST:");
+                    System.out.println("Текущий статус: " + oldStatus+ "  " + "Введите новый статус: OPEN/ FIX/ TEST:");
                     Status newStatus = Status.valueOf(scan.nextLine().toUpperCase());
                     if (transitionSet.contains(new Transition(oldStatus, newStatus))) {
                         repository.getDefectById(defId).setStatus(newStatus);
@@ -120,5 +127,29 @@ public class Main {
                 System.out.println("Такого дефекта нет");
             }
 
+    }
+
+    private static void stats () {
+        if (!repository.isEmpty()) {
+            IntSummaryStatistics intSummaryStatistics = repository.getDefectList().stream().
+                    mapToInt (Defect::getDaysToFix).summaryStatistics ();
+            System.out.println("Количество дней для исправления дефекта:");
+            System.out.println("Максимальное - " + intSummaryStatistics.getMax());
+            System.out.println("Среднее - " + intSummaryStatistics.getAverage());
+            System.out.println("Минимальное - " + intSummaryStatistics.getMin());
+            System.out.println();
+            Map <Status, List <Defect>> result = repository.getDefectList().stream().collect(Collectors.
+                    groupingBy(Defect::getStatus));
+            for (Status status : Status.values()) {
+                if (result.containsKey(status)) {
+                    System.out.println("Статус: " + status);
+                    System.out.println("Количество дефектов:" + result.get(status).size());
+                } else {
+                    System.out.println("Статус:" + status);
+                    System.out.println("Количество дефектов:" + 0);
+                }
+            }
+        } else System.out.println("В системе нет дефектов");
+        System.out.println();
     }
 }

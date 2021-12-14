@@ -45,6 +45,10 @@ public class Defect {
         return status;
     }
 
+    public int getDaysToFix() {
+        return daysToFix;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true; //проверка самих ссылок
