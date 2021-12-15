@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Repository {
-    private int capacity; // вместительность репо
-    private Map <Long, Defect> defects;
+    private final int capacity; // вместительность репо
+    private final Map <Long, Defect> defects;
     private static long currentSize = 0L; // id
 
     public Repository(int capacity) {

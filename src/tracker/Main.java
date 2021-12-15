@@ -8,12 +8,6 @@ public class Main {
     final static int MAX_DEFECTS = 10;
     static Repository repository = new Repository(MAX_DEFECTS);
 
-    private static Set<Transition> transitionSet = new HashSet<>();
-    static {
-        transitionSet.add (new Transition(Status.OPEN, Status.FIX));
-        transitionSet.add (new Transition(Status.FIX, Status.TEST));
-    }
-
     public static void main(String[] args) {
         try (Scanner scan = new Scanner(System.in)){
         boolean isRunning = true;
@@ -103,15 +97,12 @@ public class Main {
 
         if (defId < repository.getCurrentSize()) {
 
-//            Status status = null;
-//            while (status == null) {
-
             while (true) {
                 try {
                     Status oldStatus = repository.getDefectById(defId).getStatus();
                     System.out.println("Текущий статус: " + oldStatus+ "  " + "Введите новый статус: OPEN/ FIX/ TEST:");
                     Status newStatus = Status.valueOf(scan.nextLine().toUpperCase());
-                    if (transitionSet.contains(new Transition(oldStatus, newStatus))) {
+                    if (Transition.validTransitions(new Transition(oldStatus, newStatus))) {
                         repository.getDefectById(defId).setStatus(newStatus);
                         break;
                     }

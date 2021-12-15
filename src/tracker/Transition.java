@@ -1,16 +1,22 @@
 package tracker;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class Transition {
     private final Status from;
     private final Status to;
 
+    static Set <Transition> transitionSet = new HashSet<>();
+    static {
+        transitionSet.add (new Transition(Status.OPEN, Status.FIX));
+        transitionSet.add (new Transition(Status.FIX, Status.TEST));
+    }
+
     public Transition(Status from, Status to) {
         this.from = from;
         this.to = to;
+
     }
 
     @Override
@@ -21,15 +27,7 @@ public class Transition {
         return from == that.from && to == that.to;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(from, to);
-    }
-
     public static boolean validTransitions (Transition transition) {
-        Set<Transition> transitions = new HashSet<>();
-        transitions.add(new Transition(Status.OPEN, Status.FIX));
-        transitions.add(new Transition(Status.FIX, Status.TEST));
-        return transitions.contains(transition);
+        return transitionSet.contains(transition);
     }
 }

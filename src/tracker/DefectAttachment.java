@@ -3,7 +3,7 @@ package tracker;
 import java.util.Objects;
 
 public class DefectAttachment extends Attachment {
-    private long defectId;
+    private final long defectId;
 
     public DefectAttachment(long defectId) {
         this.defectId = defectId;

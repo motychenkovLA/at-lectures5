@@ -3,7 +3,7 @@ package tracker;
 import java.util.Objects;
 
 public class CommentAttachment extends Attachment {
-    private String comment;
+    private final String comment;
 
     public CommentAttachment(String comment) {
         this.comment = comment;
