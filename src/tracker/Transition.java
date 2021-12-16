@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Transition {
@@ -25,6 +26,11 @@ public class Transition {
         if (o == null || getClass() != o.getClass()) return false;
         Transition that = (Transition) o;
         return from == that.from && to == that.to;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to);
     }
 
     public static boolean validTransitions (Transition transition) {
