@@ -1,6 +1,5 @@
 package trackerV2;
-
-import java.util.InputMismatchException;
+import java.util.IntSummaryStatistics;
 import java.util.Scanner;
 
 public class Main {
@@ -9,11 +8,11 @@ public class Main {
         Repository repository = new Repository();
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
-                System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Change\n" + "Quit");
+                System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Change\n" + "Statistics\n" + "Quit");
                 String choice = scanner.nextLine();
                 switch (choice) {
                     case "Add":
-                        AddingBug(repository, scanner);
+                        addingBug(repository, scanner);
                         break;
                     case "List":
                         bugsList(repository);
@@ -25,11 +24,14 @@ public class Main {
                     case "Change":
                         changeStatus(repository, scanner);
                         break;
+                    case "Statistics":
+                        statistics(repository);
+                        break;
                 }
             }
         }
     }
-    public static void AddingBug(Repository repository, Scanner scanner) {
+    public static void addingBug(Repository repository, Scanner scanner) {
 
             System.out.print("Введите резюме дефекта: ");
             String resume = scanner.nextLine();
@@ -41,6 +43,21 @@ public class Main {
             repository.addBug(bug);
         System.out.println(bug.getStatus());
         }
+    private static void statistics(Repository repository) {
+
+        System.out.println("\nСтатитистика:");
+
+        repository.getStatisticsByStatus().forEach((key, value) -> {
+            System.out.printf("Дефекты со статусом %s: %d", key, value);
+            System.out.println();
+        });
+
+        IntSummaryStatistics daysToFixStatistics = repository.getStatisticsByDaysToFix();
+        System.out.println("Среднее кол-во дней на исправление дефекта: " + daysToFixStatistics.getAverage());
+        System.out.println("Минимальное кол-во дней на исправление дефекта: " + daysToFixStatistics.getMin());
+        System.out.println("Максимальное кол-во дней на исправление дефекта: " + daysToFixStatistics.getMax());
+
+    }
 
     public static Attachment addAttachment(Scanner scanner) {
         while (true) {
