@@ -1,5 +1,5 @@
 package trackerV2;
-
+import java.util.Objects;
 public class Defect {
     private static long counterOfBugs = 0;
     private final long id;
@@ -56,5 +56,27 @@ public class Defect {
         return String.format(
                 "Дефект: %d | Статус: %s | Резюме: %s | Критичность: %s | Кол-во дней на исправление: %d | Вложение: %s",
                 id, status.toString(), resume, priority.toString(), daysToFix, attachment.toString());
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Defect defect = (Defect) obj;
+        return id == defect.id &&
+                status == defect.status &&
+                resume.equals(defect.resume) &&
+                priority == defect.priority &&
+                daysToFix == defect.daysToFix &&
+                attachment.equals(defect.attachment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status, resume, priority, daysToFix, attachment);
     }
 }

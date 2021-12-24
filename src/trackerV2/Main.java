@@ -1,33 +1,33 @@
 package trackerV2;
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         final int ARRAY_SIZE = 10;
         Repository repository = new Repository(ARRAY_SIZE);
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Change\n" + "Quit");
-            String choice = scanner.nextLine();
-            switch (choice) {
-                case "Add":
-                    AddingBug(repository, scanner);
-                    break;
-                case "List":
-                    bugsList(repository);
-                    break;
-                case "Quit":
-                    scanner.close();
-                    System.exit(0);
-                    break;
-                case "Change":
-                    changePriority(repository, scanner);
-                    break;
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Change\n" + "Quit");
+                String choice = scanner.nextLine();
+                switch (choice) {
+                    case "Add":
+                        AddingBug(repository, scanner);
+                        break;
+                    case "List":
+                        bugsList(repository);
+                        break;
+                    case "Quit":
+                        scanner.close();
+                        System.exit(0);
+                        break;
+                    case "Change":
+                        changePriority(repository, scanner);
+                        break;
+                }
             }
         }
     }
-
     public static void AddingBug(Repository repository, Scanner scanner) {
         if (repository.isFull()) {
             System.out.println("Лимит превышен!\\n\" + \"Введите название необходимой опции:\\n\" + \"Add\\n\" + \"List\\n\" + \"Quit");
@@ -44,6 +44,7 @@ public class Main {
 
         }
     }
+
 
     public static Attachment addAttachment(Scanner scanner) {
         while (true) {
@@ -72,12 +73,17 @@ public class Main {
             }
         }
     }
-
     public static int inputNum(Scanner scanner) {
-        int num = scanner.nextInt();
-        scanner.nextLine();
-        return num;
+        while (true){
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException error) {
+                System.out.println("Ошибка: необходимо ввести число!");
+            }
+        }
     }
+
+
 
     public static void bugsList(Repository repository) {
         System.out.println("\nСписок дефектов:");
