@@ -1,11 +1,12 @@
 package trackerV2;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int ARRAY_SIZE = 10;
-        Repository repository = new Repository(ARRAY_SIZE);
+
+        Repository repository = new Repository();
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 System.out.println("Введите название необходимой опции:\n" + "Add\n" + "List\n" + "Change\n" + "Quit");
@@ -22,17 +23,14 @@ public class Main {
                         System.exit(0);
                         break;
                     case "Change":
-                        changePriority(repository, scanner);
+                        changeStatus(repository, scanner);
                         break;
                 }
             }
         }
     }
     public static void AddingBug(Repository repository, Scanner scanner) {
-        if (repository.isFull()) {
-            System.out.println("Лимит превышен!\\n\" + \"Введите название необходимой опции:\\n\" + \"Add\\n\" + \"List\\n\" + \"Quit");
 
-        } else {
             System.out.print("Введите резюме дефекта: ");
             String resume = scanner.nextLine();
             System.out.print("Введите кол-во дней на исправление дефекта: ");
@@ -41,10 +39,8 @@ public class Main {
             Attachment attachment = addAttachment(scanner);
             Defect bug = new Defect(resume, priority, daysToFix, attachment);
             repository.addBug(bug);
-
+        System.out.println(bug.getStatus());
         }
-    }
-
 
     public static Attachment addAttachment(Scanner scanner) {
         while (true) {
@@ -62,7 +58,6 @@ public class Main {
             }
         }
     }
-
     public static Priority addPriority(Scanner scanner) {
         while (true) {
             System.out.print("Выберите тип вложения (Блокирующий, Высокий, Средний, Низкий): ");
@@ -74,10 +69,11 @@ public class Main {
         }
     }
     public static int inputNum(Scanner scanner) {
+
         while (true){
             try {
                 return Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException error) {
+            } catch (NumberFormatException e) {
                 System.out.println("Ошибка: необходимо ввести число!");
             }
         }
@@ -91,22 +87,23 @@ public class Main {
             System.out.println(bug.toString());
         }
     }
-
-    public static void changePriority(Repository repository, Scanner scanner) {
+    public static void changeStatus(Repository repository, Scanner scanner) {
         System.out.print("Введите номер дефекта: ");
-        int id = inputNum(scanner);
+        long id = inputNum(scanner);
         Defect bug = repository.getElementById(id);
         if (bug == null) {
             System.out.println("\nУказанный дефект отсутствует.");
             return;
         }
-
         System.out.print("Введите новый статус: Открыт, Закрыт, Отклонен: ");
         String nameStatus = scanner.nextLine();
-
         Status status = Status.getStatusByName(nameStatus);
         if (status == null) {
             System.out.println("Статус отсутствует.");
+            return;
+        }
+        if (!Transition.isAvailable(bug.getStatus(), status)){
+            System.out.println("Ошибка: данная смена статуса невозможна");
             return;
         }
         bug.setStatus(status);
