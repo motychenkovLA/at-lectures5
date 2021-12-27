@@ -1,4 +1,5 @@
 package trackerV2;
+
 import java.util.IntSummaryStatistics;
 import java.util.Scanner;
 
@@ -31,18 +32,20 @@ public class Main {
             }
         }
     }
+
     public static void addingBug(Repository repository, Scanner scanner) {
 
-            System.out.print("Введите резюме дефекта: ");
-            String resume = scanner.nextLine();
-            System.out.print("Введите кол-во дней на исправление дефекта: ");
-            int daysToFix = inputNum(scanner);
-            Priority priority = addPriority(scanner);
-            Attachment attachment = addAttachment(scanner);
-            Defect bug = new Defect(resume, priority, daysToFix, attachment);
-            repository.addBug(bug);
+        System.out.print("Введите резюме дефекта: ");
+        String resume = scanner.nextLine();
+        System.out.print("Введите кол-во дней на исправление дефекта: ");
+        int daysToFix = inputNum(scanner);
+        Priority priority = addPriority(scanner);
+        Attachment attachment = addAttachment(scanner);
+        Defect bug = new Defect(resume, priority, daysToFix, attachment);
+        repository.addBug(bug);
         System.out.println(bug.getStatus());
-        }
+    }
+
     private static void statistics(Repository repository) {
 
         System.out.println("\nСтатитистика:");
@@ -75,6 +78,7 @@ public class Main {
             }
         }
     }
+
     public static Priority addPriority(Scanner scanner) {
         while (true) {
             System.out.print("Выберите тип вложения (Блокирующий, Высокий, Средний, Низкий): ");
@@ -85,9 +89,10 @@ public class Main {
             }
         }
     }
+
     public static int inputNum(Scanner scanner) {
 
-        while (true){
+        while (true) {
             try {
                 return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
@@ -97,13 +102,13 @@ public class Main {
     }
 
 
-
     public static void bugsList(Repository repository) {
         System.out.println("\nСписок дефектов:");
         for (Defect bug : repository.getDefects()) {
             System.out.println(bug.toString());
         }
     }
+
     public static void changeStatus(Repository repository, Scanner scanner) {
         System.out.print("Введите номер дефекта: ");
         long id = inputNum(scanner);
@@ -112,14 +117,10 @@ public class Main {
             System.out.println("\nУказанный дефект отсутствует.");
             return;
         }
-        System.out.print("Введите новый статус: Открыт, Закрыт, Отклонен: ");
+        System.out.print("Введите новый статус: OPEN, CLOSE, REJECT: ");
         String nameStatus = scanner.nextLine();
-        Status status = Status.getStatusByName(nameStatus);
-        if (status == null) {
-            System.out.println("Статус отсутствует.");
-            return;
-        }
-        if (!Transition.isAvailable(bug.getStatus(), status)){
+        Status status = Status.valueOf(nameStatus);
+        if (!Transition.isAvailable(bug.getStatus(), status)) {
             System.out.println("Ошибка: данная смена статуса невозможна");
             return;
         }

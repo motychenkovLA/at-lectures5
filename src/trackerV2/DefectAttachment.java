@@ -1,15 +1,20 @@
 package trackerV2;
+
 import java.util.Objects;
+import java.lang.Math;
 
 public class DefectAttachment extends Attachment {
     private final long bugId;
+
     public DefectAttachment(long bugId) {
         this.bugId = bugId;
     }
+
     @Override
     public String toString() {
         return String.format("№ %d", bugId);
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -25,6 +30,8 @@ public class DefectAttachment extends Attachment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(bugId);
+        int result = 17;
+        result = 31 * result + Math.toIntExact(bugId);
+        return result;
     }
 }
